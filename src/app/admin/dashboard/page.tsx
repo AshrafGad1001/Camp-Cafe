@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 import { Category, MenuItem } from '@/types';
+import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({ categories: 0, items: 0, available: 0 });
@@ -75,18 +76,26 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      <div className="card">
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '16px' }}>
-          Quick Links
-        </h2>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <a href="/admin/dashboard/categories" className="btn btn-ghost">
-            📁 Manage Categories
-          </a>
-          <a href="/admin/dashboard/items" className="btn btn-ghost">
-            🍽️ Manage Menu Items
-          </a>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '20px',
+      }}>
+        <div className="card">
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '16px' }}>
+            Quick Links
+          </h2>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a href="/admin/dashboard/categories" className="btn btn-ghost" style={{ width: '100%', justifyContent: 'flex-start' }}>
+              📁 Manage Categories
+            </a>
+            <a href="/admin/dashboard/items" className="btn btn-ghost" style={{ width: '100%', justifyContent: 'flex-start' }}>
+              🍽️ Manage Menu Items
+            </a>
+          </div>
         </div>
+
+        <QRCodeGenerator />
       </div>
     </div>
   );
