@@ -1,0 +1,37 @@
+export interface CategoryImage {
+  url: string;
+  publicId: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
+  image: CategoryImage;
+  displayOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MenuItem {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: CategoryImage;
+  category: string | Category;
+  isAvailable: boolean;
+  displayOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MenuCategory extends Category {
+  items: MenuItem[];
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  count?: number;
+  data: T;
+  message?: string;
+}
