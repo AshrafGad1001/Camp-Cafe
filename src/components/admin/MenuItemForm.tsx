@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { compressImage } from '@/lib/imageCompression';
 import { Category } from '@/types';
+import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Switch } from '@mui/material';
 
 interface MenuItemFormProps {
   categories: Category[];
@@ -68,94 +69,92 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <div className="form-group">
-        <label className="form-label" htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="form-input"
-          required
-        />
-      </div>
+    <Box component="form" onSubmit={handleSubmit} noValidate>
+      <TextField
+        fullWidth
+        margin="normal"
+        id="name"
+        label="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
-      <div className="form-group">
-        <label className="form-label" htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="form-textarea"
-          rows={3}
-          required
-        />
-      </div>
+      <TextField
+        fullWidth
+        margin="normal"
+        id="description"
+        label="Description"
+        multiline
+        rows={3}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+      />
 
-      <div className="form-group">
-        <label className="form-label" htmlFor="price">Price</label>
-        <input
-          id="price"
-          type="number"
-          step="0.01"
-          value={price}
-          onChange={(e) => setPrice(parseFloat(e.target.value) || '')}
-          className="form-input"
-          required
-        />
-      </div>
+      <TextField
+        fullWidth
+        margin="normal"
+        id="price"
+        label="Price"
+        type="number"
+        slotProps={{ htmlInput: { step: "0.01" } }}
+        value={price}
+        onChange={(e) => setPrice(parseFloat(e.target.value) || '')}
+        required
+      />
 
-      <div className="form-group">
-        <label className="form-label" htmlFor="category">Category</label>
-        <select
+      <FormControl fullWidth margin="normal" required>
+        <InputLabel id="category-label">Category</InputLabel>
+        <Select
+          labelId="category-label"
           id="category"
           value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
-          className="form-select"
-          required
+          label="Category"
+          onChange={(e) => setCategoryId(e.target.value as string)}
         >
-          <option value="" disabled>Select a category</option>
           {categories.map((cat: any) => (
-            <option key={cat._id || cat.id} value={cat._id || cat.id}>
+            <MenuItem key={cat._id || cat.id} value={cat._id || cat.id}>
               {cat.name}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </div>
+        </Select>
+      </FormControl>
 
-      <div className="form-group">
-        <label className="form-label">Available</label>
-        <label className="toggle">
-          <input
-            type="checkbox"
-            checked={isAvailable}
-            onChange={(e) => setIsAvailable(e.target.checked)}
-          />
-          <span className="toggle-slider"></span>
-        </label>
-      </div>
+      <Box sx={{ mt: 2 }}>
+        <FormControlLabel 
+          control={
+            <Switch 
+              checked={isAvailable} 
+              onChange={(e) => setIsAvailable(e.target.checked)} 
+            />
+          } 
+          label="Available" 
+        />
+      </Box>
 
-      <div className="form-group">
-        <label className="form-label">Image</label>
-        <div className="image-upload">
+      <Box sx={{ mt: 2 }}>
+        <Button component="label" variant="outlined">
+          Upload Image
           <input
             type="file"
             accept="image/*"
+            hidden
             onChange={handleImageChange}
-            className="form-input"
           />
-          {previewUrl && (
-            <div className="image-preview" style={{ marginTop: '1rem', position: 'relative', width: '200px', height: '200px' }}>
-              <img src={previewUrl} alt="Preview" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '8px' }} />
-            </div>
-          )}
-        </div>
-      </div>
+        </Button>
+        {previewUrl && (
+          <Box sx={{ mt: 2, position: 'relative', width: '200px', height: '200px' }}>
+            <img src={previewUrl} alt="Preview" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '8px' }} />
+          </Box>
+        )}
+      </Box>
 
-      <button type="submit" className="btn btn-primary" disabled={isLoading}>
-        {isLoading ? 'Saving...' : 'Save Menu Item'}
-      </button>
-    </form>
+      <Box sx={{ mt: 3 }}>
+        <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
+          {isLoading ? 'Saving...' : 'Save Menu Item'}
+        </Button>
+      </Box>
+    </Box>
   );
 }

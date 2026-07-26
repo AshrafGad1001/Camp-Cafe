@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, CardMedia, CardContent, Typography } from '@mui/material';
 
 interface MenuItemCardProps {
   name: string;
@@ -9,23 +10,21 @@ interface MenuItemCardProps {
 
 export default function MenuItemCard({ name, description, price, image }: MenuItemCardProps) {
   return (
-    <div className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {image && (
-        <img 
-          src={image.url} 
-          alt={name} 
-          style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} 
-        />
+        <CardMedia component="img" height="180" image={image.url} alt={name} />
       )}
-      <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-        <h3 style={{ fontWeight: 600, margin: '12px 0 4px', fontSize: '1.25rem' }}>{name}</h3>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.4, margin: '0 0 12px', flexGrow: 1 }}>
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="h3" gutterBottom>
+          {name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
           {description}
-        </p>
-        <div style={{ fontWeight: 700, color: 'var(--accent)', fontSize: '1.2rem', marginTop: 'auto', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+        </Typography>
+        <Typography variant="h6" color="primary" sx={{ mt: 2, fontWeight: 'bold' }}>
           ${price.toFixed(2)}
-        </div>
-      </div>
-    </div>
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }

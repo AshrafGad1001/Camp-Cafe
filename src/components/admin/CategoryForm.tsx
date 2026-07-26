@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { compressImage } from '@/lib/imageCompression';
+import { TextField, Button, Box } from '@mui/material';
 
 interface CategoryFormProps {
   initialData?: { name: string; imageUrl?: string };
@@ -45,39 +46,39 @@ export default function CategoryForm({ initialData, onSubmit, isLoading }: Categ
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <div className="form-group">
-        <label className="form-label" htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="form-input"
-          required
-        />
-      </div>
+    <Box component="form" onSubmit={handleSubmit} noValidate>
+      <TextField
+        fullWidth
+        margin="normal"
+        id="name"
+        label="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
-      <div className="form-group">
-        <label className="form-label">Image</label>
-        <div className="image-upload">
+      <Box sx={{ mt: 2 }}>
+        <Button component="label" variant="outlined">
+          Upload Image
           <input
             type="file"
             accept="image/*"
+            hidden
             onChange={handleImageChange}
-            className="form-input"
           />
-          {previewUrl && (
-            <div className="image-preview" style={{ marginTop: '1rem', position: 'relative', width: '200px', height: '200px' }}>
-              <img src={previewUrl} alt="Preview" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '8px' }} />
-            </div>
-          )}
-        </div>
-      </div>
+        </Button>
+        {previewUrl && (
+          <Box sx={{ mt: 2, position: 'relative', width: '200px', height: '200px' }}>
+            <img src={previewUrl} alt="Preview" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '8px' }} />
+          </Box>
+        )}
+      </Box>
 
-      <button type="submit" className="btn btn-primary" disabled={isLoading}>
-        {isLoading ? 'Saving...' : 'Save Category'}
-      </button>
-    </form>
+      <Box sx={{ mt: 3 }}>
+        <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
+          {isLoading ? 'Saving...' : 'Save Category'}
+        </Button>
+      </Box>
+    </Box>
   );
 }

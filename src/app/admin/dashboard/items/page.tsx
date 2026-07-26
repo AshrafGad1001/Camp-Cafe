@@ -21,6 +21,11 @@ import { Category, MenuItem } from '@/types';
 import Modal from '@/components/ui/Modal';
 import MenuItemForm from '@/components/admin/MenuItemForm';
 import SortableItem from '@/components/admin/SortableItem';
+import { Box, Typography, Button, Snackbar, Alert, IconButton, Stack, Chip, Switch, CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 export default function MenuItemsPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -158,88 +163,113 @@ export default function MenuItemsPage() {
   };
 
   if (isLoading) {
-    return <div className="loading"><div className="spinner" /></div>;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
-    <div>
-      {toast && <div className={`toast toast-${toast.type}`}>{toast.message}</div>}
+    <Box>
+      <Snackbar
+        open={!!toast}
+        autoHideDuration={3000}
+        onClose={() => setToast(null)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        {toast ? (
+          <Alert severity={toast.type} onClose={() => setToast(null)}>
+            {toast.message}
+          </Alert>
+        ) : <div />}
+      </Snackbar>
 
-      <div className="page-header">
-        <h1 className="page-title">Menu Items</h1>
-        <button className="btn btn-primary" onClick={() => { setEditingItem(null); setShowModal(true); }}>
-          + Add Item
-        </button>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Typography variant="h4" component="h1">
+          Menu Items
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => { setEditingItem(null); setShowModal(true); }}
+        >
+          Add Item
+        </Button>
+      </Box>
 
       {/* Category Filters */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
-        <button
-          className={`btn btn-sm ${filterCategory === '' ? 'btn-primary' : 'btn-ghost'}`}
+      <Stack direction="row" spacing={1} sx={{ mb: 3, flexWrap: 'wrap', gap: 1 }}>
+        <Chip
+          label="All"
           onClick={() => setFilterCategory('')}
-        >
-          All
-        </button>
+          color={filterCategory === '' ? 'primary' : 'default'}
+          variant={filterCategory === '' ? 'filled' : 'outlined'}
+          clickable
+        />
         {categories.map((cat) => (
-          <button
+          <Chip
             key={cat._id}
-            className={`btn btn-sm ${filterCategory === cat._id ? 'btn-primary' : 'btn-ghost'}`}
+            label={cat.name}
             onClick={() => setFilterCategory(cat._id)}
-          >
-            {cat.name}
-          </button>
+            color={filterCategory === cat._id ? 'primary' : 'default'}
+            variant={filterCategory === cat._id ? 'filled' : 'outlined'}
+            clickable
+          />
         ))}
-      </div>
+      </Stack>
 
       {/* Items List with DnD */}
       {filteredItems.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">🍽️</div>
-          <p>No items found.</p>
-        </div>
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <RestaurantIcon sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
+          <Typography color="text.secondary">No items found.</Typography>
+        </Box>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={filteredItems.map((i) => i._id)} strategy={verticalListSortingStrategy}>
-            <div className="item-list" style={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
+            <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {filteredItems.map((item) => (
                 <SortableItem key={item._id} id={item._id}>
-                  <div className="item-row">
-                    <div style={{ width: '60px', height: '60px', overflow: 'hidden', borderRadius: 'var(--radius-md)', flexShrink: 0 }}>
-                      {item.image?.url ? (
-                        <img src={item.image.url} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', background: 'var(--bg-glass)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>🍽️</div>
-                      )}
-                    </div>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                    {item.image?.url ? (
+                      <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
+                    ) : (
+                      <Box sx={{ width: 60, height: 60, borderRadius: 1, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <RestaurantIcon />
+                      </Box>
+                    )}
 
-                    <div className="item-info">
-                      <div className="item-name">{item.name}</div>
-                      <div className="item-meta">{getCategoryName(item.category)}</div>
-                    </div>
+                    <Box sx={{ flexGrow: 1 }}>
+                      <Typography variant="h6">{item.name}</Typography>
+                      <Typography variant="body2" color="text.secondary">{getCategoryName(item.category)}</Typography>
+                    </Box>
 
-                    <div className="item-price">${item.price.toFixed(2)}</div>
+                    <Typography variant="h6" sx={{ minWidth: 80 }}>${item.price.toFixed(2)}</Typography>
 
-                    <span className={`badge ${item.isAvailable ? 'badge-available' : 'badge-unavailable'}`}>
-                      {item.isAvailable ? 'Available' : 'Unavailable'}
-                    </span>
+                    <Chip 
+                      label={item.isAvailable ? 'Available' : 'Unavailable'} 
+                      color={item.isAvailable ? 'success' : 'default'} 
+                      size="small" 
+                    />
 
-                    <label className="toggle">
-                      <input
-                        type="checkbox"
-                        checked={item.isAvailable}
-                        onChange={() => handleToggleAvailability(item)}
-                      />
-                      <span className="toggle-slider" />
-                    </label>
+                    <Switch
+                      checked={item.isAvailable}
+                      onChange={() => handleToggleAvailability(item)}
+                    />
 
-                    <div className="item-actions">
-                      <button className="btn-icon" onClick={() => { setEditingItem(item); setShowModal(true); }} aria-label="Edit">✏️</button>
-                      <button className="btn-icon" onClick={() => handleDeleteItem(item._id)} aria-label="Delete">🗑️</button>
-                    </div>
-                  </div>
+                    <Box>
+                      <IconButton color="primary" onClick={() => { setEditingItem(item); setShowModal(true); }}>
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton color="error" onClick={() => handleDeleteItem(item._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Box>
+                  </Box>
                 </SortableItem>
               ))}
-            </div>
+            </Box>
           </SortableContext>
         </DndContext>
       )}
@@ -263,6 +293,6 @@ export default function MenuItemsPage() {
           isLoading={isSubmitting}
         />
       </Modal>
-    </div>
+    </Box>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,33 +10,12 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">{title}</h2>
-          <button className="btn-icon" onClick={onClose} aria-label="Close">
-            ✕
-          </button>
-        </div>
+    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="sm">
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>
         {children}
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

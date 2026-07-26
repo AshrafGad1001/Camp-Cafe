@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
+import { Container, Box, Paper, Typography, TextField, Button, Alert } from '@mui/material';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -29,81 +30,59 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'var(--bg-primary)',
-      padding: '20px',
-    }}>
-      <div className="card" style={{ width: '100%', maxWidth: '420px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <h1 style={{
-            fontSize: '2rem',
-            fontWeight: 800,
-            color: 'var(--accent)',
-            letterSpacing: '-1px',
-            marginBottom: '8px',
-          }}>
-            Camp Cafe
-          </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Admin Dashboard Login
-          </p>
-        </div>
+    <Container maxWidth="xs">
+      <Box sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Paper sx={{ p: 4, width: '100%' }}>
+          <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <Typography component="h1" variant="h5" sx={{ fontWeight: 800, color: 'var(--accent)' }}>
+              Camp Cafe
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Admin Dashboard Login
+            </Typography>
+          </Box>
 
-        {error && (
-          <div className="toast-error" style={{
-            position: 'relative',
-            top: 0,
-            right: 0,
-            marginBottom: '20px',
-            padding: '12px 16px',
-            borderRadius: 'var(--radius-md)',
-            fontSize: '0.875rem',
-          }}>
-            {error}
-          </div>
-        )}
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="email">Email</label>
-            <input
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              margin="normal"
               id="email"
+              label="Email"
               type="email"
-              className="form-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@campcafe.com"
               required
             />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="password">Password</label>
-            <input
+            <TextField
+              fullWidth
+              margin="normal"
               id="password"
+              label="Password"
               type="password"
-              className="form-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
             />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={isLoading}
-            style={{ width: '100%', marginTop: '8px' }}
-          >
-            {isLoading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-      </div>
-    </div>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={isLoading}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
+            </Button>
+          </form>
+        </Paper>
+      </Box>
+    </Container>
   );
 }

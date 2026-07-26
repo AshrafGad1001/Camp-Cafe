@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import ThemeRegistry from '@/theme/ThemeRegistry';
 
 export const metadata: Metadata = {
   title: "Camp Cafe | Restaurant Menu",
@@ -13,7 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ margin: 0, padding: 0 }}>
+        <AppRouterCacheProvider options={{ key: 'mui' }}>
+          <ThemeRegistry>
+            {children}
+          </ThemeRegistry>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }

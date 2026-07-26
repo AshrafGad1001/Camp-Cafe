@@ -2,6 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, Typography } from '@mui/material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import FolderIcon from '@mui/icons-material/Folder';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -13,31 +18,44 @@ export default function Sidebar() {
   };
 
   const navLinks = [
-    { href: '/admin/dashboard', icon: '📊', label: 'Dashboard' },
-    { href: '/admin/dashboard/categories', icon: '📁', label: 'Categories' },
-    { href: '/admin/dashboard/items', icon: '🍽️', label: 'Menu Items' },
+    { href: '/admin/dashboard', icon: <DashboardIcon />, label: 'Dashboard' },
+    { href: '/admin/dashboard/categories', icon: <FolderIcon />, label: 'Categories' },
+    { href: '/admin/dashboard/items', icon: <RestaurantMenuIcon />, label: 'Menu Items' },
   ];
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-logo">Camp Cafe</div>
-      <nav className="sidebar-nav">
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: 240,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': { width: 240, boxSizing: 'border-box' },
+      }}
+    >
+      <Box sx={{ p: 2 }}>
+        <Typography variant="h6" component="div">
+          Camp Cafe
+        </Typography>
+      </Box>
+      <List>
         {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`sidebar-link ${pathname === link.href ? 'active' : ''}`}
-          >
-            <span className="icon">{link.icon}</span>
-            {link.label}
-          </Link>
+          <ListItem key={link.href} disablePadding>
+            <ListItemButton component={Link} href={link.href} selected={pathname === link.href}>
+              <ListItemIcon>{link.icon}</ListItemIcon>
+              <ListItemText primary={link.label} />
+            </ListItemButton>
+          </ListItem>
         ))}
-      </nav>
-      <div style={{ marginTop: 'auto', padding: '1rem' }}>
-        <button onClick={handleLogout} className="btn-icon" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-          <span>🚪</span> Logout
-        </button>
-      </div>
-    </aside>
+      </List>
+      <Box sx={{ flexGrow: 1 }} />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={handleLogout}>
+            <ListItemIcon><LogoutIcon /></ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Drawer>
   );
 }

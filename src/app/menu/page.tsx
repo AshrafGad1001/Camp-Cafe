@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
 import CategorySection from '@/components/public/CategorySection';
 
 interface MenuCategory {
@@ -34,36 +35,40 @@ export default async function MenuPage() {
   const menu = await getMenu();
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', width: '100%' }}>
-      <header style={{ textAlign: 'center', padding: '60px 20px 40px' }}>
-        <h1 style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--accent)', letterSpacing: '-1px', margin: 0 }}>
-          Camp Cafe
-        </h1>
-        <p style={{ color: 'var(--text-secondary)', marginTop: '8px', fontSize: '1.125rem' }}>
-          Explore our delicious menu
-        </p>
-      </header>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography variant="h2" component="h1" color="primary" sx={{ fontWeight: 'bold' }}>
+            Camp Cafe
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Explore our delicious menu
+          </Typography>
+        </Box>
 
-      <main style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px 60px' }}>
-        {menu.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px 0' }}>
-            <p>Our menu is currently being updated. Please check back later.</p>
-          </div>
-        ) : (
-          menu.map(category => (
-            <CategorySection
-              key={category._id}
-              name={category.name}
-              image={category.image}
-              items={category.items}
-            />
-          ))
-        )}
-      </main>
+        <Box component="main">
+          {menu.length === 0 ? (
+            <Box sx={{ textAlign: 'center', color: 'text.secondary', py: 5 }}>
+              <Typography>Our menu is currently being updated. Please check back later.</Typography>
+            </Box>
+          ) : (
+            menu.map(category => (
+              <CategorySection
+                key={category._id}
+                name={category.name}
+                image={category.image}
+                items={category.items}
+              />
+            ))
+          )}
+        </Box>
 
-      <footer style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-        © 2024 Camp Cafe. All rights reserved.
-      </footer>
-    </div>
+        <Box component="footer" sx={{ textAlign: 'center', py: 4 }}>
+          <Typography variant="body2" color="text.secondary">
+            © 2024 Camp Cafe. All rights reserved.
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 }

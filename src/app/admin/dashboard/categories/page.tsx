@@ -21,6 +21,11 @@ import { Category } from '@/types';
 import Modal from '@/components/ui/Modal';
 import CategoryForm from '@/components/admin/CategoryForm';
 import SortableItem from '@/components/admin/SortableItem';
+import { Box, Typography, Button, Snackbar, Alert, IconButton, CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FolderIcon from '@mui/icons-material/Folder';
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -118,51 +123,72 @@ export default function CategoriesPage() {
   };
 
   return (
-    <div>
-      {toast && (
-        <div className={`toast toast-${toast.type}`}>{toast.message}</div>
-      )}
+    <Box>
+      <Snackbar
+        open={!!toast}
+        autoHideDuration={3000}
+        onClose={() => setToast(null)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        {toast ? (
+          <Alert severity={toast.type} onClose={() => setToast(null)}>
+            {toast.message}
+          </Alert>
+        ) : <div />}
+      </Snackbar>
 
-      <div className="page-header">
-        <h1 className="page-title">Categories</h1>
-        <button className="btn btn-primary" onClick={() => { setEditingCategory(null); setShowModal(true); }}>
-          + Add Category
-        </button>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Typography variant="h4" component="h1">
+          Categories
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => { setEditingCategory(null); setShowModal(true); }}
+        >
+          Add Category
+        </Button>
+      </Box>
 
       {isLoading ? (
-        <div className="loading"><div className="spinner" /></div>
+        <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+          <CircularProgress />
+        </Box>
       ) : categories.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">📁</div>
-          <p>No categories yet. Add your first category!</p>
-        </div>
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <FolderIcon sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
+          <Typography color="text.secondary">No categories yet. Add your first category!</Typography>
+        </Box>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={categories.map((c) => c._id)} strategy={verticalListSortingStrategy}>
-            <div className="item-list" style={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
+            <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {categories.map((category) => (
                 <SortableItem key={category._id} id={category._id}>
-                  <div className="item-row">
-                    <div style={{ width: '60px', height: '60px', overflow: 'hidden', borderRadius: 'var(--radius-md)', flexShrink: 0 }}>
-                      {category.image?.url ? (
-                        <img src={category.image.url} alt={category.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', background: 'var(--bg-glass)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📁</div>
-                      )}
-                    </div>
-                    <div className="item-info">
-                      <div className="item-name">{category.name}</div>
-                      <div className="item-meta">Order: {category.displayOrder}</div>
-                    </div>
-                    <div className="item-actions">
-                      <button className="btn-icon" onClick={() => { setEditingCategory(category); setShowModal(true); }} aria-label="Edit">✏️</button>
-                      <button className="btn-icon" onClick={() => handleDeleteClick(category._id)} aria-label="Delete">🗑️</button>
-                    </div>
-                  </div>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                    {category.image?.url ? (
+                      <Box component="img" src={category.image.url} alt={category.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
+                    ) : (
+                      <Box sx={{ width: 60, height: 60, borderRadius: 1, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <FolderIcon />
+                      </Box>
+                    )}
+                    <Box sx={{ flexGrow: 1 }}>
+                      <Typography variant="h6">{category.name}</Typography>
+                      <Typography variant="body2" color="text.secondary">Order: {category.displayOrder}</Typography>
+                    </Box>
+                    <Box>
+                      <IconButton color="primary" onClick={() => { setEditingCategory(category); setShowModal(true); }}>
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton color="error" onClick={() => handleDeleteClick(category._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Box>
+                  </Box>
                 </SortableItem>
               ))}
-            </div>
+            </Box>
           </SortableContext>
         </DndContext>
       )}
@@ -178,6 +204,6 @@ export default function CategoriesPage() {
           isLoading={isSubmitting}
         />
       </Modal>
-    </div>
+    </Box>
   );
 }

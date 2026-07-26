@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Sidebar from '@/components/admin/Sidebar';
+import { Box, CircularProgress } from '@mui/material';
 
 export default function AdminLayout({
   children,
@@ -26,9 +27,9 @@ export default function AdminLayout({
 
   if (isLoading) {
     return (
-      <div className="loading" style={{ minHeight: '100vh' }}>
-        <div className="spinner" />
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
     );
   }
 
@@ -40,11 +41,11 @@ export default function AdminLayout({
   if (!isAuthenticated) return null;
 
   return (
-    <div className="admin-layout">
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar />
-      <main className="main-content">
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         {children}
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 }

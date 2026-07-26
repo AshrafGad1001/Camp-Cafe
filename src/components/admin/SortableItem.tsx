@@ -2,6 +2,8 @@
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Paper, IconButton } from '@mui/material';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 interface SortableItemProps {
   id: string;
@@ -26,21 +28,23 @@ export default function SortableItem({ id, children }: SortableItemProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className={isDragging ? 'dragging' : ''}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <button
-          className="drag-handle"
+    <div ref={setNodeRef} style={style}>
+      <Paper
+        elevation={isDragging ? 4 : 1}
+        sx={{ p: 2, mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}
+      >
+        <IconButton
           {...attributes}
           {...listeners}
+          sx={{ cursor: 'grab' }}
           aria-label="Drag to reorder"
-          style={{ background: 'none', border: 'none', padding: '8px', cursor: 'grab' }}
         >
-          ⠿
-        </button>
+          <DragIndicatorIcon />
+        </IconButton>
         <div style={{ flex: 1 }}>
           {children}
         </div>
-      </div>
+      </Paper>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
+import { Card, Typography, Button, CircularProgress, Box } from '@mui/material';
 
 export default function QRCodeGenerator() {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
@@ -30,41 +31,44 @@ export default function QRCodeGenerator() {
   }, []);
 
   return (
-    <div className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '100%' }}>
-      <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '16px' }}>
+    <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '100%' }}>
+      <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
         Menu QR Code
-      </h2>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '0.9rem' }}>
+      </Typography>
+      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
         Customers can scan this QR code to view the menu on their devices.
-      </p>
+      </Typography>
       
       {qrCodeDataUrl ? (
-        <div style={{ background: '#fff', padding: '10px', borderRadius: '8px', marginBottom: '20px', boxShadow: 'var(--shadow-sm)' }}>
+        <Box sx={{ background: '#fff', p: 1.25, borderRadius: 2, mb: 3, boxShadow: 1 }}>
           <img src={qrCodeDataUrl} alt="Menu QR Code" style={{ width: '200px', height: '200px' }} />
-        </div>
+        </Box>
       ) : (
-        <div style={{ width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-glass)', borderRadius: '8px', marginBottom: '20px' }}>
-          <div className="spinner" />
-        </div>
+        <Box sx={{ width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 2, mb: 3 }}>
+          <CircularProgress />
+        </Box>
       )}
 
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: 'auto' }}>
-        <a 
+      <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', justifyContent: 'center', mt: 'auto' }}>
+        <Button 
+          component="a"
           href={qrCodeDataUrl} 
           download="camp-cafe-qr.png"
-          className="btn btn-primary"
+          variant="contained" 
+          color="primary"
         >
           📥 Download
-        </a>
-        <a 
+        </Button>
+        <Button 
+          component="a"
           href={menuUrl}
           target="_blank"
           rel="noopener noreferrer" 
-          className="btn btn-ghost"
+          variant="outlined"
         >
           🔗 View Menu
-        </a>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Card>
   );
 }

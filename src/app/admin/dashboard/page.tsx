@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 import { Category, MenuItem } from '@/types';
 import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
+import { Grid, Card, Typography, CircularProgress, Box, Button } from '@mui/material';
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({ categories: 0, items: 0, available: 0 });
@@ -34,9 +35,9 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="loading">
-        <div className="spinner" />
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+        <CircularProgress />
+      </Box>
     );
   }
 
@@ -47,56 +48,50 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div>
-      <div className="page-header">
-        <h1 className="page-title">Dashboard</h1>
-      </div>
+    <Box>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Dashboard
+        </Typography>
+      </Box>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: '20px',
-        marginBottom: '32px',
-      }}>
+      <Grid container spacing={3} sx={{ mb: 4 }}>
         {statCards.map((stat) => (
-          <div className="card" key={stat.label} style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{stat.icon}</div>
-            <div style={{
-              fontSize: '2rem',
-              fontWeight: 800,
-              color: stat.color,
-              marginBottom: '4px',
-            }}>
-              {stat.value}
-            </div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-              {stat.label}
-            </div>
-          </div>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={stat.label}>
+            <Card sx={{ p: 3, textAlign: 'center' }}>
+              <Typography variant="h3" sx={{ mb: 1 }}>{stat.icon}</Typography>
+              <Typography variant="h4" sx={{ fontWeight: 800, color: stat.color, mb: 1 }}>
+                {stat.value}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {stat.label}
+              </Typography>
+            </Card>
+          </Grid>
         ))}
-      </div>
+      </Grid>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '20px',
-      }}>
-        <div className="card">
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '16px' }}>
-            Quick Links
-          </h2>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <a href="/admin/dashboard/categories" className="btn btn-ghost" style={{ width: '100%', justifyContent: 'flex-start' }}>
-              📁 Manage Categories
-            </a>
-            <a href="/admin/dashboard/items" className="btn btn-ghost" style={{ width: '100%', justifyContent: 'flex-start' }}>
-              🍽️ Manage Menu Items
-            </a>
-          </div>
-        </div>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card sx={{ p: 3 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+              Quick Links
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', flexDirection: 'column' }}>
+              <Button href="/admin/dashboard/categories" variant="outlined" sx={{ justifyContent: 'flex-start' }}>
+                📁 Manage Categories
+              </Button>
+              <Button href="/admin/dashboard/items" variant="outlined" sx={{ justifyContent: 'flex-start' }}>
+                🍽️ Manage Menu Items
+              </Button>
+            </Box>
+          </Card>
+        </Grid>
 
-        <QRCodeGenerator />
-      </div>
-    </div>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <QRCodeGenerator />
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

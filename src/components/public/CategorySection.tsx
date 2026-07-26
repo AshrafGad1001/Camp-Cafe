@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, Typography, Grid } from '@mui/material';
 import MenuItemCard from './MenuItemCard';
 
 interface CategorySectionProps {
@@ -15,38 +16,30 @@ interface CategorySectionProps {
 
 export default function CategorySection({ name, image, items }: CategorySectionProps) {
   return (
-    <section style={{ marginBottom: '40px' }}>
-      <h2 style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '1.5rem', marginBottom: '16px' }}>
+    <Box sx={{ mb: 6 }}>
+      <Typography variant="h4" component="h2" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>
         {name}
-      </h2>
+      </Typography>
       {image && (
-        <img 
+        <Box 
+          component="img" 
           src={image.url} 
-          alt={name} 
-          style={{ 
-            maxHeight: '200px', 
-            width: '100%', 
-            objectFit: 'cover', 
-            borderRadius: 'var(--radius-lg)', 
-            marginBottom: '20px' 
-          }} 
+          alt={name}
+          sx={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 2, mb: 3 }} 
         />
       )}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-        gap: '16px' 
-      }}>
+      <Grid container spacing={3}>
         {items.map(item => (
-          <MenuItemCard 
-            key={item._id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            image={item.image}
-          />
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item._id}>
+            <MenuItemCard 
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              image={item.image}
+            />
+          </Grid>
         ))}
-      </div>
-    </section>
+      </Grid>
+    </Box>
   );
 }
