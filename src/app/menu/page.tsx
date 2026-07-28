@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, AppBar, Toolbar } from '@mui/material';
 import CategorySection from '@/components/public/CategorySection';
 
 interface MenuCategory {
@@ -36,15 +36,13 @@ export default async function MenuPage() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <Container maxWidth="lg" sx={{ py: 6 }}>
-        <Box sx={{ textAlign: 'center', mb: 6 }}>
-          <Typography variant="h2" component="h1" color="primary" sx={{ fontWeight: 'bold' }}>
-            Camp Cafe
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Explore our delicious menu
-          </Typography>
-        </Box>
+      <AppBar position="sticky" sx={{ bgcolor: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+        <Toolbar sx={{ justifyContent: 'center', py: 1 }}>
+          <Box component="img" src="/logo.png" alt="Camp Cafe" sx={{ height: 40 }} />
+        </Toolbar>
+      </AppBar>
+
+      <Container maxWidth="lg" sx={{ py: 4 }}>
 
         <Box component="main">
           {menu.length === 0 ? (
