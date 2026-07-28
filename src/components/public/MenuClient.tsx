@@ -41,6 +41,8 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
           display: 'block',
           whiteSpace: 'nowrap',
           overflowX: 'auto', 
+          width: '100%',
+          maxWidth: '100vw',
           py: 2, 
           mb: 4,
           px: 2,
@@ -55,10 +57,12 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              verticalAlign: 'middle',
+              height: 44,
               gap: 1,
               cursor: 'pointer',
-              py: 1,
-              px: 2.5,
+              px: 3,
               ml: 1.5,
               borderRadius: '24px',
               bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#fff',
@@ -84,9 +88,11 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
+                verticalAlign: 'middle',
+                height: 44,
                 gap: 1,
                 cursor: 'pointer',
-                py: 1,
                 px: 2.5,
                 ml: 1.5,
                 borderRadius: '24px',
@@ -105,8 +111,8 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 <Avatar 
                   src={category.image.url}
                   sx={{ 
-                    width: 24, 
-                    height: 24,
+                    width: 28, 
+                    height: 28,
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                   }}
                 />
