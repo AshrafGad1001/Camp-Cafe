@@ -33,7 +33,7 @@ export default function QRCodeGenerator() {
 
   return (
     <Card sx={{ 
-      p: 5, 
+      p: { xs: 3, sm: 4, md: 5 }, 
       display: 'flex', 
       flexDirection: 'column', 
       height: '100%', 
@@ -47,14 +47,14 @@ export default function QRCodeGenerator() {
         <QrCode2Icon fontSize="medium" />
       </Avatar>
       
-      <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', mb: 1 }}>
+      <Typography sx={{ typography: { xs: 'h6', md: 'h5' }, fontWeight: 800, color: 'text.primary', mb: 1 }}>
         باركود المنيو الرقمي
       </Typography>
-      <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4, px: 2 }}>
+      <Typography sx={{ typography: { xs: 'body2', md: 'body1' }, color: 'text.secondary', mb: { xs: 3, md: 4 }, px: { xs: 0, sm: 2 }, lineHeight: 1.6 }}>
         اطبع هذا الباركود وضعه على الطاولات ليتمكن العملاء من مسحه وعرض قائمة الطلبات مباشرة.
       </Typography>
       
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5, width: '100%' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: { xs: 3, md: 5 }, width: '100%' }}>
         {qrCodeDataUrl ? (
           <Box sx={{ 
             background: '#fff', 
