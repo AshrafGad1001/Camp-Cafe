@@ -55,7 +55,7 @@ export default async function MenuPage() {
         </AppBar>
       </Box>
 
-      <Container maxWidth="lg" sx={{ pt: 1, pb: 2 }}>
+      <Container maxWidth="lg" sx={{ pt: 1, pb: 2, px: { xs: 1, sm: 2, md: 3 } }}>
         <MenuClient menu={menu} />
 
         <Box component="footer" sx={{ textAlign: 'center', py: 4 }}>

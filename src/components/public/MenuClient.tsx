@@ -36,7 +36,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
     : menu.filter(c => c._id === activeCategory);
 
   return (
-    <Box sx={{ mb: 4, px: { xs: 1, sm: 2 } }}>
+    <Box sx={{ mb: 4 }}>
       <Box 
         sx={{ 
           display: 'flex',
