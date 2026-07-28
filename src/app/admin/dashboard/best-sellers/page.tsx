@@ -87,7 +87,7 @@ export default function BestSellersPage() {
       ) : (
         <Grid container spacing={3}>
           {items.map((item) => (
-            <Grid item xs={12} sm={6} md={4} key={item._id || item.id}>
+            <Grid xs={12} sm={6} md={4} key={item._id || item.id}>
               <Card sx={{ 
                 borderRadius: 4, 
                 boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
