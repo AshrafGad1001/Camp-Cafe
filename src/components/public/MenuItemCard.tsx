@@ -120,28 +120,54 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       </Box>
 
       {image?.url && (
-        <Box sx={{ width: 110, height: 110, flexShrink: 0, ml: 2, position: 'relative' }}>
+        <Box sx={{ 
+          width: 110, 
+          height: 110, 
+          minWidth: 110, 
+          minHeight: 110, 
+          flexShrink: 0, 
+          ml: 2, 
+          position: 'relative' 
+        }}>
+          {/* Outer halo ring */}
           <Box sx={{
             position: 'absolute',
-            top: -3, left: -3, right: -3, bottom: -3,
+            top: -4, left: -4, right: -4, bottom: -4,
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, rgba(196,154,69,0.3) 0%, rgba(10,41,71,0.15) 100%)',
+            background: 'conic-gradient(from 0deg, rgba(196,154,69,0.15), rgba(10,41,71,0.2), rgba(196,154,69,0.15))',
             zIndex: 0,
           }} />
-          <CardMedia 
-            component="img" 
-            image={image.url} 
-            alt={name} 
-            sx={{ 
-              borderRadius: '50%', 
-              width: '100%', 
-              height: '100%', 
-              objectFit: 'cover',
-              position: 'relative',
-              zIndex: 1,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}
-          />
+          
+          {/* Inner solid white ring + Unified background */}
+          <Box sx={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, #ffffff 0%, #e9ecef 100%)',
+            border: '3px solid #ffffff',
+            zIndex: 1,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            overflow: 'hidden'
+          }}>
+            <CardMedia 
+              component="img" 
+              image={image.url} 
+              alt={name} 
+              sx={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            />
+            {/* Vignette overlay */}
+            <Box sx={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0, bottom: 0,
+              boxShadow: 'inset 0 0 16px rgba(0,0,0,0.15)',
+              pointerEvents: 'none'
+            }} />
+          </Box>
         </Box>
       )}
     </Card>
