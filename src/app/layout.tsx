@@ -20,8 +20,8 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body suppressHydrationWarning className={cairo.className} style={{ margin: 0, padding: 0 }}>
-        <SplashScreen />
         <ThemeRegistry>
+          <SplashScreen />
           {children}
         </ThemeRegistry>
       </body>
