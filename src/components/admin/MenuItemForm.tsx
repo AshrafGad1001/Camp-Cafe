@@ -207,6 +207,7 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
         </Select>
       </FormControl>
 
+      <Box sx={{ mt: 2 }}>
         <FormControlLabel 
           control={
             <Switch 
