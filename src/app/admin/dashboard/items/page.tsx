@@ -239,11 +239,11 @@ export default function MenuItemsPage() {
                 <SortableItem key={item._id} id={item._id}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 3 }, width: '100%' }}>
                     {/* Top Row: Info */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, width: '100%' }}>
                       {item.image?.url ? (
-                        <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }} />
+                        <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: 2, objectFit: 'cover', border: '1px solid', borderColor: 'divider' }} />
                       ) : (
-                        <Box sx={{ width: 64, height: 64, borderRadius: '50%', bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+                        <Box sx={{ width: 64, height: 64, borderRadius: 2, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid', borderColor: 'divider' }}>
                           <LocalCafeOutlinedIcon sx={{ color: 'text.secondary' }} />
                         </Box>
                       )}
@@ -286,7 +286,7 @@ export default function MenuItemsPage() {
                           color="error" 
                           startIcon={<DeleteIcon fontSize="small" />} 
                           onClick={() => handleDeleteItem(item._id)}
-                          sx={{ borderRadius: 6, px: 2, fontWeight: 700, textTransform: 'none' }}
+                          sx={{ borderRadius: 1.5, px: 2, fontWeight: 700, textTransform: 'none' }}
                         >
                           Delete
                         </Button>
@@ -296,7 +296,7 @@ export default function MenuItemsPage() {
                           color="inherit" 
                           startIcon={<EditIcon fontSize="small" />} 
                           onClick={() => { setEditingItem(item); setShowModal(true); }}
-                          sx={{ borderRadius: 6, px: 2, fontWeight: 700, color: 'text.primary', borderColor: 'rgba(0,0,0,0.2)', textTransform: 'none' }}
+                          sx={{ borderRadius: 1.5, px: 2, fontWeight: 700, color: 'text.primary', borderColor: 'rgba(0,0,0,0.2)', textTransform: 'none' }}
                         >
                           Edit
                         </Button>

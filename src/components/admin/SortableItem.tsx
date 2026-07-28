@@ -37,7 +37,7 @@ export default function SortableItem({ id, children }: SortableItemProps) {
           display: 'flex', 
           alignItems: 'center', 
           gap: { xs: 1.5, md: 2 },
-          borderRadius: 4,
+          borderRadius: 2,
           border: '1px solid',
           borderColor: 'rgba(0,0,0,0.05)',
           boxShadow: isDragging ? '0 12px 24px rgba(0,0,0,0.1)' : '0 4px 12px rgba(0,0,0,0.03)',
