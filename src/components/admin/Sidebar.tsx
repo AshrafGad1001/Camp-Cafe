@@ -67,11 +67,16 @@ export default function Sidebar() {
                   {link.icon}
                 </ListItemIcon>
                 <ListItemText 
-                  primary={link.label} 
-                  primaryTypographyProps={{ 
-                    fontWeight: active ? 700 : 500,
-                    color: active ? 'primary.main' : 'text.primary'
-                  }} 
+                  primary={
+                    <Typography 
+                      sx={{ 
+                        fontWeight: active ? 700 : 500,
+                        color: active ? 'primary.main' : 'text.primary'
+                      }}
+                    >
+                      {link.label}
+                    </Typography>
+                  } 
                 />
               </ListItemButton>
             </ListItem>
@@ -101,7 +106,7 @@ export default function Sidebar() {
             }}
           >
             <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}><LogoutIcon /></ListItemIcon>
-            <ListItemText primary="تسجيل الخروج" primaryTypographyProps={{ fontWeight: 500 }} />
+            <ListItemText primary={<Typography sx={{ fontWeight: 500 }}>تسجيل الخروج</Typography>} />
           </ListItemButton>
         </ListItem>
       </List>

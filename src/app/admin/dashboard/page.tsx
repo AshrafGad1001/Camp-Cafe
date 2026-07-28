@@ -74,7 +74,7 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {statCards.map((stat, idx) => (
-          <Grid item xs={12} sm={6} md={4} key={idx}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={idx}>
             <Card sx={{ 
               p: 3, 
               display: 'flex', 
@@ -115,11 +115,11 @@ export default function DashboardPage() {
 
       {/* Bottom Section */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={5}>
+        <Grid size={{ xs: 12, md: 5 }}>
           <QRCodeGenerator />
         </Grid>
         
-        <Grid item xs={12} md={7}>
+        <Grid size={{ xs: 12, md: 7 }}>
           <Box sx={{ mb: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 1 }}>
               روابط سريعة 🔗
