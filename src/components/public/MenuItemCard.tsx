@@ -30,9 +30,17 @@ export default function MenuItemCard({ name, description, price, image }: MenuIt
             {description}
           </Typography>
         )}
-        <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem', mt: 'auto' }}>
-          {price} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
-        </Typography>
+        <Box sx={{ 
+          width: '100%', 
+          mt: 'auto', 
+          pt: 1.5, 
+          borderTop: '1px solid rgba(0,0,0,0.05)',
+          boxShadow: '0 -4px 12px rgba(0,0,0,0.02)' 
+        }}>
+          <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem' }}>
+            {price} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
+          </Typography>
+        </Box>
       </Box>
 
       {image?.url && (
