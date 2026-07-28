@@ -9,7 +9,9 @@ interface CategorySectionProps {
     _id: string;
     name: string;
     description: string;
-    price: number;
+    price: number | null;
+    hasSizes?: boolean;
+    sizes?: { name: string; price: number }[];
     image?: { url: string; publicId: string };
   }>;
 }
@@ -31,6 +33,8 @@ export default function CategorySection({ name, image, items }: CategorySectionP
               name={item.name}
               description={item.description}
               price={item.price}
+              hasSizes={item.hasSizes}
+              sizes={item.sizes}
               image={item.image}
             />
           </Grid>

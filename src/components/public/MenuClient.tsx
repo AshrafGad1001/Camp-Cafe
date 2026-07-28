@@ -13,7 +13,9 @@ interface MenuCategory {
     _id: string;
     name: string;
     description: string;
-    price: number;
+    price: number | null;
+    hasSizes?: boolean;
+    sizes?: { name: string; price: number }[];
     image: { url: string; publicId: string };
   }>;
 }
