@@ -41,7 +41,7 @@ export default function Sidebar() {
       }}
     >
       <Box sx={{ p: 3, display: 'flex', justifyContent: 'center', mb: 2 }}>
-        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '80px' }} />
+        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '55px' }} />
       </Box>
       <List sx={{ px: 2 }}>
         {navLinks.map((link) => {
