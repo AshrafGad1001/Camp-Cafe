@@ -29,12 +29,18 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       display: 'flex', 
       alignItems: 'flex-start',
       justifyContent: 'space-between',
-      borderRadius: '16px',
-      boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-      border: '1px solid rgba(0,0,0,0.04)',
+      borderRadius: '20px', // slightly softer corners
+      boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+      border: '1px solid rgba(0,0,0,0.03)',
       p: 2,
       height: '100%',
-      gap: 2
+      gap: 2,
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        transform: 'translateY(-4px)',
+        boxShadow: '0 12px 28px rgba(30, 58, 95, 0.08)',
+        borderColor: 'rgba(30, 58, 95, 0.1)',
+      }
     }}>
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%' }}>
         <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
@@ -83,8 +89,8 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                 key={displayPrice}
                 sx={{ 
                   fontWeight: 800, 
-                  color: '#1E3A5F', 
-                  fontSize: '1.1rem',
+                  color: '#C49A45', // Gold Accent
+                  fontSize: '1.15rem',
                   animation: 'fadeIn 0.3s ease-in-out',
                   '@keyframes fadeIn': {
                     '0%': { opacity: 0.3, transform: 'translateY(2px)' },
@@ -96,7 +102,7 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
               </Typography>
             </Box>
           ) : displayPrice !== null && displayPrice !== undefined ? (
-            <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem' }}>
+            <Typography variant="h6" sx={{ fontWeight: 800, color: '#C49A45', fontSize: '1.15rem' }}>
               {displayPrice} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
             </Typography>
           ) : (
@@ -108,12 +114,20 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       </Box>
 
       {image?.url && (
-        <Box sx={{ width: 100, height: 100, flexShrink: 0, ml: 2 }}>
+        <Box sx={{ width: 100, height: 100, flexShrink: 0, ml: 2, position: 'relative' }}>
+          <Box sx={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            borderRadius: '16px',
+            boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.04)',
+            zIndex: 1,
+            pointerEvents: 'none'
+          }} />
           <CardMedia 
             component="img" 
             image={image.url} 
             alt={name} 
-            sx={{ borderRadius: '12px', width: '100%', height: '100%', objectFit: 'cover' }}
+            sx={{ borderRadius: '16px', width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </Box>
       )}
