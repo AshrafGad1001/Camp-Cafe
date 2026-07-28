@@ -61,7 +61,7 @@ export default function DashboardPage() {
             لوحة التحكم
           </Typography>
           <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-            مرحباً بعودتك، إليك نظرة عامة على نشاط النظام ☕🎮
+            مرحباً بعودتك KareemTahon، إليك نظرة عامة على نشاط النظام ☕🎮
           </Typography>
         </Box>
       </Box>
