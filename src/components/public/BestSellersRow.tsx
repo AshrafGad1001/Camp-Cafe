@@ -36,6 +36,7 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
           display: 'flex',
           overflowX: 'auto',
           gap: 2,
+          pt: 2, // Added padding top to prevent badge clipping
           pb: 2,
           px: { xs: 2, md: 3 },
           scrollSnapType: 'x mandatory',
@@ -51,7 +52,7 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
               minWidth: { xs: 240, sm: 280 },
               maxWidth: { xs: 240, sm: 280 },
               scrollSnapAlign: 'start',
-              borderRadius: 4,
+              borderRadius: '20px', // Reduced border radius
               flexShrink: 0,
               display: 'flex',
               flexDirection: 'column',
@@ -67,8 +68,8 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
             <Box
               sx={{
                 position: 'absolute',
-                top: -10,
-                left: -10,
+                top: -12,
+                left: -12,
                 bgcolor: 'warning.main',
                 color: '#fff',
                 px: 1.5,
