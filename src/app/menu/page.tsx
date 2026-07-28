@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, Container, Typography, AppBar, Toolbar } from '@mui/material';
+import { Box, Container, Typography, AppBar, Toolbar, IconButton } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import PhoneIcon from '@mui/icons-material/Phone';
 import MenuClient from '@/components/public/MenuClient';
 
 interface MenuCategory {
@@ -58,8 +61,51 @@ export default async function MenuPage() {
       <Container maxWidth="lg" sx={{ pt: 1, pb: 2, px: { xs: 1, sm: 2, md: 2 } }}>
         <MenuClient menu={menu} />
 
-        <Box component="footer" sx={{ textAlign: 'center', py: 4 }}>
-          <Typography variant="body2" color="text.secondary">
+        <Box 
+          component="footer" 
+          sx={{ 
+            mt: 4,
+            mb: 2,
+            px: { xs: 2, md: 4 }, 
+            py: 3,
+            bgcolor: 'rgba(10, 41, 71, 0.95)', 
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            boxShadow: '0 8px 32px rgba(10, 41, 71, 0.25)', 
+            borderRadius: '20px', 
+            border: '1px solid rgba(255,255,255,0.08)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2
+          }}
+        >
+          <Box sx={{ display: 'flex', gap: { xs: 2, sm: 3 } }}>
+            <IconButton 
+              component="a" 
+              href="https://www.facebook.com/share/1Ebbei8Ysr/?mibextid=wwXIfr" 
+              target="_blank" 
+              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#1877F2', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+            >
+              <FacebookIcon fontSize="large" />
+            </IconButton>
+            <IconButton 
+              component="a" 
+              href="https://www.instagram.com/camp11114?igsh=MTBmMWZpOG1oYWd2bA%3D%3D&utm_source=qr" 
+              target="_blank" 
+              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#E4405F', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+            >
+              <InstagramIcon fontSize="large" />
+            </IconButton>
+            <IconButton 
+              component="a" 
+              href="tel:01023321047" 
+              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#25D366', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+            >
+              <PhoneIcon fontSize="large" />
+            </IconButton>
+          </Box>
+          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
             © 2024 Camp Cafe. All rights reserved.
           </Typography>
         </Box>
