@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Typography, AppBar, Toolbar, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import PhoneIcon from '@mui/icons-material/Phone';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import MenuClient from '@/components/public/MenuClient';
 
 interface MenuCategory {
@@ -115,7 +115,8 @@ export default async function MenuPage() {
             </IconButton>
             <IconButton 
               component="a" 
-              href="tel:01023321047" 
+              href="https://wa.me/+201023321047" 
+              target="_blank"
               sx={{ 
                 color: '#25D366', 
                 bgcolor: '#fff',
@@ -126,7 +127,7 @@ export default async function MenuPage() {
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
               }}
             >
-              <PhoneIcon fontSize="medium" />
+              <WhatsAppIcon fontSize="medium" />
             </IconButton>
           </Box>
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
