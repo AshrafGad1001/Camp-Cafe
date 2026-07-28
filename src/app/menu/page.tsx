@@ -38,7 +38,7 @@ export default async function MenuPage() {
   const menu = await getMenu();
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ px: { xs: 1, sm: 2, md: 2 }, pt: { xs: 2, md: 1.5 }, pb: 0, position: 'sticky', top: 0, zIndex: 1100, width: '100%', pointerEvents: 'none' }}>
         <AppBar position="static" sx={{ 
           bgcolor: 'rgba(10, 41, 71, 0.95)', 
@@ -58,13 +58,13 @@ export default async function MenuPage() {
         </AppBar>
       </Box>
 
-      <Container maxWidth="lg" sx={{ pt: 1, pb: 2, px: { xs: 1, sm: 2, md: 2 } }}>
+      <Container maxWidth="lg" sx={{ pt: 1, pb: 2, px: { xs: 1, sm: 2, md: 2 }, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <MenuClient menu={menu} />
 
         <Box 
           component="footer" 
           sx={{ 
-            mt: 4,
+            mt: 'auto',
             mb: 2,
             px: { xs: 2, md: 4 }, 
             py: 3,
