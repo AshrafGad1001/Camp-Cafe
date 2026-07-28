@@ -27,15 +27,15 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
   return (
     <Card sx={{ 
       display: 'flex', 
-      alignItems: 'flex-start',
+      alignItems: 'stretch',
       justifyContent: 'space-between',
       borderRadius: '20px',
       background: 'linear-gradient(135deg, #ffffff 0%, #f4f6f8 100%)',
       boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
       border: '1px solid rgba(0,0,0,0.02)',
-      p: 2,
+      p: 0,
+      overflow: 'hidden',
       height: '100%',
-      gap: 2,
       transition: 'all 0.3s ease',
       '&:hover': {
         transform: 'translateY(-4px)',
@@ -43,7 +43,7 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
         borderColor: 'rgba(10, 41, 71, 0.1)',
       }
     }}>
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%' }}>
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%', p: { xs: 1.5, sm: 2 } }}>
         <Typography variant="h6" component="h3" sx={{ fontWeight: 900, color: '#0A2947', mb: 0.5, fontSize: '1.2rem', lineHeight: 1.3 }}>
           {name}
         </Typography>
@@ -121,20 +121,14 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
 
       {image?.url && (
         <Box sx={{ 
-          width: { xs: 100, sm: 120 }, 
-          height: { xs: 100, sm: 120 }, 
-          minWidth: { xs: 100, sm: 120 }, 
+          width: { xs: '35%', sm: '33.33%' }, 
           flexShrink: 0, 
-          ml: { xs: 1.5, sm: 2 }, 
-          borderRadius: '16px',
           background: '#ffffff',
-          border: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 8px 20px rgba(0,0,0,0.05)',
-          overflow: 'hidden',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          overflow: 'hidden'
         }}>
           <CardMedia 
             component="img" 
@@ -143,21 +137,13 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
             sx={{ 
               width: '100%', 
               height: '100%', 
-              objectFit: 'cover', // You can change to 'contain' if the images have white backgrounds and you don't want any cropping
+              objectFit: 'cover',
               transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               '&:hover': {
                 transform: 'scale(1.08)'
               }
             }}
           />
-          {/* Subtle inner shadow for depth */}
-          <Box sx={{
-            position: 'absolute',
-            inset: 0,
-            boxShadow: 'inset 0 0 12px rgba(0,0,0,0.04)',
-            pointerEvents: 'none',
-            borderRadius: '16px'
-          }} />
         </Box>
       )}
     </Card>
