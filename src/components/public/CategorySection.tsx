@@ -17,22 +17,12 @@ interface CategorySectionProps {
 export default function CategorySection({ name, image, items }: CategorySectionProps) {
   return (
     <Box sx={{ mb: 6 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4, mt: 2 }}>
-        <Box sx={{ textAlign: 'right', borderLeft: '3px solid #C49A45', pl: 2 }}>
-          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 4, mt: 2 }}>
+        <Box sx={{ borderLeft: '3px solid #C49A45', pl: 2 }}>
+          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#1E3A5F', m: 0 }}>
             {name}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-            لذة الأصالة في كل قطعة
-          </Typography>
         </Box>
-        {image?.url && (
-          <Avatar 
-            src={image.url} 
-            alt={name}
-            sx={{ width: 72, height: 72, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', border: '4px solid #fff' }} 
-          />
-        )}
       </Box>
       <Grid container spacing={3}>
         {items.map(item => (
