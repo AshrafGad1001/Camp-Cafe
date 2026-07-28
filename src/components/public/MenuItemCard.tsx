@@ -11,45 +11,36 @@ interface MenuItemCardProps {
 export default function MenuItemCard({ name, description, price, image }: MenuItemCardProps) {
   return (
     <Card sx={{ 
-      height: '100%', 
       display: 'flex', 
-      flexDirection: 'column',
+      alignItems: 'stretch',
       borderRadius: 4,
-      boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
       border: 'none',
+      p: 1.5,
+      height: '100%'
     }}>
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', pr: 1, textAlign: 'right' }}>
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1rem', lineHeight: 1.3 }}>
+          {name}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.8rem', mb: 1, flexGrow: 1 }}>
+          {description || 'وصف لذيذ لهذا العنصر'}
+        </Typography>
+        <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem' }}>
+          {price} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
+        </Typography>
+      </Box>
+
       {image?.url && (
-        <Box sx={{ p: 1.5, pb: 0 }}>
+        <Box sx={{ width: 110, height: 110, flexShrink: 0, ml: 2 }}>
           <CardMedia 
             component="img" 
-            height="220" 
             image={image.url} 
             alt={name} 
-            sx={{ borderRadius: 3 }}
+            sx={{ borderRadius: 3, width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </Box>
       )}
-      <CardContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', p: 2, '&:last-child': { pb: 2 } }}>
-        <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
-          <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1.1rem' }}>
-            {name}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>
-            {description || 'وصف لذيذ لهذا العنصر'}
-          </Typography>
-        </Box>
-        
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, ml: 2, pl: 2, borderLeft: '2px solid #C49A45' }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h5" sx={{ fontWeight: 800, color: '#1E3A5F', lineHeight: 1 }}>
-              {price}
-            </Typography>
-            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-              ج.م
-            </Typography>
-          </Box>
-        </Box>
-      </CardContent>
     </Card>
   );
 }
