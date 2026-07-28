@@ -12,32 +12,34 @@ export default function MenuItemCard({ name, description, price, image }: MenuIt
   return (
     <Card sx={{ 
       display: 'flex', 
-      alignItems: 'stretch',
-      borderRadius: 4,
-      boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-      border: 'none',
-      p: 1.5,
-      height: '100%'
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+      borderRadius: '16px',
+      boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+      border: '1px solid rgba(0,0,0,0.04)',
+      p: 2,
+      height: '100%',
+      gap: 2
     }}>
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', pr: 1, textAlign: 'right' }}>
-        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1rem', lineHeight: 1.3 }}>
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', textAlign: 'right', height: '100%' }}>
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
           {name}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.8rem', mb: 1, flexGrow: 1 }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.85rem', mb: 1, flexGrow: 1 }}>
           {description || 'وصف لذيذ لهذا العنصر'}
         </Typography>
-        <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem' }}>
+        <Typography variant="h6" sx={{ fontWeight: 800, color: '#1E3A5F', fontSize: '1.1rem', mt: 'auto' }}>
           {price} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
         </Typography>
       </Box>
 
       {image?.url && (
-        <Box sx={{ width: 110, height: 110, flexShrink: 0, ml: 2 }}>
+        <Box sx={{ width: 100, height: 100, flexShrink: 0 }}>
           <CardMedia 
             component="img" 
             image={image.url} 
             alt={name} 
-            sx={{ borderRadius: 3, width: '100%', height: '100%', objectFit: 'cover' }}
+            sx={{ borderRadius: '12px', width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </Box>
       )}
