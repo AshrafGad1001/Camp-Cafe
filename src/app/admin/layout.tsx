@@ -76,7 +76,7 @@ export default function AdminLayout({
           </IconButton>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <img src="/logo.png" alt="Logo" style={{ maxHeight: '36px' }} />
+          <img src="/logo.png" alt="Logo" style={{ maxHeight: '26px' }} />
         </Box>
         <Box />
       </Box>

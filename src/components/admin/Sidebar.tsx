@@ -31,8 +31,18 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
 
   const drawerContent = (
     <>
-      <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', mb: 1 }}>
-        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '50px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' }} />
+      <Box sx={{ p: { xs: 2, md: 4 }, display: 'flex', justifyContent: 'center', mb: 1 }}>
+        <Box 
+          component="img" 
+          src="/logo.png" 
+          alt="Camp Cafe Logo" 
+          sx={{ 
+            maxWidth: '100%', 
+            height: 'auto', 
+            maxHeight: { xs: '35px', md: '50px' }, 
+            filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' 
+          }} 
+        />
       </Box>
 
       <List sx={{ px: 3 }}>
