@@ -7,7 +7,7 @@ import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
 import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import FolderIcon from '@mui/icons-material/Folder';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Use ArrowBack for RTL arrow pointing left (which is visually forward)
@@ -50,7 +50,7 @@ export default function DashboardPage() {
 
   const statCards = [
     { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح', value: stats.available, icon: <CheckCircleOutlinedIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
-    { label: 'عناصر القائمة', subtitle: 'كل العناصر', value: stats.items, icon: <RestaurantIcon fontSize="large" />, color: 'primary.main', bg: '#D3D4C0' },
+    { label: 'عناصر القائمة', subtitle: 'كل العناصر', value: stats.items, icon: <LocalCafeIcon fontSize="large" />, color: 'primary.main', bg: '#D3D4C0' },
     { label: 'التصنيفات', subtitle: 'إجمالي الأقسام', value: stats.categories, icon: <FolderIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
   ];
 
@@ -78,7 +78,8 @@ export default function DashboardPage() {
             <Card sx={{ 
               p: 3, 
               display: 'flex', 
-              alignItems: 'center', 
+              alignItems: 'center',
+              gap: 2, 
               bgcolor: '#fff', 
               borderRadius: 4,
               boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
@@ -89,8 +90,7 @@ export default function DashboardPage() {
                 color: stat.color, 
                 p: 2, 
                 borderRadius: 3, 
-                display: 'flex',
-                mr: 2 // Since RTL, mr applies to the actual visual gap
+                display: 'flex'
               }}>
                 {stat.icon}
               </Box>
@@ -137,6 +137,7 @@ export default function DashboardPage() {
               mb: 2,
               display: 'flex', 
               alignItems: 'center', 
+              gap: 2,
               bgcolor: '#fff', 
               borderRadius: 3,
               boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
@@ -145,7 +146,7 @@ export default function DashboardPage() {
               '&:hover': { transform: 'translateY(-2px)' }
             }}
           >
-            <Box sx={{ bgcolor: 'success.main', color: '#fff', p: 1.5, borderRadius: 2, ml: 2 }}>
+            <Box sx={{ bgcolor: 'success.main', color: '#fff', p: 1.5, borderRadius: 2 }}>
               <FolderIcon />
             </Box>
             <Box sx={{ flexGrow: 1 }}>
@@ -166,6 +167,7 @@ export default function DashboardPage() {
               p: 3, 
               display: 'flex', 
               alignItems: 'center', 
+              gap: 2,
               bgcolor: '#fff', 
               borderRadius: 3,
               boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
@@ -174,8 +176,8 @@ export default function DashboardPage() {
               '&:hover': { transform: 'translateY(-2px)' }
             }}
           >
-            <Box sx={{ bgcolor: 'primary.main', color: '#fff', p: 1.5, borderRadius: 2, ml: 2 }}>
-              <RestaurantIcon />
+            <Box sx={{ bgcolor: 'primary.main', color: '#fff', p: 1.5, borderRadius: 2 }}>
+              <LocalCafeIcon />
             </Box>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'primary.main' }}>
