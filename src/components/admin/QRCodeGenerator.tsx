@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
-import { Card, Typography, Button, CircularProgress, Box } from '@mui/material';
+import { Card, Typography, Button, CircularProgress, Box, Avatar } from '@mui/material';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import DownloadIcon from '@mui/icons-material/Download';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 
 export default function QRCodeGenerator() {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
@@ -16,10 +16,10 @@ export default function QRCodeGenerator() {
     setMenuUrl(url);
 
     QRCode.toDataURL(url, {
-      width: 250,
+      width: 280,
       margin: 1,
       color: {
-        dark: '#000000',
+        dark: '#1E293B',
         light: '#ffffff'
       }
     })
@@ -33,42 +33,63 @@ export default function QRCodeGenerator() {
 
   return (
     <Card sx={{ 
-      p: 4, 
+      p: 5, 
       display: 'flex', 
       flexDirection: 'column', 
       height: '100%', 
       bgcolor: '#fff', 
-      borderRadius: 4,
-      boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)'
+      border: '1px solid',
+      borderColor: 'rgba(0,0,0,0.03)',
+      alignItems: 'center',
+      textAlign: 'center'
     }}>
-      <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-        باركود المنيو <QrCode2Icon fontSize="small" sx={{ color: 'text.secondary' }}/>
+      <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark', width: 56, height: 56, mb: 2 }}>
+        <QrCode2Icon fontSize="medium" />
+      </Avatar>
+      
+      <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', mb: 1 }}>
+        باركود المنيو الرقمي
       </Typography>
-      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 4 }}>
-        يمكن للعملاء مسح الباركود لعرض المنيو على أجهزتهم.
+      <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4, px: 2 }}>
+        اطبع هذا الباركود وضعه على الطاولات ليتمكن العملاء من مسحه وعرض قائمة الطلبات مباشرة.
       </Typography>
       
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5, width: '100%' }}>
         {qrCodeDataUrl ? (
-          <Box sx={{ background: '#fff', p: 1, borderRadius: 4, boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
-            <img src={qrCodeDataUrl} alt="Menu QR Code" style={{ width: '180px', height: '180px', display: 'block', borderRadius: '12px' }} />
+          <Box sx={{ 
+            background: '#fff', 
+            p: 1.5, 
+            borderRadius: 4, 
+            boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
+            border: '1px solid',
+            borderColor: 'rgba(0,0,0,0.05)',
+            transition: 'transform 0.3s ease',
+            '&:hover': { transform: 'scale(1.02)' }
+          }}>
+            <img src={qrCodeDataUrl} alt="Menu QR Code" style={{ width: '220px', height: '220px', display: 'block', borderRadius: '12px' }} />
           </Box>
         ) : (
-          <Box sx={{ width: '180px', height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 4, boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+          <Box sx={{ width: '220px', height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 4, boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
             <CircularProgress />
           </Box>
         )}
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 'auto' }}>
+      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 'auto', width: '100%' }}>
         <Button 
           component="a"
           href={menuUrl}
           target="_blank"
           rel="noopener noreferrer" 
           variant="outlined"
-          startIcon={<VisibilityIcon />}
-          sx={{ borderRadius: 2, fontWeight: 600, color: 'primary.main', borderColor: '#d0d0d0', px: 3 }}
+          startIcon={<VisibilityOutlinedIcon />}
+          fullWidth
+          sx={{ 
+            borderRadius: 3, 
+            fontWeight: 700, 
+            borderWidth: 2,
+            '&:hover': { borderWidth: 2 }
+          }}
         >
           عرض المنيو
         </Button>
@@ -78,8 +99,9 @@ export default function QRCodeGenerator() {
           download="camp-cafe-qr.png"
           variant="contained" 
           color="primary"
-          startIcon={<DownloadIcon />}
-          sx={{ borderRadius: 2, fontWeight: 600, px: 3 }}
+          startIcon={<DownloadOutlinedIcon />}
+          fullWidth
+          sx={{ borderRadius: 3, fontWeight: 700 }}
         >
           تحميل
         </Button>

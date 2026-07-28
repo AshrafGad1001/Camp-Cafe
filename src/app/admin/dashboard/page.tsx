@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 import { Category, MenuItem } from '@/types';
 import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
-import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button } from '@mui/material';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button, Avatar } from '@mui/material';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
-import FolderIcon from '@mui/icons-material/Folder';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Use ArrowBack for RTL arrow pointing left (which is visually forward)
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -43,70 +42,90 @@ export default function DashboardPage() {
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', p: 4, height: '80vh', alignItems: 'center' }}>
-        <CircularProgress />
+        <CircularProgress size={60} thickness={4} />
       </Box>
     );
   }
 
   const statCards = [
-    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح', value: stats.available, icon: <CheckCircleOutlinedIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
-    { label: 'عناصر القائمة', subtitle: 'كل العناصر', value: stats.items, icon: <LocalCafeIcon fontSize="large" />, color: 'primary.main', bg: '#D3D4C0' },
-    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام', value: stats.categories, icon: <FolderIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
+    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: 36 }} />, color: 'success.main', bg: 'success.light' },
+    { label: 'عناصر القائمة', subtitle: 'كل المشروبات والألعاب', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 36 }} />, color: 'primary.main', bg: 'primary.light' },
+    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 36 }} />, color: 'secondary.main', bg: 'secondary.light' },
   ];
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
+    <Box sx={{ maxWidth: 1280, mx: 'auto', p: { xs: 2, md: 4 } }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 6 }}>
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 800, color: 'primary.main', mb: 0.5 }}>
+          <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', mb: 1, letterSpacing: '-0.5px' }}>
             لوحة التحكم
           </Typography>
-          <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-            مرحباً بعودتك، Admin 🍃
+          <Typography variant="subtitle1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+            مرحباً بعودتك، إليك نظرة عامة على نشاط النظام ☕🎮
           </Typography>
         </Box>
-        <IconButton sx={{ bgcolor: '#fff', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', p: 1.5, '&:hover': { bgcolor: '#f5f5f5' } }}>
-          <NotificationsNoneIcon sx={{ color: 'primary.main' }} />
+        <IconButton 
+          sx={{ 
+            bgcolor: '#fff', 
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)', 
+            p: 1.5, 
+            border: '1px solid',
+            borderColor: 'rgba(0,0,0,0.05)',
+            transition: 'all 0.2s ease',
+            '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 20px rgba(0,0,0,0.1)' } 
+          }}
+        >
+          <NotificationsNoneOutlinedIcon sx={{ color: 'text.primary' }} />
         </IconButton>
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={4} sx={{ mb: 6 }}>
         {statCards.map((stat, idx) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={idx}>
+          <Grid size={{ xs: 12, md: 4 }} key={idx}>
             <Card sx={{ 
-              p: 3, 
+              p: 4, 
               display: 'flex', 
               alignItems: 'center',
-              gap: 2, 
+              gap: 3, 
               bgcolor: '#fff', 
-              borderRadius: 4,
-              boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
-              position: 'relative'
+              position: 'relative',
+              overflow: 'visible',
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.03)'
             }}>
-              <Box sx={{ 
-                bgcolor: stat.bg, 
-                color: stat.color, 
-                p: 2, 
-                borderRadius: 3, 
+              <Avatar sx={{ 
+                bgcolor: stat.color, 
+                color: '#fff', 
+                width: 72, 
+                height: 72, 
+                borderRadius: 4, 
+                boxShadow: `0 12px 24px ${stat.color}40`,
                 display: 'flex'
               }}>
                 {stat.icon}
-              </Box>
+              </Avatar>
               <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="h4" sx={{ fontWeight: 800, color: 'primary.main', lineHeight: 1.2 }}>
+                <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', lineHeight: 1 }}>
                   {stat.value}
                 </Typography>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary', mt: 0.5 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: 'text.primary', mt: 1 }}>
                   {stat.label}
                 </Typography>
-                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
                   {stat.subtitle}
                 </Typography>
               </Box>
-              <IconButton size="small" sx={{ border: '1px solid #e0e0e0', color: 'text.secondary', ml: -1 }}>
-                <ArrowBackIcon fontSize="small" />
+              <IconButton size="small" sx={{ 
+                position: 'absolute', 
+                left: 16, 
+                top: '50%', 
+                transform: 'translateY(-50%)',
+                bgcolor: 'background.default',
+                '&:hover': { bgcolor: 'primary.main', color: '#fff' }
+              }}>
+                <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
               </IconButton>
             </Card>
           </Grid>
@@ -114,18 +133,18 @@ export default function DashboardPage() {
       </Grid>
 
       {/* Bottom Section */}
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid size={{ xs: 12, md: 5 }}>
           <QRCodeGenerator />
         </Grid>
         
         <Grid size={{ xs: 12, md: 7 }}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 1 }}>
-              روابط سريعة 🔗
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+              روابط سريعة ⚡
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              قم بإدارة التصنيفات وعناصر القائمة الخاصة بك بسهولة.
+            <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+              قم بإدارة التصنيفات وعناصر القائمة الخاصة بك بسهولة واحترافية.
             </Typography>
           </Box>
           
@@ -134,30 +153,29 @@ export default function DashboardPage() {
             href="/admin/dashboard/categories"
             sx={{ 
               p: 3, 
-              mb: 2,
+              mb: 3,
               display: 'flex', 
               alignItems: 'center', 
-              gap: 2,
+              gap: 3,
               bgcolor: '#fff', 
-              borderRadius: 3,
-              boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
               textDecoration: 'none',
-              transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-2px)' }
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.03)',
+              '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Box sx={{ bgcolor: 'success.main', color: '#fff', p: 1.5, borderRadius: 2 }}>
-              <FolderIcon />
-            </Box>
+            <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.dark', width: 64, height: 64, borderRadius: 3 }}>
+              <DashboardCustomizeOutlinedIcon fontSize="large" />
+            </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'primary.main' }}>
+              <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
                 إدارة التصنيفات
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                إضافة، تعديل أو حذف التصنيفات
+              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                إضافة، تعديل أو ترتيب الأقسام داخل المنيو
               </Typography>
             </Box>
-            <ArrowBackIcon sx={{ color: 'text.secondary' }} />
+            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease' }} />
           </Card>
 
           <Card 
@@ -167,27 +185,26 @@ export default function DashboardPage() {
               p: 3, 
               display: 'flex', 
               alignItems: 'center', 
-              gap: 2,
+              gap: 3,
               bgcolor: '#fff', 
-              borderRadius: 3,
-              boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)',
               textDecoration: 'none',
-              transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-2px)' }
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.03)',
+              '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Box sx={{ bgcolor: 'primary.main', color: '#fff', p: 1.5, borderRadius: 2 }}>
-              <LocalCafeIcon />
-            </Box>
+            <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark', width: 64, height: 64, borderRadius: 3 }}>
+              <SportsEsportsIcon fontSize="large" />
+            </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'primary.main' }}>
+              <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
                 إدارة عناصر القائمة
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                إضافة، تعديل أو حذف عناصر القائمة
+              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                التحكم في المشروبات، الألعاب، الأسعار والتوافر
               </Typography>
             </Box>
-            <ArrowBackIcon sx={{ color: 'text.secondary' }} />
+            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease' }} />
           </Card>
 
         </Grid>
