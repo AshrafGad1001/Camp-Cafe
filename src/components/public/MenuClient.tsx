@@ -63,12 +63,12 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               color: activeCategory === 'all' ? '#fff' : '#1E3A5F',
               border: '1px solid',
               borderColor: activeCategory === 'all' ? '#1E3A5F' : 'rgba(0,0,0,0.06)',
-              boxShadow: activeCategory === 'all' ? '0 4px 10px rgba(30,58,95,0.25)' : '0 2px 6px rgba(0,0,0,0.04)',
-              transition: 'all 0.2s ease',
+              boxShadow: activeCategory === 'all' ? '0 4px 12px rgba(30,58,95,0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               '&:hover': {
                 bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#f8f9fa',
-                transform: 'translateY(-1px)',
-                boxShadow: activeCategory === 'all' ? '0 6px 14px rgba(30,58,95,0.3)' : '0 4px 8px rgba(0,0,0,0.06)',
+                transform: 'translateY(-2px)',
+                boxShadow: activeCategory === 'all' ? '0 6px 16px rgba(30,58,95,0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
               }
             }}
           >
@@ -95,12 +95,12 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 color: activeCategory === category._id ? '#fff' : '#1E3A5F',
                 border: '1px solid',
                 borderColor: activeCategory === category._id ? '#1E3A5F' : 'rgba(0,0,0,0.06)',
-                boxShadow: activeCategory === category._id ? '0 4px 10px rgba(30,58,95,0.25)' : '0 2px 6px rgba(0,0,0,0.04)',
-                transition: 'all 0.2s ease',
+                boxShadow: activeCategory === category._id ? '0 4px 12px rgba(30,58,95,0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
                   bgcolor: activeCategory === category._id ? '#1E3A5F' : '#f8f9fa',
-                  transform: 'translateY(-1px)',
-                  boxShadow: activeCategory === category._id ? '0 6px 14px rgba(30,58,95,0.3)' : '0 4px 8px rgba(0,0,0,0.06)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: activeCategory === category._id ? '0 6px 16px rgba(30,58,95,0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
                 }
               }}
             >
