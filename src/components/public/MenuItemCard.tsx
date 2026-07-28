@@ -12,7 +12,12 @@ interface MenuItemCardProps {
 
 export default function MenuItemCard({ name, description, price, hasSizes, sizes, image }: MenuItemCardProps) {
   const validSizes = sizes?.filter(s => s.name && s.price > 0) || [];
-  const [selectedSizeIndex, setSelectedSizeIndex] = useState<number>(0);
+  
+  // Find index of 'M' (Medium), or default to the first valid size (0)
+  const defaultSizeIndex = validSizes.findIndex(s => s.name === 'M');
+  const initialIndex = defaultSizeIndex !== -1 ? defaultSizeIndex : 0;
+  
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState<number>(initialIndex);
 
   const isSizesAvailable = hasSizes && validSizes.length > 0;
   

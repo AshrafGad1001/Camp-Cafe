@@ -253,8 +253,21 @@ export default function MenuItemsPage() {
                         <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>{getCategoryName(item.category)}</Typography>
                       </Box>
 
-                      <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', minWidth: 'max-content' }}>
-                        {item.price} ج.م
+                      <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', minWidth: 'max-content', textAlign: 'right' }}>
+                        {item.hasSizes && item.sizes && item.sizes.length > 0 ? (
+                          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5 }}>
+                            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 700 }}>
+                              متعدد الأحجام
+                            </Typography>
+                            <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                              {item.sizes.map(s => (
+                                <Chip key={s.name} label={`${s.name}: ${s.price}`} size="small" variant="outlined" sx={{ fontWeight: 600, fontSize: '0.7rem', height: 20 }} />
+                              ))}
+                            </Box>
+                          </Box>
+                        ) : (
+                          <>{item.price} ج.م</>
+                        )}
                       </Typography>
                     </Box>
 
@@ -323,6 +336,8 @@ export default function MenuItemsPage() {
             price: editingItem.price,
             category: getCategoryId(editingItem.category),
             isAvailable: editingItem.isAvailable,
+            hasSizes: editingItem.hasSizes,
+            sizes: editingItem.sizes,
             imageUrl: editingItem.image?.url,
           } : undefined}
           onSubmit={handleFormSubmit}
