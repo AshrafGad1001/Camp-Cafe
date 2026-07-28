@@ -11,7 +11,7 @@ interface MenuItemCardProps {
 export default function MenuItemCard({ name, description, price, image }: MenuItemCardProps) {
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {image && (
+      {image?.url && (
         <CardMedia component="img" height="180" image={image.url} alt={name} />
       )}
       <CardContent sx={{ flexGrow: 1 }}>

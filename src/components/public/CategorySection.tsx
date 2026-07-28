@@ -20,7 +20,7 @@ export default function CategorySection({ name, image, items }: CategorySectionP
       <Typography variant="h4" component="h2" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>
         {name}
       </Typography>
-      {image && (
+      {image?.url && (
         <Box 
           component="img" 
           src={image.url} 
