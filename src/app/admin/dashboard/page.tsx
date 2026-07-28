@@ -5,7 +5,6 @@ import api from '@/lib/api';
 import { Category, MenuItem } from '@/types';
 import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
 import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button, Avatar } from '@mui/material';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
@@ -65,19 +64,6 @@ export default function DashboardPage() {
             مرحباً بعودتك، إليك نظرة عامة على نشاط النظام ☕🎮
           </Typography>
         </Box>
-        <IconButton 
-          sx={{ 
-            bgcolor: '#fff', 
-            boxShadow: '0 4px 12px rgba(0,0,0,0.05)', 
-            p: 1.5, 
-            border: '1px solid',
-            borderColor: 'rgba(0,0,0,0.05)',
-            transition: 'all 0.2s ease',
-            '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 20px rgba(0,0,0,0.1)' } 
-          }}
-        >
-          <NotificationsNoneOutlinedIcon sx={{ color: 'text.primary' }} />
-        </IconButton>
       </Box>
 
       {/* Stats Cards */}
@@ -142,9 +128,6 @@ export default function DashboardPage() {
           <Box sx={{ mb: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
               روابط سريعة ⚡
-            </Typography>
-            <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-              قم بإدارة التصنيفات وعناصر القائمة الخاصة بك بسهولة واحترافية.
             </Typography>
           </Box>
           

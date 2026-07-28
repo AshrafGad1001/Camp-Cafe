@@ -42,7 +42,7 @@ export default function Sidebar() {
       }}
     >
       <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', mb: 1 }}>
-        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '70px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' }} />
+        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '50px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' }} />
       </Box>
 
       <List sx={{ px: 3 }}>
