@@ -36,7 +36,7 @@ export default async function MenuPage() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <Box sx={{ px: 1, pt: 1, position: 'sticky', top: 0, zIndex: 1100, width: '100%' }}>
+      <Box sx={{ px: 1, pt: 1, pb: 1, position: 'sticky', top: 0, zIndex: 1100, width: '100%', bgcolor: 'background.default' }}>
         <AppBar position="static" sx={{ bgcolor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', borderRadius: 2, width: '100%' }}>
           <Toolbar sx={{ justifyContent: 'center', py: 1 }}>
             <Box component="img" src="/logo.png" alt="Camp Cafe" sx={{ height: 40 }} />
