@@ -47,9 +47,9 @@ export default function DashboardPage() {
   }
 
   const statCards = [
-    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: 36 }} />, color: 'success.main', bg: 'success.light' },
-    { label: 'عناصر القائمة', subtitle: 'كل المشروبات والألعاب', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 36 }} />, color: 'primary.main', bg: 'primary.light' },
-    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 36 }} />, color: 'secondary.main', bg: 'secondary.light' },
+    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: 32 }} />, color: 'success.main' },
+    { label: 'عناصر القائمة', subtitle: 'كل المشروبات والألعاب', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 32 }} />, color: 'primary.main' },
+    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 32 }} />, color: 'secondary.main' },
   ];
 
   return (
@@ -57,10 +57,10 @@ export default function DashboardPage() {
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 6 }}>
         <Box>
-          <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', mb: 1, letterSpacing: '-0.5px' }}>
+          <Typography variant="h4" sx={{ fontWeight: 800, color: 'text.primary', mb: 1, letterSpacing: '-0.5px' }}>
             لوحة التحكم
           </Typography>
-          <Typography variant="subtitle1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+          <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
             مرحباً بعودتك، إليك نظرة عامة على نشاط النظام ☕🎮
           </Typography>
         </Box>
@@ -71,43 +71,38 @@ export default function DashboardPage() {
         {statCards.map((stat, idx) => (
           <Grid size={{ xs: 12, md: 4 }} key={idx}>
             <Card sx={{ 
-              p: 4, 
+              p: 3, 
               display: 'flex', 
               alignItems: 'center',
-              gap: 3, 
+              justifyContent: 'space-between',
               bgcolor: '#fff', 
-              position: 'relative',
-              overflow: 'visible',
               border: '1px solid',
               borderColor: 'rgba(0,0,0,0.03)'
             }}>
-              <Avatar sx={{ 
-                bgcolor: stat.color, 
-                color: '#fff', 
-                width: 72, 
-                height: 72, 
-                borderRadius: 4, 
-                boxShadow: `0 12px 24px ${stat.color}40`,
-                display: 'flex'
-              }}>
-                {stat.icon}
-              </Avatar>
-              <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', lineHeight: 1 }}>
-                  {stat.value}
-                </Typography>
-                <Typography variant="h6" sx={{ fontWeight: 700, color: 'text.primary', mt: 1 }}>
-                  {stat.label}
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                  {stat.subtitle}
-                </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
+                <Avatar sx={{ 
+                  bgcolor: stat.color, 
+                  color: '#fff', 
+                  width: 56, 
+                  height: 56, 
+                  borderRadius: 3, 
+                  boxShadow: `0 8px 16px ${stat.color}40`,
+                }}>
+                  {stat.icon}
+                </Avatar>
+                <Box>
+                  <Typography variant="h4" sx={{ fontWeight: 800, color: 'text.primary', lineHeight: 1, mb: 0.5 }}>
+                    {stat.value}
+                  </Typography>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary' }}>
+                    {stat.label}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                    {stat.subtitle}
+                  </Typography>
+                </Box>
               </Box>
               <IconButton size="small" sx={{ 
-                position: 'absolute', 
-                left: 16, 
-                top: '50%', 
-                transform: 'translateY(-50%)',
                 bgcolor: 'background.default',
                 '&:hover': { bgcolor: 'primary.main', color: '#fff' }
               }}>
