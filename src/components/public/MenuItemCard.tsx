@@ -29,9 +29,10 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       display: 'flex', 
       alignItems: 'flex-start',
       justifyContent: 'space-between',
-      borderRadius: '20px', // slightly softer corners
+      borderRadius: '20px',
+      background: 'linear-gradient(135deg, #ffffff 0%, #f4f6f8 100%)',
       boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
-      border: '1px solid rgba(0,0,0,0.03)',
+      border: '1px solid rgba(0,0,0,0.02)',
       p: 2,
       height: '100%',
       gap: 2,
@@ -43,7 +44,7 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       }
     }}>
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%' }}>
-        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#0A2947', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 900, color: '#0A2947', mb: 0.5, fontSize: '1.2rem', lineHeight: 1.3 }}>
           {name}
         </Typography>
         {description && (
@@ -68,15 +69,20 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                       key={size.name}
                       onClick={() => setSelectedSizeIndex(index)}
                       sx={{
-                        minWidth: 28,
-                        height: 28,
+                        minWidth: 32,
+                        height: 32,
                         px: 1,
-                        borderRadius: '14px',
-                        fontSize: '0.75rem',
-                        fontWeight: isSelected ? 800 : 600,
-                        bgcolor: isSelected ? '#0A2947' : '#f0f2f5',
+                        borderRadius: '16px',
+                        fontSize: '0.8rem',
+                        fontWeight: isSelected ? 800 : 700,
+                        bgcolor: isSelected ? '#0A2947' : 'transparent',
                         color: isSelected ? '#fff' : '#0A2947',
-                        transition: 'all 0.2s ease',
+                        border: isSelected ? '1px solid #0A2947' : '1px solid rgba(10, 41, 71, 0.2)',
+                        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                          transform: 'scale(1.08)',
+                          bgcolor: isSelected ? '#0A2947' : 'rgba(10, 41, 71, 0.04)',
+                        }
                       }}
                     >
                       {size.name}
@@ -88,9 +94,9 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                 variant="h6" 
                 key={displayPrice}
                 sx={{ 
-                  fontWeight: 800, 
+                  fontWeight: 900, 
                   color: '#C49A45', // Gold Accent
-                  fontSize: '1.15rem',
+                  fontSize: '1.25rem',
                   animation: 'fadeIn 0.3s ease-in-out',
                   '@keyframes fadeIn': {
                     '0%': { opacity: 0.3, transform: 'translateY(2px)' },
@@ -102,11 +108,11 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
               </Typography>
             </Box>
           ) : displayPrice !== null && displayPrice !== undefined ? (
-            <Typography variant="h6" sx={{ fontWeight: 800, color: '#C49A45', fontSize: '1.15rem' }}>
+            <Typography variant="h6" sx={{ fontWeight: 900, color: '#C49A45', fontSize: '1.25rem' }}>
               {displayPrice} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
             </Typography>
           ) : (
-            <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.secondary' }}>
+            <Typography variant="body2" sx={{ fontWeight: 700, color: 'text.secondary' }}>
               السعر غير متاح
             </Typography>
           )}
@@ -114,20 +120,27 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       </Box>
 
       {image?.url && (
-        <Box sx={{ width: 100, height: 100, flexShrink: 0, ml: 2, position: 'relative' }}>
+        <Box sx={{ width: 110, height: 110, flexShrink: 0, ml: 2, position: 'relative' }}>
           <Box sx={{
             position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            borderRadius: '16px',
-            boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.04)',
-            zIndex: 1,
-            pointerEvents: 'none'
+            top: -3, left: -3, right: -3, bottom: -3,
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, rgba(196,154,69,0.3) 0%, rgba(10,41,71,0.15) 100%)',
+            zIndex: 0,
           }} />
           <CardMedia 
             component="img" 
             image={image.url} 
             alt={name} 
-            sx={{ borderRadius: '16px', width: '100%', height: '100%', objectFit: 'cover' }}
+            sx={{ 
+              borderRadius: '50%', 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover',
+              position: 'relative',
+              zIndex: 1,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
           />
         </Box>
       )}
