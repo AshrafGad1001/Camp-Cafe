@@ -5,7 +5,7 @@ import api from '@/lib/api';
 import { MenuItem } from '@/types';
 import { Box, Typography, Button, Snackbar, Alert, Grid, Card, CardMedia, CardContent, CardActions, Chip, CircularProgress } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function BestSellersPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -119,7 +119,7 @@ export default function BestSellersPage() {
                     color="error" 
                     variant="outlined" 
                     fullWidth 
-                    startIcon={<RemoveCircleOutlineIcon />}
+                    startIcon={<DeleteIcon />}
                     onClick={() => handleRemoveBestSeller(item._id || item.id as string)}
                     sx={{ borderRadius: 2 }}
                   >
