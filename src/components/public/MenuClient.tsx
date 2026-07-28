@@ -38,33 +38,26 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
       {/* Category Filter Bar */}
       <Box 
         sx={{ 
-          display: 'block',
-          whiteSpace: 'nowrap',
-          overflowX: 'auto', 
-          width: '100%',
-          maxWidth: '100vw',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: 1.5,
           py: 2, 
           mb: 4,
           px: 2,
-          '&::-webkit-scrollbar': { display: 'none' },
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
         }}
       >
           <Box
             onClick={() => setActiveCategory('all')}
             sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              verticalAlign: 'middle',
-              height: 44,
-              gap: 1,
-              cursor: 'pointer',
-              px: 3,
-              ml: 1.5,
-              borderRadius: '24px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                verticalAlign: 'middle',
+                height: 44,
+                cursor: 'pointer',
+                px: 2.5,
+                borderRadius: '24px',
               bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#fff',
               color: activeCategory === 'all' ? '#fff' : '#1E3A5F',
               border: '1px solid',
@@ -94,7 +87,6 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 gap: 1,
                 cursor: 'pointer',
                 px: 2.5,
-                ml: 1.5,
                 borderRadius: '24px',
                 bgcolor: activeCategory === category._id ? '#1E3A5F' : '#fff',
                 color: activeCategory === category._id ? '#fff' : '#1E3A5F',
