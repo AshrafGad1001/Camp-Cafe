@@ -1,17 +1,24 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Box, Fade } from '@mui/material';
+import { Box, Fade, Typography } from '@mui/material';
 import { keyframes } from '@mui/system';
 
-const pulseAnimation = keyframes`
+const fillAnimation = keyframes`
+  0% {
+    background-size: 0% 100%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+`;
+
+const floatAnimation = keyframes`
   0%, 100% {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateY(0px) scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.05);
+    transform: translateY(-10px) scale(1.02);
   }
 `;
 
@@ -20,15 +27,15 @@ export default function SplashScreen() {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Start fade out after 2 seconds
+    // Start fade out after 2.5 seconds to allow animation to complete
     const hideTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 2000);
+    }, 2500);
 
-    // Completely unmount after transition (2s + 0.5s fade)
+    // Completely unmount after transition (2.5s + 0.5s fade)
     const removeTimer = setTimeout(() => {
       setShouldRender(false);
-    }, 2500);
+    }, 3000);
 
     return () => {
       clearTimeout(hideTimer);
@@ -52,16 +59,31 @@ export default function SplashScreen() {
           flexDirection: 'column',
         }}
       >
-        <Box
-          component="img"
-          src="/logo.png"
-          alt="Camp Cafe Logo"
-          sx={{
-            width: { xs: 150, sm: 200, md: 250 },
-            filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.4))',
-            animation: `${pulseAnimation} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite`,
-          }}
-        />
+        <Box sx={{ animation: `${floatAnimation} 3s ease-in-out infinite` }}>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: 900,
+              fontSize: { xs: '3.5rem', sm: '5rem', md: '6.5rem' },
+              textTransform: 'uppercase',
+              letterSpacing: '4px',
+              color: 'transparent',
+              WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.15)', // Faint outline
+              backgroundImage: 'linear-gradient(90deg, #ffffff 0%, #C49A45 100%)', // Fill gradient (White to Gold)
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'left center', // Start filling from left
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              backgroundSize: '0% 100%',
+              animation: `${fillAnimation} 2s cubic-bezier(0.4, 0, 0.2, 1) forwards`,
+              filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.4))',
+              m: 0,
+              lineHeight: 1,
+            }}
+          >
+            Camp Cafe
+          </Typography>
+        </Box>
       </Box>
     </Fade>
   );
