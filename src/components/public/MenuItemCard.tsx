@@ -38,12 +38,12 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
       transition: 'all 0.3s ease',
       '&:hover': {
         transform: 'translateY(-4px)',
-        boxShadow: '0 12px 28px rgba(30, 58, 95, 0.08)',
-        borderColor: 'rgba(30, 58, 95, 0.1)',
+        boxShadow: '0 12px 28px rgba(10, 41, 71, 0.08)',
+        borderColor: 'rgba(10, 41, 71, 0.1)',
       }
     }}>
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%' }}>
-        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#0A2947', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
           {name}
         </Typography>
         {description && (
@@ -74,8 +74,8 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                         borderRadius: '14px',
                         fontSize: '0.75rem',
                         fontWeight: isSelected ? 800 : 600,
-                        bgcolor: isSelected ? '#1E3A5F' : '#f0f2f5',
-                        color: isSelected ? '#fff' : '#1E3A5F',
+                        bgcolor: isSelected ? '#0A2947' : '#f0f2f5',
+                        color: isSelected ? '#fff' : '#0A2947',
                         transition: 'all 0.2s ease',
                       }}
                     >

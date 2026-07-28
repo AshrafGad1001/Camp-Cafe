@@ -59,16 +59,16 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 cursor: 'pointer',
                 px: 2, // reduced padding
                 borderRadius: '20px', // slightly smaller border radius
-              bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#fff',
-              color: activeCategory === 'all' ? '#fff' : '#1E3A5F',
+              bgcolor: activeCategory === 'all' ? '#0A2947' : '#fff',
+              color: activeCategory === 'all' ? '#fff' : '#0A2947',
               border: '1px solid',
-              borderColor: activeCategory === 'all' ? '#1E3A5F' : 'rgba(0,0,0,0.06)',
-              boxShadow: activeCategory === 'all' ? '0 4px 12px rgba(30,58,95,0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
+              borderColor: activeCategory === 'all' ? '#0A2947' : 'rgba(0,0,0,0.06)',
+              boxShadow: activeCategory === 'all' ? '0 4px 12px rgba(10, 41, 71, 0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               '&:hover': {
-                bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#f8f9fa',
+                bgcolor: activeCategory === 'all' ? '#0A2947' : '#f8f9fa',
                 transform: 'translateY(-2px)',
-                boxShadow: activeCategory === 'all' ? '0 6px 16px rgba(30,58,95,0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
+                boxShadow: activeCategory === 'all' ? '0 6px 16px rgba(10, 41, 71, 0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
               }
             }}
           >
@@ -91,16 +91,16 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 cursor: 'pointer',
                 px: 1.5, // reduced padding
                 borderRadius: '20px',
-                bgcolor: activeCategory === category._id ? '#1E3A5F' : '#fff',
-                color: activeCategory === category._id ? '#fff' : '#1E3A5F',
+                bgcolor: activeCategory === category._id ? '#0A2947' : '#fff',
+                color: activeCategory === category._id ? '#fff' : '#0A2947',
                 border: '1px solid',
-                borderColor: activeCategory === category._id ? '#1E3A5F' : 'rgba(0,0,0,0.06)',
-                boxShadow: activeCategory === category._id ? '0 4px 12px rgba(30,58,95,0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
+                borderColor: activeCategory === category._id ? '#0A2947' : 'rgba(0,0,0,0.06)',
+                boxShadow: activeCategory === category._id ? '0 4px 12px rgba(10, 41, 71, 0.3)' : '0 2px 8px rgba(0,0,0,0.05)',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
-                  bgcolor: activeCategory === category._id ? '#1E3A5F' : '#f8f9fa',
+                  bgcolor: activeCategory === category._id ? '#0A2947' : '#f8f9fa',
                   transform: 'translateY(-2px)',
-                  boxShadow: activeCategory === category._id ? '0 6px 16px rgba(30,58,95,0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
+                  boxShadow: activeCategory === category._id ? '0 6px 16px rgba(10, 41, 71, 0.4)' : '0 4px 12px rgba(0,0,0,0.08)',
                 }
               }}
             >

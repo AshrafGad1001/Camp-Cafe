@@ -21,7 +21,7 @@ export default function CategorySection({ name, image, items }: CategorySectionP
     <Box sx={{ mb: 6 }}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 4, mt: 2 }}>
         <Box sx={{ borderLeft: '3px solid #C49A45', pl: 2 }}>
-          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#1E3A5F', m: 0 }}>
+          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#0A2947', m: 0 }}>
             {name}
           </Typography>
         </Box>
