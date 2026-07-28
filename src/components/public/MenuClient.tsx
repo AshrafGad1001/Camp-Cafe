@@ -54,11 +54,10 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                verticalAlign: 'middle',
-                height: 36, // reduced height
+                height: 32, // reduced height
                 cursor: 'pointer',
-                px: 2, // reduced padding
-                borderRadius: '20px', // slightly smaller border radius
+                px: 1.5, // reduced padding
+                borderRadius: '16px', // smaller border radius
               bgcolor: activeCategory === 'all' ? '#0A2947' : '#fff',
               color: activeCategory === 'all' ? '#fff' : '#0A2947',
               border: '1px solid',
@@ -72,7 +71,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               }
             }}
           >
-            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 800 : 700, fontSize: '0.85rem' }}>
+            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 800 : 700, fontSize: '0.8rem' }}>
               الكل
             </Typography>
           </Box>
@@ -85,12 +84,11 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                verticalAlign: 'middle',
-                height: 36, // reduced height
-                gap: 0.75, // reduced gap between image and text
+                height: 32, // reduced height
+                gap: 0.5, // reduced gap between image and text
                 cursor: 'pointer',
-                px: 1.5, // reduced padding
-                borderRadius: '20px',
+                px: 1.25, // reduced padding
+                borderRadius: '16px',
                 bgcolor: activeCategory === category._id ? '#0A2947' : '#fff',
                 color: activeCategory === category._id ? '#fff' : '#0A2947',
                 border: '1px solid',
@@ -108,13 +106,13 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 <Avatar 
                   src={category.image.url}
                   sx={{ 
-                    width: 22, // reduced avatar size
-                    height: 22,
+                    width: 20, // reduced avatar size
+                    height: 20,
                     boxShadow: '0 1px 3px rgba(0,0,0,0.15)'
                   }}
                 />
               )}
-              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 800 : 700, fontSize: '0.85rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 800 : 700, fontSize: '0.8rem' }}>
                 {category.name}
               </Typography>
             </Box>

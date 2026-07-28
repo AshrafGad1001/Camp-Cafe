@@ -36,7 +36,7 @@ export default async function MenuPage() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <Box sx={{ px: { xs: 2, md: 4 }, pt: { xs: 2, md: 3 }, pb: 2, position: 'sticky', top: 0, zIndex: 1100, width: '100%', pointerEvents: 'none' }}>
+      <Box sx={{ px: { xs: 1, sm: 2, md: 4 }, pt: { xs: 2, md: 3 }, pb: 2, position: 'sticky', top: 0, zIndex: 1100, width: '100%', pointerEvents: 'none' }}>
         <AppBar position="static" sx={{ 
           bgcolor: 'rgba(10, 41, 71, 0.95)', 
           backdropFilter: 'blur(8px)',
