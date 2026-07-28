@@ -1,9 +1,11 @@
 import imageCompression from 'browser-image-compression';
 
 const defaultOptions = {
-  maxSizeMB: 1,
-  maxWidthOrHeight: 1920,
+  maxSizeMB: 0.25,
+  maxWidthOrHeight: 800,
   useWebWorker: true,
+  fileType: 'image/webp',
+  initialQuality: 0.8
 };
 
 export const compressImage = async (file: File): Promise<File> => {
@@ -11,7 +13,7 @@ export const compressImage = async (file: File): Promise<File> => {
     const compressedFile = await imageCompression(file, defaultOptions);
     return compressedFile;
   } catch (error) {
-    console.error('Image compression failed:', error);
-    return file; // Return original if compression fails
+    console.error('Image compression failed, falling back to original file:', error);
+    return file; // Fallback to original image if compression fails
   }
 };
