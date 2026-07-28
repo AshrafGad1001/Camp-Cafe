@@ -30,18 +30,31 @@ export default function SortableItem({ id, children }: SortableItemProps) {
   return (
     <div ref={setNodeRef} style={style}>
       <Paper
-        elevation={isDragging ? 4 : 1}
-        sx={{ p: 2, mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}
+        elevation={0}
+        sx={{ 
+          p: { xs: 2, md: 2.5 }, 
+          mb: { xs: 2, md: 3 }, 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: { xs: 1.5, md: 2 },
+          borderRadius: 4,
+          border: '1px solid',
+          borderColor: 'rgba(0,0,0,0.05)',
+          boxShadow: isDragging ? '0 12px 24px rgba(0,0,0,0.1)' : '0 4px 12px rgba(0,0,0,0.03)',
+          transition: 'all 0.2s ease',
+          bgcolor: '#fff'
+        }}
       >
         <IconButton
           {...attributes}
           {...listeners}
-          sx={{ cursor: 'grab' }}
+          sx={{ cursor: 'grab', color: 'text.disabled', '&:hover': { color: 'text.primary', bgcolor: 'rgba(0,0,0,0.04)' } }}
           aria-label="Drag to reorder"
+          size="small"
         >
           <DragIndicatorIcon />
         </IconButton>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, overflow: 'hidden' }}>
           {children}
         </div>
       </Paper>
