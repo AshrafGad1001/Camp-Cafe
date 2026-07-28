@@ -2,6 +2,18 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Fade } from '@mui/material';
+import { keyframes } from '@mui/system';
+
+const pulseAnimation = keyframes`
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+`;
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -47,17 +59,7 @@ export default function SplashScreen() {
           sx={{
             width: { xs: 150, sm: 200, md: 250 },
             filter: 'drop-shadow(0px 8px 24px rgba(0,0,0,0.4))',
-            animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            '@keyframes pulse': {
-              '0%, 100%': {
-                opacity: 1,
-                transform: 'scale(1)',
-              },
-              '50%': {
-                opacity: .8,
-                transform: 'scale(1.05)',
-              },
-            }
+            animation: `${pulseAnimation} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite`,
           }}
         />
       </Box>
