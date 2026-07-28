@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, AppBar, Toolbar } from '@mui/material';
-import CategorySection from '@/components/public/CategorySection';
+import MenuClient from '@/components/public/MenuClient';
 
 interface MenuCategory {
   _id: string;
@@ -44,24 +44,8 @@ export default async function MenuPage() {
         </AppBar>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-
-        <Box component="main">
-          {menu.length === 0 ? (
-            <Box sx={{ textAlign: 'center', color: 'text.secondary', py: 5 }}>
-              <Typography>Our menu is currently being updated. Please check back later.</Typography>
-            </Box>
-          ) : (
-            menu.map(category => (
-              <CategorySection
-                key={category._id}
-                name={category.name}
-                image={category.image}
-                items={category.items}
-              />
-            ))
-          )}
-        </Box>
+      <Container maxWidth="lg" sx={{ py: 2 }}>
+        <MenuClient menu={menu} />
 
         <Box component="footer" sx={{ textAlign: 'center', py: 4 }}>
           <Typography variant="body2" color="text.secondary">
