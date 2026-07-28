@@ -53,7 +53,8 @@ export default function MenuItemsPage() {
       ]);
       setCategories(catRes.data.data);
       setItems(itemRes.data.data);
-    } catch {
+    } catch (error) {
+      console.error('Failed to load data:', error);
       showToast('Failed to load data', 'error');
     } finally {
       setIsLoading(false);

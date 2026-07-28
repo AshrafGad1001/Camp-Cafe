@@ -29,8 +29,8 @@ export default function DashboardPage() {
           items: items.length,
           available: items.filter((i) => i.isAvailable).length,
         });
-      } catch {
-        console.error('Failed to fetch stats');
+      } catch (error) {
+        console.error('Failed to fetch stats:', error);
       } finally {
         setIsLoading(false);
       }

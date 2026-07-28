@@ -46,7 +46,8 @@ export default function CategoriesPage() {
       setIsLoading(true);
       const res = await api.get('/categories');
       setCategories(res.data.data);
-    } catch {
+    } catch (error) {
+      console.error('Failed to load categories:', error);
       showToast('Failed to load categories', 'error');
     } finally {
       setIsLoading(false);
