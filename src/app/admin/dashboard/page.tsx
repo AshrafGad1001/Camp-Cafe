@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
   const statCards = [
     { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: 32 }} />, color: 'success.main' },
-    { label: 'عناصر القائمة', subtitle: 'كل المشروبات والألعاب', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 32 }} />, color: 'primary.main' },
+    { label: 'عناصر القائمة', subtitle: 'كافة الأصناف والمشروبات', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 32 }} />, color: 'primary.main' },
     { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 32 }} />, color: 'secondary.main' },
   ];
 
@@ -179,7 +179,7 @@ export default function DashboardPage() {
                 إدارة عناصر القائمة
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                التحكم في المشروبات، الألعاب، الأسعار والتوافر
+                التحكم في الأصناف، المشروبات، الأسعار والتوافر
               </Typography>
             </Box>
             <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease' }} />
