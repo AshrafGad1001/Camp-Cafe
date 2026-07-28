@@ -6,7 +6,7 @@ import { Category, MenuItem } from '@/types';
 import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
 import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button, Avatar } from '@mui/material';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Link from 'next/link';
@@ -47,9 +47,9 @@ export default function DashboardPage() {
   }
 
   const statCards = [
-    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: 32 }} />, color: 'success.main' },
-    { label: 'عناصر القائمة', subtitle: 'كافة الأصناف والمشروبات', value: stats.items, icon: <SportsEsportsIcon sx={{ fontSize: 32 }} />, color: 'primary.main' },
-    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 32 }} />, color: 'secondary.main' },
+    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح للطلب', value: stats.available, icon: <CheckCircleOutlinedIcon sx={{ fontSize: { xs: 24, md: 32 } }} />, color: 'success.main' },
+    { label: 'عناصر القائمة', subtitle: 'كافة الأصناف والمشروبات', value: stats.items, icon: <LocalCafeOutlinedIcon sx={{ fontSize: { xs: 24, md: 32 } }} />, color: 'primary.main' },
+    { label: 'التصنيفات', subtitle: 'إجمالي الأقسام بالمنيو', value: stats.categories, icon: <DashboardCustomizeOutlinedIcon sx={{ fontSize: { xs: 24, md: 32 } }} />, color: 'secondary.main' },
   ];
 
   return (
@@ -71,7 +71,7 @@ export default function DashboardPage() {
         {statCards.map((stat, idx) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={idx}>
             <Card sx={{ 
-              p: { xs: 2.5, md: 3 }, 
+              p: { xs: 2, md: 3 }, 
               display: 'flex', 
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -79,25 +79,25 @@ export default function DashboardPage() {
               border: '1px solid',
               borderColor: 'rgba(0,0,0,0.03)'
             }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 2, md: 2.5 } }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1.5, md: 2.5 } }}>
                 <Avatar sx={{ 
                   bgcolor: stat.color, 
                   color: '#fff', 
-                  width: { xs: 48, md: 56 }, 
-                  height: { xs: 48, md: 56 }, 
-                  borderRadius: 3, 
+                  width: { xs: 44, md: 56 }, 
+                  height: { xs: 44, md: 56 }, 
+                  borderRadius: { xs: 2, md: 3 }, 
                   boxShadow: `0 8px 16px ${stat.color}40`,
                 }}>
                   {stat.icon}
                 </Avatar>
                 <Box>
-                  <Typography sx={{ typography: { xs: 'h5', md: 'h4' }, fontWeight: 800, color: 'text.primary', lineHeight: 1, mb: 0.5 }}>
+                  <Typography sx={{ typography: { xs: 'h6', md: 'h4' }, fontWeight: 800, color: 'text.primary', lineHeight: 1, mb: 0.5 }}>
                     {stat.value}
                   </Typography>
-                  <Typography sx={{ typography: { xs: 'body1', md: 'subtitle1' }, fontWeight: 700, color: 'text.primary' }}>
+                  <Typography sx={{ typography: { xs: 'subtitle2', md: 'subtitle1' }, fontWeight: 700, color: 'text.primary' }}>
                     {stat.label}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                  <Typography sx={{ typography: { xs: 'caption', md: 'caption' }, color: 'text.secondary', fontWeight: 500, fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                     {stat.subtitle}
                   </Typography>
                 </Box>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
             }}
           >
             <Avatar sx={{ bgcolor: 'primary.main', color: '#fff', width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, borderRadius: { xs: 2, md: 3 }, boxShadow: '0 8px 16px rgba(44, 30, 22, 0.25)' }}>
-              <SportsEsportsIcon sx={{ fontSize: { xs: 24, md: 35 } }} />
+              <LocalCafeOutlinedIcon sx={{ fontSize: { xs: 24, md: 35 } }} />
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
               <Typography sx={{ typography: { xs: 'subtitle1', md: 'h6' }, fontWeight: 800, color: 'text.primary', mb: 0.5 }}>

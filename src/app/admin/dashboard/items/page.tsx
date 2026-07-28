@@ -26,7 +26,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
 
 export default function MenuItemsPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -235,40 +235,63 @@ export default function MenuItemsPage() {
             <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {filteredItems.map((item) => (
                 <SortableItem key={item._id} id={item._id}>
-                  <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', sm: 'nowrap' }, alignItems: 'center', gap: { xs: 1, md: 2 }, width: '100%' }}>
-                    {item.image?.url ? (
-                      <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
-                    ) : (
-                      <Box sx={{ width: 60, height: 60, borderRadius: 1, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <SportsEsportsIcon />
-                      </Box>
-                    )}
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
+                    {/* Top Row: Info */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                      {item.image?.url ? (
+                        <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: 2, objectFit: 'cover' }} />
+                      ) : (
+                        <Box sx={{ width: 64, height: 64, borderRadius: 2, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid', borderColor: 'divider' }}>
+                          <LocalCafeOutlinedIcon sx={{ color: 'text.secondary' }} />
+                        </Box>
+                      )}
 
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Typography variant="h6">{item.name}</Typography>
-                      <Typography variant="body2" color="text.secondary">{getCategoryName(item.category)}</Typography>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" sx={{ fontSize: { xs: '1.1rem', md: '1.25rem' }, fontWeight: 700 }}>{item.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">{getCategoryName(item.category)}</Typography>
+                      </Box>
+
+                      <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>{item.price} ج.م</Typography>
                     </Box>
 
-                    <Typography variant="h6" sx={{ minWidth: 80 }}>{item.price} ج.م</Typography>
+                    {/* Bottom Row: Actions */}
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 2, pt: 1, borderTop: '1px solid', borderColor: 'divider' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Switch
+                          checked={item.isAvailable}
+                          onChange={() => handleToggleAvailability(item)}
+                          size="small"
+                        />
+                        <Chip 
+                          label={item.isAvailable ? 'متاح (Available)' : 'غير متاح (Unavailable)'} 
+                          color={item.isAvailable ? 'success' : 'default'} 
+                          size="small" 
+                          variant={item.isAvailable ? 'filled' : 'outlined'}
+                        />
+                      </Box>
 
-                    <Chip 
-                      label={item.isAvailable ? 'Available' : 'Unavailable'} 
-                      color={item.isAvailable ? 'success' : 'default'} 
-                      size="small" 
-                    />
-
-                    <Switch
-                      checked={item.isAvailable}
-                      onChange={() => handleToggleAvailability(item)}
-                    />
-
-                    <Box>
-                      <IconButton color="primary" onClick={() => { setEditingItem(item); setShowModal(true); }}>
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton color="error" onClick={() => handleDeleteItem(item._id)}>
-                        <DeleteIcon />
-                      </IconButton>
+                      <Box sx={{ display: 'flex', gap: 1 }}>
+                        <Button 
+                          size="small" 
+                          variant="outlined" 
+                          color="primary" 
+                          startIcon={<EditIcon />} 
+                          onClick={() => { setEditingItem(item); setShowModal(true); }}
+                          sx={{ borderRadius: 2 }}
+                        >
+                          Edit
+                        </Button>
+                        <Button 
+                          size="small" 
+                          variant="outlined" 
+                          color="error" 
+                          startIcon={<DeleteIcon />} 
+                          onClick={() => handleDeleteItem(item._id)}
+                          sx={{ borderRadius: 2 }}
+                        >
+                          Delete
+                        </Button>
+                      </Box>
                     </Box>
                   </Box>
                 </SortableItem>

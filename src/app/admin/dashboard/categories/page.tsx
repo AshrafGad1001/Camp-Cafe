@@ -168,25 +168,44 @@ export default function CategoriesPage() {
             <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {categories.map((category) => (
                 <SortableItem key={category._id} id={category._id}>
-                  <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', sm: 'nowrap' }, alignItems: 'center', gap: { xs: 1, md: 2 }, width: '100%' }}>
-                    {category.image?.url ? (
-                      <Box component="img" src={category.image.url} alt={category.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
-                    ) : (
-                      <Box sx={{ width: 60, height: 60, borderRadius: 1, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <FolderIcon />
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
+                    {/* Top Row: Info */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                      {category.image?.url ? (
+                        <Box component="img" src={category.image.url} alt={category.name} sx={{ width: 64, height: 64, borderRadius: 2, objectFit: 'cover' }} />
+                      ) : (
+                        <Box sx={{ width: 64, height: 64, borderRadius: 2, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid', borderColor: 'divider' }}>
+                          <FolderIcon sx={{ color: 'text.secondary' }} />
+                        </Box>
+                      )}
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" sx={{ fontSize: { xs: '1.1rem', md: '1.25rem' }, fontWeight: 700 }}>{category.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">Order: {category.displayOrder}</Typography>
                       </Box>
-                    )}
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Typography variant="h6">{category.name}</Typography>
-                      <Typography variant="body2" color="text.secondary">Order: {category.displayOrder}</Typography>
                     </Box>
-                    <Box>
-                      <IconButton color="primary" onClick={() => { setEditingCategory(category); setShowModal(true); }}>
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton color="error" onClick={() => handleDeleteClick(category._id)}>
-                        <DeleteIcon />
-                      </IconButton>
+
+                    {/* Bottom Row: Actions */}
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: 1, pt: 1, borderTop: '1px solid', borderColor: 'divider' }}>
+                      <Button 
+                        size="small" 
+                        variant="outlined" 
+                        color="primary" 
+                        startIcon={<EditIcon />} 
+                        onClick={() => { setEditingCategory(category); setShowModal(true); }}
+                        sx={{ borderRadius: 2 }}
+                      >
+                        Edit
+                      </Button>
+                      <Button 
+                        size="small" 
+                        variant="outlined" 
+                        color="error" 
+                        startIcon={<DeleteIcon />} 
+                        onClick={() => handleDeleteClick(category._id)}
+                        sx={{ borderRadius: 2 }}
+                      >
+                        Delete
+                      </Button>
                     </Box>
                   </Box>
                 </SortableItem>
