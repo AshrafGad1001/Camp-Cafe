@@ -69,11 +69,11 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                       key={size.name}
                       onClick={() => setSelectedSizeIndex(index)}
                       sx={{
-                        minWidth: 32,
-                        height: 32,
-                        px: 1,
-                        borderRadius: '16px',
-                        fontSize: '0.8rem',
+                        minWidth: { xs: 28, sm: 32 },
+                        height: { xs: 28, sm: 32 },
+                        px: { xs: 0.5, sm: 1 },
+                        borderRadius: { xs: '14px', sm: '16px' },
+                        fontSize: { xs: '0.75rem', sm: '0.8rem' },
                         fontWeight: isSelected ? 800 : 700,
                         bgcolor: isSelected ? '#0A2947' : 'transparent',
                         color: isSelected ? '#fff' : '#0A2947',
@@ -96,7 +96,7 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
                 sx={{ 
                   fontWeight: 900, 
                   color: '#C49A45', // Gold Accent
-                  fontSize: '1.25rem',
+                  fontSize: { xs: '1.05rem', sm: '1.25rem' },
                   animation: 'fadeIn 0.3s ease-in-out',
                   '@keyframes fadeIn': {
                     '0%': { opacity: 0.3, transform: 'translateY(2px)' },
@@ -108,7 +108,7 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
               </Typography>
             </Box>
           ) : displayPrice !== null && displayPrice !== undefined ? (
-            <Typography variant="h6" sx={{ fontWeight: 900, color: '#C49A45', fontSize: '1.25rem' }}>
+            <Typography variant="h6" sx={{ fontWeight: 900, color: '#C49A45', fontSize: { xs: '1.05rem', sm: '1.25rem' } }}>
               {displayPrice} <Typography component="span" variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, ml: 0.5 }}>ج.م</Typography>
             </Typography>
           ) : (
