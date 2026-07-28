@@ -81,97 +81,100 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
               minWidth: { xs: 240, sm: 280 },
               maxWidth: { xs: 240, sm: 280 },
               scrollSnapAlign: 'start',
-              borderRadius: '20px', // Reduced border radius
+              borderRadius: '24px',
               flexShrink: 0,
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
-              overflow: 'visible',
-              bgcolor: '#0A2947', // Dark Premium Background
-              color: '#fff',
-              boxShadow: '0 12px 24px rgba(10, 41, 71, 0.25)',
-              border: '1px solid rgba(196, 154, 69, 0.3)', // Gold border
+              overflow: 'hidden',
+              bgcolor: '#FFFFFF',
+              color: '#1E293B',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
+              border: '1px solid rgba(0, 0, 0, 0.04)',
             }}
           >
-            {/* Gold Badge */}
+            {/* Green Badge */}
             <Box
               sx={{
                 position: 'absolute',
-                top: -12,
-                left: -12,
-                bgcolor: 'warning.main',
+                top: 16,
+                right: 16,
+                bgcolor: '#728A70', // Muted green
                 color: '#fff',
                 px: 1.5,
                 py: 0.5,
-                borderRadius: '12px',
+                borderRadius: '20px',
                 fontWeight: 'bold',
-                fontSize: '0.75rem',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                fontSize: '0.85rem',
                 zIndex: 2,
                 display: 'flex',
                 alignItems: 'center',
                 gap: 0.5,
+                boxShadow: '0 4px 12px rgba(114, 138, 112, 0.3)',
               }}
             >
-              <StarIcon sx={{ fontSize: 14 }} /> Top
+              الأكثر مبيعاً <StarIcon sx={{ fontSize: 16, mb: '2px' }} />
             </Box>
 
-            <Box sx={{ p: 1 }}>
-              <Box
-                sx={{
-                  borderRadius: 3,
-                  overflow: 'hidden',
-                  position: 'relative',
-                  height: 180,
-                }}
-              >
-                {item.image?.url ? (
-                  <CardMedia
-                    component="img"
-                    height="180"
-                    image={item.image.url}
-                    alt={item.name}
-                    sx={{ transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.05)' } }}
-                  />
-                ) : (
-                  <Box sx={{ height: 180, bgcolor: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <StarIcon sx={{ fontSize: 40, color: 'rgba(255,255,255,0.2)' }} />
-                  </Box>
-                )}
-                {/* Gold Gradient overlay */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: '50%',
-                    background: 'linear-gradient(to top, #0A2947 0%, transparent 100%)',
+            {/* Image Area */}
+            <Box
+              sx={{
+                width: '100%',
+                height: 200,
+                bgcolor: '#F8FAFC',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                p: 2,
+              }}
+            >
+              {item.image?.url ? (
+                <CardMedia
+                  component="img"
+                  image={item.image.url}
+                  alt={item.name}
+                  sx={{ 
+                    maxHeight: '100%', 
+                    width: 'auto', 
+                    objectFit: 'contain',
+                    transition: 'transform 0.3s', 
+                    '&:hover': { transform: 'scale(1.05)' },
+                    filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.1))'
                   }}
                 />
-              </Box>
+              ) : (
+                <StarIcon sx={{ fontSize: 40, color: 'rgba(0,0,0,0.1)' }} />
+              )}
             </Box>
 
-            <CardContent sx={{ pt: 1, pb: '16px !important', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mb: 0.5, color: '#C49A45' }}>
+            <CardContent sx={{ pt: 2, pb: '20px !important', flexGrow: 1, display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
+              <Typography variant="h6" sx={{ fontWeight: 800, mb: 0.5, color: '#1E293B' }}>
                 {item.name}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 2, flexGrow: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <Typography variant="body2" sx={{ color: '#64748B', mb: 2, flexGrow: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {item.description}
               </Typography>
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
+              {/* Dashed Separator */}
+              <Box sx={{ borderTop: '2px dashed #E2E8F0', my: 2, mx: 'auto', width: '100%' }} />
+
+              {/* Price */}
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', gap: 0.5, mt: 'auto' }}>
                 {item.hasSizes && item.sizes && item.sizes.length > 0 ? (
-                  <Box>
-                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block' }}>تبدأ من</Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 800, color: '#fff' }}>
-                      {Math.min(...item.sizes.map(s => s.price))} ج.م
+                  <>
+                    <Typography variant="body2" sx={{ color: '#64748B' }}>تبدأ من</Typography>
+                    <Typography variant="h4" sx={{ fontWeight: 800, color: '#728A70' }}>
+                      {Math.min(...item.sizes.map(s => s.price))}
                     </Typography>
-                  </Box>
+                    <Typography variant="body2" sx={{ color: '#64748B', fontWeight: 600 }}>ج.م</Typography>
+                  </>
                 ) : (
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#fff' }}>
-                    {item.price} ج.م
-                  </Typography>
+                  <>
+                    <Typography variant="h4" sx={{ fontWeight: 800, color: '#728A70' }}>
+                      {item.price}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#64748B', fontWeight: 600 }}>ج.م</Typography>
+                  </>
                 )}
               </Box>
             </CardContent>
