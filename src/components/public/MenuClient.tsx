@@ -36,46 +36,14 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
     : menu.filter(c => c._id === activeCategory);
 
   return (
-    <Box sx={{ position: 'relative', mb: 4 }}>
-      {/* Right Fade (RTL Start) */}
-      <Box sx={{
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        width: 32,
-        background: (theme) => `linear-gradient(to left, ${theme.palette.background.default} 20%, transparent)`,
-        zIndex: 2,
-        pointerEvents: 'none'
-      }} />
-      
-      {/* Left Fade (RTL End) */}
-      <Box sx={{
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        width: 32,
-        background: (theme) => `linear-gradient(to right, ${theme.palette.background.default} 20%, transparent)`,
-        zIndex: 2,
-        pointerEvents: 'none'
-      }} />
-
+    <Box sx={{ mb: 4, px: { xs: 1, sm: 2 } }}>
       <Box 
         sx={{ 
           display: 'flex',
-          flexWrap: 'nowrap',
-          justifyContent: 'flex-start',
-          gap: 1.5, 
+          flexWrap: 'wrap',
+          justifyContent: 'center', // Center the wrapped items
+          gap: 1.5, // ~12px gap horizontal and vertical
           py: 2, 
-          paddingInlineStart: 3,
-          paddingInlineEnd: 3,
-          overflowX: 'auto',
-          scrollBehavior: 'smooth',
-          WebkitOverflowScrolling: 'touch',
-          '&::-webkit-scrollbar': { display: 'none' }, // hide scrollbar
-          msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
         }}
       >
           <Box
