@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Avatar } from '@mui/material';
 import MenuItemCard from './MenuItemCard';
 
 interface CategorySectionProps {
@@ -17,17 +17,18 @@ interface CategorySectionProps {
 export default function CategorySection({ name, image, items }: CategorySectionProps) {
   return (
     <Box sx={{ mb: 6 }}>
-      <Typography variant="h4" component="h2" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>
-        {name}
-      </Typography>
-      {image?.url && (
-        <Box 
-          component="img" 
-          src={image.url} 
-          alt={name}
-          sx={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 2, mb: 3 }} 
-        />
-      )}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+        <Typography variant="h4" component="h2" color="text.primary" sx={{ fontWeight: 800, m: 0 }}>
+          {name}
+        </Typography>
+        {image?.url && (
+          <Avatar 
+            src={image.url} 
+            alt={name}
+            sx={{ width: 56, height: 56, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }} 
+          />
+        )}
+      </Box>
       <Grid container spacing={3}>
         {items.map(item => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item._id}>
