@@ -25,7 +25,8 @@ import { Box, Typography, Button, Snackbar, Alert, IconButton, Stack, Chip, Swit
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 export default function MenuItemsPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -222,7 +223,7 @@ export default function MenuItemsPage() {
       {/* Items List with DnD */}
       {filteredItems.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 8 }}>
-          <RestaurantIcon sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
+          <LocalCafeIcon sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
           <Typography color="text.secondary">No items found.</Typography>
         </Box>
       ) : (
@@ -236,7 +237,7 @@ export default function MenuItemsPage() {
                       <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
                     ) : (
                       <Box sx={{ width: 60, height: 60, borderRadius: 1, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <RestaurantIcon />
+                        <SportsEsportsIcon />
                       </Box>
                     )}
 
