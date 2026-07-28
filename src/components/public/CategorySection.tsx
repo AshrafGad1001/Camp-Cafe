@@ -3,6 +3,7 @@ import { Box, Typography, Grid, Avatar } from '@mui/material';
 import MenuItemCard from './MenuItemCard';
 
 interface CategorySectionProps {
+  id: string;
   name: string;
   image?: { url: string; publicId: string };
   items: Array<{
@@ -16,9 +17,9 @@ interface CategorySectionProps {
   }>;
 }
 
-export default function CategorySection({ name, image, items }: CategorySectionProps) {
+export default function CategorySection({ id, name, image, items }: CategorySectionProps) {
   return (
-    <Box sx={{ mb: 6 }}>
+    <Box id={id} className="scrollspy-section" sx={{ mb: 6, pt: 4, mt: -4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 4, mt: 2 }}>
         <Box sx={{ borderLeft: '3px solid #C49A45', pl: 2 }}>
           <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#0A2947', m: 0 }}>
