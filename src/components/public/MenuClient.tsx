@@ -40,12 +40,17 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
       <Box 
         sx={{ 
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: 1, // reduced gap
+          flexWrap: 'nowrap',
+          justifyContent: 'flex-start',
+          gap: 1, 
           py: 2, 
           mb: 4,
-          px: 2,
+          px: 1,
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          '&::-webkit-scrollbar': { display: 'none' }, // hide scrollbar
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
         }}
       >
           <Box
@@ -54,6 +59,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexShrink: 0,
                 height: 32, // reduced height
                 cursor: 'pointer',
                 px: 1.5, // reduced padding
@@ -84,6 +90,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexShrink: 0,
                 height: 32, // reduced height
                 gap: 0.5, // reduced gap between image and text
                 cursor: 'pointer',
