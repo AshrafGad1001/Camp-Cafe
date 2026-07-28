@@ -55,23 +55,23 @@ export default function DashboardPage() {
   return (
     <Box sx={{ maxWidth: 1280, mx: 'auto', p: { xs: 2, md: 4 } }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 6 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: { xs: 4, md: 6 } }}>
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 800, color: 'text.primary', mb: 1, letterSpacing: '-0.5px' }}>
+          <Typography sx={{ typography: { xs: 'h5', md: 'h4' }, fontWeight: 800, color: 'text.primary', mb: 1, letterSpacing: '-0.5px' }}>
             لوحة التحكم
           </Typography>
-          <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+          <Typography variant="body1" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: { xs: '0.9rem', md: '1rem' } }}>
             مرحباً بعودتك KareemTahon، إليك نظرة عامة على نشاط النظام ☕🎮
           </Typography>
         </Box>
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={4} sx={{ mb: 6 }}>
+      <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ mb: { xs: 4, md: 6 } }}>
         {statCards.map((stat, idx) => (
-          <Grid size={{ xs: 12, md: 4 }} key={idx}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={idx}>
             <Card sx={{ 
-              p: 3, 
+              p: { xs: 2.5, md: 3 }, 
               display: 'flex', 
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -79,22 +79,22 @@ export default function DashboardPage() {
               border: '1px solid',
               borderColor: 'rgba(0,0,0,0.03)'
             }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 2, md: 2.5 } }}>
                 <Avatar sx={{ 
                   bgcolor: stat.color, 
                   color: '#fff', 
-                  width: 56, 
-                  height: 56, 
+                  width: { xs: 48, md: 56 }, 
+                  height: { xs: 48, md: 56 }, 
                   borderRadius: 3, 
                   boxShadow: `0 8px 16px ${stat.color}40`,
                 }}>
                   {stat.icon}
                 </Avatar>
                 <Box>
-                  <Typography variant="h4" sx={{ fontWeight: 800, color: 'text.primary', lineHeight: 1, mb: 0.5 }}>
+                  <Typography sx={{ typography: { xs: 'h5', md: 'h4' }, fontWeight: 800, color: 'text.primary', lineHeight: 1, mb: 0.5 }}>
                     {stat.value}
                   </Typography>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'text.primary' }}>
+                  <Typography sx={{ typography: { xs: 'body1', md: 'subtitle1' }, fontWeight: 700, color: 'text.primary' }}>
                     {stat.label}
                   </Typography>
                   <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>

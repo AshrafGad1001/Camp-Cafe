@@ -9,7 +9,12 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
-export default function Sidebar() {
+interface SidebarProps {
+  mobileOpen: boolean;
+  onClose: () => void;
+}
+
+export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -21,26 +26,11 @@ export default function Sidebar() {
   const navLinks = [
     { href: '/admin/dashboard', icon: <DashboardIcon />, label: 'لوحة التحكم' },
     { href: '/admin/dashboard/categories', icon: <FolderIcon />, label: 'التصنيفات' },
-    { href: '/admin/dashboard/items', icon: <SportsEsportsIcon />, label: 'عناصر القائمة' }, // Updated to Esports for Cafe/PS vibe
+    { href: '/admin/dashboard/items', icon: <SportsEsportsIcon />, label: 'عناصر القائمة' },
   ];
 
-  return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: 280,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': { 
-          width: 280, 
-          boxSizing: 'border-box', 
-          backgroundColor: '#FFFFFF', 
-          borderLeft: 'none',
-          borderRight: '1px solid rgba(0, 0, 0, 0.05)',
-          display: 'flex',
-          flexDirection: 'column'
-        },
-      }}
-    >
+  const drawerContent = (
+    <>
       <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', mb: 1 }}>
         <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '50px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' }} />
       </Box>
@@ -52,7 +42,8 @@ export default function Sidebar() {
             <ListItem key={link.href} disablePadding sx={{ mb: 1.5 }}>
               <ListItemButton 
                 component={Link} 
-                href={link.href} 
+                href={link.href}
+                onClick={onClose} 
                 sx={{
                   borderRadius: 3,
                   py: 1.5,
@@ -141,6 +132,46 @@ export default function Sidebar() {
           </ListItemButton>
         </ListItem>
       </List>
-    </Drawer>
+    </>
+  );
+
+  return (
+    <Box component="nav" sx={{ width: { md: 280 }, flexShrink: { md: 0 } }}>
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onClose}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: 280,
+            backgroundColor: '#FFFFFF',
+            borderRight: 'none',
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: 280,
+            backgroundColor: '#FFFFFF', 
+            borderLeft: 'none',
+            borderRight: '1px solid rgba(0, 0, 0, 0.05)',
+          },
+        }}
+        open
+      >
+        {drawerContent}
+      </Drawer>
+    </Box>
   );
 }

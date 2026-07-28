@@ -186,12 +186,14 @@ export default function MenuItemsPage() {
         ) : <div />}
       </Snackbar>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" component="h1">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: { xs: 3, md: 4 } }}>
+        <Typography sx={{ typography: { xs: 'h5', md: 'h4' } }} component="h1">
           Menu Items
         </Typography>
         <Button
           variant="contained"
+          size="medium"
+          sx={{ size: { xs: 'small', md: 'medium' } }}
           startIcon={<AddIcon />}
           onClick={() => { setEditingItem(null); setShowModal(true); }}
         >
@@ -232,7 +234,7 @@ export default function MenuItemsPage() {
             <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {filteredItems.map((item) => (
                 <SortableItem key={item._id} id={item._id}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                  <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', sm: 'nowrap' }, alignItems: 'center', gap: { xs: 1, md: 2 }, width: '100%' }}>
                     {item.image?.url ? (
                       <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
                     ) : (

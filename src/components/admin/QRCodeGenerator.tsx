@@ -75,7 +75,7 @@ export default function QRCodeGenerator() {
         )}
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 'auto', width: '100%' }}>
+      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 'auto', width: '100%', flexDirection: { xs: 'column', sm: 'row' } }}>
         <Button 
           component="a"
           href={menuUrl}

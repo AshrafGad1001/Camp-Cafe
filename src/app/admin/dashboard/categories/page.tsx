@@ -137,12 +137,14 @@ export default function CategoriesPage() {
         ) : <div />}
       </Snackbar>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" component="h1">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: { xs: 3, md: 4 } }}>
+        <Typography sx={{ typography: { xs: 'h5', md: 'h4' } }} component="h1">
           Categories
         </Typography>
         <Button
           variant="contained"
+          size="medium"
+          sx={{ size: { xs: 'small', md: 'medium' } }}
           startIcon={<AddIcon />}
           onClick={() => { setEditingCategory(null); setShowModal(true); }}
         >
@@ -165,7 +167,7 @@ export default function CategoriesPage() {
             <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {categories.map((category) => (
                 <SortableItem key={category._id} id={category._id}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                  <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', sm: 'nowrap' }, alignItems: 'center', gap: { xs: 1, md: 2 }, width: '100%' }}>
                     {category.image?.url ? (
                       <Box component="img" src={category.image.url} alt={category.name} sx={{ width: 60, height: 60, borderRadius: 1, objectFit: 'cover' }} />
                     ) : (
