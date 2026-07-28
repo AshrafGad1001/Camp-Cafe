@@ -43,7 +43,8 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
           flexWrap: 'wrap',
           justifyContent: 'center', // Center the wrapped items
           gap: 1.5, // ~12px gap horizontal and vertical
-          py: 2, 
+          pt: 0,
+          pb: 2, 
         }}
       >
           <Box
