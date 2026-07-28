@@ -54,14 +54,14 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
           <Box
             onClick={() => setActiveCategory('all')}
             sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                height: 32, // reduced height
-                cursor: 'pointer',
-                px: 1.5, // reduced padding
-                borderRadius: '16px', // smaller border radius
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              height: 36, // Good touch target min height
+              cursor: 'pointer',
+              px: 1.5, // Reduced padding
+              borderRadius: '18px', 
               bgcolor: activeCategory === 'all' ? '#0A2947' : '#fff',
               color: activeCategory === 'all' ? '#fff' : '#0A2947',
               border: '1px solid',
@@ -75,7 +75,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               }
             }}
           >
-            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 800 : 700, fontSize: '0.8rem' }}>
+            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 800 : 700, fontSize: '13px' }}>
               الكل
             </Typography>
           </Box>
@@ -89,11 +89,11 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
-                height: 32, // reduced height
-                gap: 0.5, // reduced gap between image and text
+                height: 36, // Ensure good touch target
+                gap: 0.5, // 4px gap between icon and text
                 cursor: 'pointer',
-                px: 1.25, // reduced padding
-                borderRadius: '16px',
+                px: 1, // Reduced horizontal padding to 8px
+                borderRadius: '18px',
                 bgcolor: activeCategory === category._id ? '#0A2947' : '#fff',
                 color: activeCategory === category._id ? '#fff' : '#0A2947',
                 border: '1px solid',
@@ -111,13 +111,13 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
                 <Avatar 
                   src={category.image.url}
                   sx={{ 
-                    width: 20, // reduced avatar size
-                    height: 20,
+                    width: 18, // Reduced from 20-24
+                    height: 18,
                     boxShadow: '0 1px 3px rgba(0,0,0,0.15)'
                   }}
                 />
               )}
-              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 800 : 700, fontSize: '0.8rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 800 : 700, fontSize: '13px' }}>
                 {category.name}
               </Typography>
             </Box>
