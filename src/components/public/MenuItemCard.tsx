@@ -121,53 +121,43 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
 
       {image?.url && (
         <Box sx={{ 
-          width: 110, 
-          height: 110, 
-          minWidth: 110, 
-          minHeight: 110, 
+          width: { xs: 100, sm: 120 }, 
+          height: { xs: 100, sm: 120 }, 
+          minWidth: { xs: 100, sm: 120 }, 
           flexShrink: 0, 
-          ml: 2, 
-          position: 'relative' 
+          ml: { xs: 1.5, sm: 2 }, 
+          borderRadius: '16px',
+          background: '#ffffff',
+          border: '1px solid rgba(0,0,0,0.06)',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.05)',
+          overflow: 'hidden',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
-          {/* Outer halo ring */}
+          <CardMedia 
+            component="img" 
+            image={image.url} 
+            alt={name} 
+            sx={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover', // You can change to 'contain' if the images have white backgrounds and you don't want any cropping
+              transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              '&:hover': {
+                transform: 'scale(1.08)'
+              }
+            }}
+          />
+          {/* Subtle inner shadow for depth */}
           <Box sx={{
             position: 'absolute',
-            top: -4, left: -4, right: -4, bottom: -4,
-            borderRadius: '50%',
-            background: 'conic-gradient(from 0deg, rgba(196,154,69,0.15), rgba(10,41,71,0.2), rgba(196,154,69,0.15))',
-            zIndex: 0,
+            inset: 0,
+            boxShadow: 'inset 0 0 12px rgba(0,0,0,0.04)',
+            pointerEvents: 'none',
+            borderRadius: '16px'
           }} />
-          
-          {/* Inner solid white ring + Unified background */}
-          <Box sx={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, #ffffff 0%, #e9ecef 100%)',
-            border: '3px solid #ffffff',
-            zIndex: 1,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            overflow: 'hidden'
-          }}>
-            <CardMedia 
-              component="img" 
-              image={image.url} 
-              alt={name} 
-              sx={{ 
-                width: '100%', 
-                height: '100%', 
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
-            />
-            {/* Vignette overlay */}
-            <Box sx={{
-              position: 'absolute',
-              top: 0, left: 0, right: 0, bottom: 0,
-              boxShadow: 'inset 0 0 16px rgba(0,0,0,0.15)',
-              pointerEvents: 'none'
-            }} />
-          </Box>
         </Box>
       )}
     </Card>
