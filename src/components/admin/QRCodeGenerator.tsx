@@ -3,20 +3,21 @@
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
 import { Card, Typography, Button, CircularProgress, Box } from '@mui/material';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function QRCodeGenerator() {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
   const [menuUrl, setMenuUrl] = useState('');
 
   useEffect(() => {
-    // Generate the URL for the menu based on current origin
     const url = `${window.location.origin}/menu`;
     setMenuUrl(url);
 
-    // Generate the QR code
     QRCode.toDataURL(url, {
       width: 250,
-      margin: 2,
+      margin: 1,
       color: {
         dark: '#000000',
         light: '#ffffff'
@@ -31,42 +32,56 @@ export default function QRCodeGenerator() {
   }, []);
 
   return (
-    <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '100%' }}>
-      <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
-        Menu QR Code
+    <Card sx={{ 
+      p: 4, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: '100%', 
+      bgcolor: '#fff', 
+      borderRadius: 4,
+      boxShadow: '0 4px 20px rgba(15, 48, 64, 0.04)'
+    }}>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+        باركود المنيو <QrCode2Icon fontSize="small" sx={{ color: 'text.secondary' }}/>
       </Typography>
-      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
-        Customers can scan this QR code to view the menu on their devices.
+      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 4 }}>
+        يمكن للعملاء مسح الباركود لعرض المنيو على أجهزتهم.
       </Typography>
       
-      {qrCodeDataUrl ? (
-        <Box sx={{ background: '#fff', p: 1.25, borderRadius: 2, mb: 3, boxShadow: 1 }}>
-          <img src={qrCodeDataUrl} alt="Menu QR Code" style={{ width: '200px', height: '200px' }} />
-        </Box>
-      ) : (
-        <Box sx={{ width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 2, mb: 3 }}>
-          <CircularProgress />
-        </Box>
-      )}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
+        {qrCodeDataUrl ? (
+          <Box sx={{ background: '#fff', p: 1, borderRadius: 4, boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+            <img src={qrCodeDataUrl} alt="Menu QR Code" style={{ width: '180px', height: '180px', display: 'block', borderRadius: '12px' }} />
+          </Box>
+        ) : (
+          <Box sx={{ width: '180px', height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 4, boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+            <CircularProgress />
+          </Box>
+        )}
+      </Box>
 
-      <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', justifyContent: 'center', mt: 'auto' }}>
-        <Button 
-          component="a"
-          href={qrCodeDataUrl} 
-          download="camp-cafe-qr.png"
-          variant="contained" 
-          color="primary"
-        >
-          📥 Download
-        </Button>
+      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 'auto' }}>
         <Button 
           component="a"
           href={menuUrl}
           target="_blank"
           rel="noopener noreferrer" 
           variant="outlined"
+          startIcon={<VisibilityIcon />}
+          sx={{ borderRadius: 2, fontWeight: 600, color: 'primary.main', borderColor: '#d0d0d0', px: 3 }}
         >
-          🔗 View Menu
+          عرض المنيو
+        </Button>
+        <Button 
+          component="a"
+          href={qrCodeDataUrl} 
+          download="camp-cafe-qr.png"
+          variant="contained" 
+          color="primary"
+          startIcon={<DownloadIcon />}
+          sx={{ borderRadius: 2, fontWeight: 600, px: 3 }}
+        >
+          تحميل
         </Button>
       </Box>
     </Card>
