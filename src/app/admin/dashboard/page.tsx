@@ -142,7 +142,7 @@ export default function DashboardPage() {
               '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.dark', width: 64, height: 64, borderRadius: 3 }}>
+            <Avatar sx={{ bgcolor: 'secondary.main', color: '#fff', width: 64, height: 64, borderRadius: 3, boxShadow: '0 8px 16px rgba(217, 119, 6, 0.25)' }}>
               <DashboardCustomizeOutlinedIcon fontSize="large" />
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
               '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark', width: 64, height: 64, borderRadius: 3 }}>
+            <Avatar sx={{ bgcolor: 'primary.main', color: '#fff', width: 64, height: 64, borderRadius: 3, boxShadow: '0 8px 16px rgba(44, 30, 22, 0.25)' }}>
               <SportsEsportsIcon fontSize="large" />
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>

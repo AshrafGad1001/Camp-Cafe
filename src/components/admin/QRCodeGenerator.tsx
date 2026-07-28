@@ -43,7 +43,7 @@ export default function QRCodeGenerator() {
       alignItems: 'center',
       textAlign: 'center'
     }}>
-      <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark', width: 56, height: 56, mb: 2 }}>
+      <Avatar sx={{ bgcolor: 'primary.main', color: '#fff', width: 56, height: 56, mb: 2, boxShadow: '0 8px 16px rgba(44, 30, 22, 0.2)' }}>
         <QrCode2Icon fontSize="medium" />
       </Avatar>
       
