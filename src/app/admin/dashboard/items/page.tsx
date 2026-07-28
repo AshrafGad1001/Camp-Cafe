@@ -245,7 +245,7 @@ export default function MenuItemsPage() {
                       <Typography variant="body2" color="text.secondary">{getCategoryName(item.category)}</Typography>
                     </Box>
 
-                    <Typography variant="h6" sx={{ minWidth: 80 }}>${item.price.toFixed(2)}</Typography>
+                    <Typography variant="h6" sx={{ minWidth: 80 }}>{item.price} ج.م</Typography>
 
                     <Chip 
                       label={item.isAvailable ? 'Available' : 'Unavailable'} 

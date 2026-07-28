@@ -22,7 +22,7 @@ export default function MenuItemCard({ name, description, price, image }: MenuIt
           {description}
         </Typography>
         <Typography variant="h6" color="primary" sx={{ mt: 2, fontWeight: 'bold' }}>
-          ${price.toFixed(2)}
+          {price} ج.م
         </Typography>
       </CardContent>
     </Card>
