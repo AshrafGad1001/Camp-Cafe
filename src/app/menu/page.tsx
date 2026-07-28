@@ -36,10 +36,21 @@ export default async function MenuPage() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <Box sx={{ px: 1, pt: 1, pb: 1, position: 'sticky', top: 0, zIndex: 1100, width: '100%', bgcolor: 'background.default' }}>
-        <AppBar position="static" sx={{ bgcolor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', borderRadius: 2, width: '100%' }}>
-          <Toolbar sx={{ justifyContent: 'center', py: 1 }}>
-            <Box component="img" src="/logo.png" alt="Camp Cafe" sx={{ height: 40 }} />
+      <Box sx={{ px: { xs: 2, md: 4 }, pt: { xs: 2, md: 3 }, pb: 2, position: 'sticky', top: 0, zIndex: 1100, width: '100%', pointerEvents: 'none' }}>
+        <AppBar position="static" sx={{ 
+          bgcolor: 'rgba(30, 58, 95, 0.95)', 
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          boxShadow: '0 8px 32px rgba(30, 58, 95, 0.25)', 
+          borderRadius: '24px', 
+          width: '100%',
+          maxWidth: '1200px',
+          mx: 'auto',
+          pointerEvents: 'auto',
+          border: '1px solid rgba(255,255,255,0.1)'
+        }}>
+          <Toolbar sx={{ justifyContent: 'center', py: 1.5, minHeight: '64px !important' }}>
+            <Box component="img" src="/logo.png" alt="Camp Cafe" sx={{ height: 48, filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.3))' }} />
           </Toolbar>
         </AppBar>
       </Box>
