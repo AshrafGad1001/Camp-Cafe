@@ -88,7 +88,9 @@ export default function AdminLayout({
           sx={{ 
             flexGrow: 1, 
             p: { xs: 2, sm: 3, md: 4 }, 
-            width: { md: `calc(100% - 280px)` } 
+            width: { md: `calc(100% - 280px)` },
+            minWidth: 0,
+            overflowX: 'hidden'
           }}
         >
           {children}

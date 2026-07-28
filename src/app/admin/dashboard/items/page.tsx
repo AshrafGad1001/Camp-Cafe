@@ -203,7 +203,7 @@ export default function MenuItemsPage() {
       </Box>
 
       {/* Category Filters */}
-      <Stack direction="row" spacing={1} sx={{ mb: 4, flexWrap: 'wrap', gap: 1, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+      <Box sx={{ display: 'flex', mb: 4, flexWrap: 'wrap', gap: 1, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
         <Chip
           label="الكل"
           onClick={() => setFilterCategory('')}
@@ -223,7 +223,7 @@ export default function MenuItemsPage() {
             clickable
           />
         ))}
-      </Stack>
+      </Box>
 
       {/* Items List with DnD */}
       {filteredItems.length === 0 ? (
@@ -253,7 +253,8 @@ export default function MenuItemsPage() {
                         <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>{getCategoryName(item.category)}</Typography>
                       </Box>
 
-                      <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', minWidth: 'max-content', textAlign: 'right' }}>
+                      <Box sx={{ minWidth: { xs: 'auto', sm: 'max-content' }, textAlign: { xs: 'left', sm: 'right' }, mt: { xs: 1, sm: 0 } }}>
+                        <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary' }}>
                         {item.hasSizes && item.sizes && item.sizes.length > 0 ? (
                           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5 }}>
                             <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 700 }}>
@@ -268,7 +269,8 @@ export default function MenuItemsPage() {
                         ) : (
                           <>{item.price} ج.م</>
                         )}
-                      </Typography>
+                        </Typography>
+                      </Box>
                     </Box>
 
                     {/* Divider */}
