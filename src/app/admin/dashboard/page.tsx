@@ -122,7 +122,7 @@ export default function DashboardPage() {
         <Grid size={{ xs: 12, md: 7 }} sx={{ order: { xs: 1, md: 2 } }}>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              روابط سريعة ⚡
+              روابط سريعة
             </Typography>
           </Box>
           
@@ -130,11 +130,11 @@ export default function DashboardPage() {
             component={Link} 
             href="/admin/dashboard/categories"
             sx={{ 
-              p: 3, 
+              p: { xs: 2, md: 3 }, 
               mb: 3,
               display: 'flex', 
               alignItems: 'center', 
-              gap: 3,
+              gap: { xs: 2, md: 3 },
               bgcolor: '#fff', 
               textDecoration: 'none',
               border: '1px solid',
@@ -142,28 +142,28 @@ export default function DashboardPage() {
               '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Avatar sx={{ bgcolor: 'secondary.main', color: '#fff', width: 64, height: 64, borderRadius: 3, boxShadow: '0 8px 16px rgba(217, 119, 6, 0.25)' }}>
-              <DashboardCustomizeOutlinedIcon fontSize="large" />
+            <Avatar sx={{ bgcolor: 'secondary.main', color: '#fff', width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, borderRadius: { xs: 2, md: 3 }, boxShadow: '0 8px 16px rgba(217, 119, 6, 0.25)' }}>
+              <DashboardCustomizeOutlinedIcon sx={{ fontSize: { xs: 24, md: 35 } }} />
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
+              <Typography sx={{ typography: { xs: 'subtitle1', md: 'h6' }, fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
                 إدارة التصنيفات
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+              <Typography sx={{ typography: { xs: 'caption', md: 'body2' }, color: 'text.secondary', fontWeight: 500 }}>
                 إضافة، تعديل أو ترتيب الأقسام داخل المنيو
               </Typography>
             </Box>
-            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease' }} />
+            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease', fontSize: { xs: 16, md: 24 } }} />
           </Card>
 
           <Card 
             component={Link} 
             href="/admin/dashboard/items"
             sx={{ 
-              p: 3, 
+              p: { xs: 2, md: 3 }, 
               display: 'flex', 
               alignItems: 'center', 
-              gap: 3,
+              gap: { xs: 2, md: 3 },
               bgcolor: '#fff', 
               textDecoration: 'none',
               border: '1px solid',
@@ -171,18 +171,18 @@ export default function DashboardPage() {
               '&:hover .hover-icon': { transform: 'translateX(-4px)', color: 'primary.main' }
             }}
           >
-            <Avatar sx={{ bgcolor: 'primary.main', color: '#fff', width: 64, height: 64, borderRadius: 3, boxShadow: '0 8px 16px rgba(44, 30, 22, 0.25)' }}>
-              <SportsEsportsIcon fontSize="large" />
+            <Avatar sx={{ bgcolor: 'primary.main', color: '#fff', width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, borderRadius: { xs: 2, md: 3 }, boxShadow: '0 8px 16px rgba(44, 30, 22, 0.25)' }}>
+              <SportsEsportsIcon sx={{ fontSize: { xs: 24, md: 35 } }} />
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
+              <Typography sx={{ typography: { xs: 'subtitle1', md: 'h6' }, fontWeight: 800, color: 'text.primary', mb: 0.5 }}>
                 إدارة عناصر القائمة
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+              <Typography sx={{ typography: { xs: 'caption', md: 'body2' }, color: 'text.secondary', fontWeight: 500 }}>
                 التحكم في الأصناف، المشروبات، الأسعار والتوافر
               </Typography>
             </Box>
-            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease' }} />
+            <ArrowBackIosNewIcon className="hover-icon" sx={{ color: 'text.disabled', transition: 'all 0.2s ease', fontSize: { xs: 16, md: 24 } }} />
           </Card>
 
         </Grid>
