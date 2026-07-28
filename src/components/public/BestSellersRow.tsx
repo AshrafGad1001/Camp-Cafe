@@ -19,6 +19,30 @@ interface BestSellersRowProps {
 }
 
 export default function BestSellersRow({ items }: BestSellersRowProps) {
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!scrollContainerRef.current || isPaused) return;
+
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        // In RTL, we scroll to the left (negative values). Math.abs helps normalize.
+        if (Math.abs(scrollLeft) >= maxScroll - 10) {
+          scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll left by roughly one card width
+          scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+        }
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   if (!items || items.length === 0) return null;
 
   return (
@@ -32,6 +56,11 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
 
       {/* Horizontal Scroll Container */}
       <Box
+        ref={scrollContainerRef}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
         sx={{
           display: 'flex',
           overflowX: 'auto',
