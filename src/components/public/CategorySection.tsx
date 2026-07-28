@@ -17,15 +17,20 @@ interface CategorySectionProps {
 export default function CategorySection({ name, image, items }: CategorySectionProps) {
   return (
     <Box sx={{ mb: 6 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-        <Typography variant="h4" component="h2" color="text.primary" sx={{ fontWeight: 800, m: 0 }}>
-          {name}
-        </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4, mt: 2 }}>
+        <Box sx={{ textAlign: 'right', borderRight: '3px solid #C49A45', pr: 2 }}>
+          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5 }}>
+            {name}
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>
+            لذة الأصالة في كل قطعة
+          </Typography>
+        </Box>
         {image?.url && (
           <Avatar 
             src={image.url} 
             alt={name}
-            sx={{ width: 56, height: 56, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }} 
+            sx={{ width: 72, height: 72, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', border: '4px solid #fff' }} 
           />
         )}
       </Box>
