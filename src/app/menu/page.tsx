@@ -131,7 +131,7 @@ export default async function MenuPage() {
             </IconButton>
           </Box>
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
-            © 2024 Camp Cafe. All rights reserved.
+            © 2026 Camp Cafe. All rights reserved.
           </Typography>
         </Box>
       </Container>
