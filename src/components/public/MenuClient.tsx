@@ -38,12 +38,12 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
       {/* Category Filter Bar */}
       <Box 
         sx={{ 
-          display: 'flex',
+          display: 'block',
+          whiteSpace: 'nowrap',
           overflowX: 'auto', 
           py: 2, 
           mb: 4,
           px: 2,
-          gap: 1.5,
           '&::-webkit-scrollbar': { display: 'none' },
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
@@ -53,13 +53,13 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
           <Box
             onClick={() => setActiveCategory('all')}
             sx={{
-              flexShrink: 0,
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               gap: 1,
               cursor: 'pointer',
               py: 1,
               px: 2.5,
+              ml: 1.5,
               borderRadius: '24px',
               bgcolor: activeCategory === 'all' ? '#1E3A5F' : '#fff',
               color: activeCategory === 'all' ? '#fff' : '#1E3A5F',
@@ -82,13 +82,13 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               key={category._id}
               onClick={() => setActiveCategory(category._id)}
               sx={{
-                flexShrink: 0,
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: 1,
                 cursor: 'pointer',
                 py: 1,
                 px: 2.5,
+                ml: 1.5,
                 borderRadius: '24px',
                 bgcolor: activeCategory === category._id ? '#1E3A5F' : '#fff',
                 color: activeCategory === category._id ? '#fff' : '#1E3A5F',
