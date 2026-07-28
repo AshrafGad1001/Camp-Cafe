@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Stack, Avatar } from '@mui/material';
 import CategorySection from '@/components/public/CategorySection';
+import BestSellersRow from '@/components/public/BestSellersRow';
 
 interface MenuCategory {
   _id: string;
@@ -15,6 +16,7 @@ interface MenuCategory {
     description: string;
     price: number | null;
     hasSizes?: boolean;
+    isBestSeller?: boolean;
     sizes?: { name: string; price: number }[];
     image: { url: string; publicId: string };
   }>;
@@ -30,6 +32,8 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
       </Box>
     );
   }
+
+  const bestSellers = menu.flatMap(cat => cat.items.filter(item => item.isBestSeller));
 
   const displayedMenu = activeCategory === 'all' 
     ? menu 
@@ -119,6 +123,11 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
             </Box>
           ))}
       </Box>
+
+      {/* Show Best Sellers ONLY when 'all' is selected */}
+      {activeCategory === 'all' && bestSellers.length > 0 && (
+        <BestSellersRow items={bestSellers} />
+      )}
 
       {/* Menu Sections */}
       <Box component="main">
