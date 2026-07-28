@@ -7,7 +7,6 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import FolderIcon from '@mui/icons-material/Folder';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -41,11 +40,8 @@ export default function Sidebar() {
         },
       }}
     >
-      <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-        <LocalCafeIcon sx={{ color: 'success.main', fontSize: 32 }} />
-        <Typography variant="h6" component="div" sx={{ fontWeight: 800, color: 'primary.main', letterSpacing: 1 }}>
-          CAMP CAFE
-        </Typography>
+      <Box sx={{ p: 3, display: 'flex', justifyContent: 'center', mb: 2 }}>
+        <img src="/logo.png" alt="Camp Cafe Logo" style={{ maxWidth: '100%', height: 'auto', maxHeight: '80px' }} />
       </Box>
       <List sx={{ px: 2 }}>
         {navLinks.map((link) => {
