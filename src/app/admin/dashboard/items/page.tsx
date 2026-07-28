@@ -157,8 +157,9 @@ export default function MenuItemsPage() {
       setShowModal(false);
       setEditingItem(null);
       fetchData();
-    } catch {
-      showToast('Failed to save item', 'error');
+    } catch (error: any) {
+      showToast(error.response?.data?.message || 'Failed to save item', 'error');
+      throw error; // Re-throw to let form handle UI reverts
     } finally {
       setIsSubmitting(false);
     }

@@ -13,6 +13,7 @@ interface MenuItemFormProps {
     price: number;
     category: string;
     isAvailable: boolean;
+    isBestSeller?: boolean;
     hasSizes?: boolean;
     sizes?: { name: string; price: number }[];
     imageUrl?: string;
@@ -27,6 +28,7 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
   const [price, setPrice] = useState<number | ''>('');
   const [categoryId, setCategoryId] = useState('');
   const [isAvailable, setIsAvailable] = useState(true);
+  const [isBestSeller, setIsBestSeller] = useState(false);
   const [hasSizes, setHasSizes] = useState(false);
   const [sizes, setSizes] = useState<{name: string, price: number | ''}[]>([
     { name: 'S', price: '' },
@@ -44,6 +46,7 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
       setPrice(initialData.price || '');
       setCategoryId(initialData.category || '');
       setIsAvailable(initialData.isAvailable ?? true);
+      setIsBestSeller(initialData.isBestSeller ?? false);
       setHasSizes(initialData.hasSizes ?? false);
       if (initialData.sizes && initialData.sizes.length > 0) {
         const baseSizes = [
@@ -97,12 +100,20 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
     
     formData.append('category', categoryId);
     formData.append('isAvailable', String(isAvailable));
+    formData.append('isBestSeller', String(isBestSeller));
     
     if (imageFile) {
       formData.append('image', imageFile);
     }
     
-    await onSubmit(formData);
+    try {
+      await onSubmit(formData);
+    } catch (error) {
+      // Revert the Best Seller toggle if it fails (e.g. limit reached)
+      if (isBestSeller) {
+        setIsBestSeller(false);
+      }
+    }
   };
 
   return (
@@ -196,7 +207,6 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
         </Select>
       </FormControl>
 
-      <Box sx={{ mt: 2 }}>
         <FormControlLabel 
           control={
             <Switch 
@@ -205,6 +215,23 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
             />
           } 
           label="Available" 
+        />
+      </Box>
+
+      <Box sx={{ mt: 2 }}>
+        <FormControlLabel 
+          control={
+            <Switch 
+              checked={isBestSeller} 
+              onChange={(e) => setIsBestSeller(e.target.checked)} 
+              color="warning"
+            />
+          } 
+          label={
+            <Typography sx={{ fontWeight: 'bold', color: isBestSeller ? 'warning.main' : 'inherit' }}>
+              Best Seller (الأكثر مبيعاً)
+            </Typography>
+          } 
         />
       </Box>
 
