@@ -32,17 +32,18 @@ export default function SortableItem({ id, children }: SortableItemProps) {
       <Paper
         elevation={0}
         sx={{ 
-          p: { xs: 2, md: 2.5 }, 
-          mb: { xs: 2, md: 3 }, 
+          p: { xs: 1.5, md: 2 }, 
+          mb: { xs: 1.5, md: 2 }, 
           display: 'flex', 
           alignItems: 'center', 
-          gap: { xs: 1.5, md: 2 },
-          borderRadius: 2,
+          gap: { xs: 1, md: 2 },
+          borderRadius: 3,
           border: '1px solid',
-          borderColor: 'rgba(0,0,0,0.05)',
-          boxShadow: isDragging ? '0 12px 24px rgba(0,0,0,0.1)' : '0 4px 12px rgba(0,0,0,0.03)',
+          borderColor: 'rgba(0,0,0,0.08)',
+          boxShadow: isDragging ? '0 16px 32px rgba(0,0,0,0.1)' : '0 2px 8px rgba(0,0,0,0.02)',
           transition: 'all 0.2s ease',
-          bgcolor: '#fff'
+          bgcolor: '#fff',
+          overflow: 'hidden'
         }}
       >
         <IconButton

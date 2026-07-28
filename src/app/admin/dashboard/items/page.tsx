@@ -237,83 +237,80 @@ export default function MenuItemsPage() {
             <Box sx={{ opacity: isSorting ? 0.7 : 1, pointerEvents: isSorting ? 'none' : 'auto' }}>
               {filteredItems.map((item) => (
                 <SortableItem key={item._id} id={item._id}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 3 }, width: '100%' }}>
-                    {/* Top Row: Info */}
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, width: '100%' }}>
-                      {item.image?.url ? (
-                        <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: 2, objectFit: 'cover', border: '1px solid', borderColor: 'divider' }} />
-                      ) : (
-                        <Box sx={{ width: 64, height: 64, borderRadius: 2, bgcolor: 'background.paper', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid', borderColor: 'divider' }}>
-                          <LocalCafeOutlinedIcon sx={{ color: 'text.secondary' }} />
-                        </Box>
-                      )}
+                  <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                    {/* Top Section: Info & Price */}
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: { xs: 1.5, sm: 2 }, width: '100%', mb: { xs: 1.5, sm: 2 } }}>
+                      
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: { xs: '100%', sm: 'auto' }, flexGrow: 1 }}>
+                        {/* Image */}
+                        {item.image?.url ? (
+                          <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', border: '2px solid', borderColor: 'primary.light', flexShrink: 0 }} />
+                        ) : (
+                          <Box sx={{ width: 64, height: 64, borderRadius: '50%', bgcolor: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid', borderColor: 'divider', flexShrink: 0 }}>
+                            <LocalCafeOutlinedIcon sx={{ color: 'text.secondary' }} />
+                          </Box>
+                        )}
 
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Typography variant="h6" sx={{ fontSize: { xs: '1rem', md: '1.15rem' }, fontWeight: 800 }}>{item.name}</Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>{getCategoryName(item.category)}</Typography>
+                        {/* Title & Category */}
+                        <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                          <Typography variant="h6" sx={{ fontSize: { xs: '1.1rem', md: '1.15rem' }, fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</Typography>
+                          <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>{getCategoryName(item.category)}</Typography>
+                        </Box>
                       </Box>
 
-                      <Box sx={{ minWidth: { xs: 'auto', sm: 'max-content' }, textAlign: { xs: 'left', sm: 'right' }, mt: { xs: 1, sm: 0 } }}>
-                        <Typography variant="h6" sx={{ fontWeight: 800, color: 'text.primary' }}>
+                      {/* Price / Sizes */}
+                      <Box sx={{ minWidth: { xs: '100%', sm: 'auto' }, textAlign: { xs: 'right', sm: 'left' }, display: 'flex', justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
                         {item.hasSizes && item.sizes && item.sizes.length > 0 ? (
-                          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5 }}>
-                            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 700 }}>
-                              متعدد الأحجام
-                            </Typography>
-                            <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-                              {item.sizes.map(s => (
-                                <Chip key={s.name} label={`${s.name}: ${s.price}`} size="small" variant="outlined" sx={{ fontWeight: 600, fontSize: '0.7rem', height: 20 }} />
-                              ))}
-                            </Box>
+                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
+                            {item.sizes.map(s => (
+                              <Chip key={s.name} label={`${s.name}: ${s.price}`} size="small" sx={{ fontWeight: 700, fontSize: '0.75rem', bgcolor: 'rgba(10, 41, 71, 0.05)', color: '#0A2947' }} />
+                            ))}
                           </Box>
                         ) : (
-                          <>{item.price} ج.م</>
+                          <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main', px: 1.5, py: 0.5, bgcolor: 'rgba(10, 41, 71, 0.05)', borderRadius: 2, display: 'inline-block' }}>
+                            {item.price} ج.م
+                          </Typography>
                         )}
-                        </Typography>
                       </Box>
                     </Box>
 
                     {/* Divider */}
-                    <Box sx={{ height: '1px', bgcolor: 'rgba(0,0,0,0.04)', width: '100%' }} />
+                    <Box sx={{ height: '1px', bgcolor: 'rgba(0,0,0,0.06)', width: '100%', mb: { xs: 1.5, sm: 2 } }} />
 
-                    {/* Bottom Row: Actions */}
+                    {/* Bottom Section: Actions */}
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      
+                      {/* Availability Toggle */}
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: item.isAvailable ? 'rgba(46, 125, 50, 0.08)' : 'rgba(0, 0, 0, 0.04)', px: 1.5, py: 0.5, borderRadius: 10, transition: 'all 0.2s' }}>
                         <Switch
                           checked={item.isAvailable}
                           onChange={() => handleToggleAvailability(item)}
                           size="small"
                           color="success"
+                          sx={{ ml: -1 }}
                         />
-                        <Chip 
-                          label={item.isAvailable ? 'متاح (Available)' : 'غير متاح (Unavailable)'} 
-                          color={item.isAvailable ? 'success' : 'default'} 
-                          size="small" 
-                          variant={item.isAvailable ? 'filled' : 'outlined'}
-                          sx={{ fontWeight: 700, borderRadius: 2 }}
-                        />
+                        <Typography sx={{ fontWeight: 700, fontSize: '0.85rem', color: item.isAvailable ? 'success.main' : 'text.secondary' }}>
+                          {item.isAvailable ? 'متاح' : 'غير متاح'}
+                        </Typography>
                       </Box>
 
+                      {/* Action Buttons */}
                       <Box sx={{ display: 'flex', gap: 1 }}>
                         <Button 
                           size="small" 
-                          variant="outlined" 
-                          color="error" 
-                          startIcon={<DeleteIcon fontSize="small" />} 
-                          onClick={() => handleDeleteItem(item._id)}
-                          sx={{ borderRadius: 1.5, px: 2, fontWeight: 700, textTransform: 'none' }}
+                          color="inherit" 
+                          onClick={() => { setEditingItem(item); setShowModal(true); }}
+                          sx={{ minWidth: '40px', width: '40px', height: '40px', borderRadius: '50%', bgcolor: 'rgba(0,0,0,0.04)', '&:hover': { bgcolor: 'rgba(0,0,0,0.08)' } }}
                         >
-                          Delete
+                          <EditIcon fontSize="small" sx={{ color: 'text.secondary' }} />
                         </Button>
                         <Button 
                           size="small" 
-                          variant="outlined" 
-                          color="inherit" 
-                          startIcon={<EditIcon fontSize="small" />} 
-                          onClick={() => { setEditingItem(item); setShowModal(true); }}
-                          sx={{ borderRadius: 1.5, px: 2, fontWeight: 700, color: 'text.primary', borderColor: 'rgba(0,0,0,0.2)', textTransform: 'none' }}
+                          color="error" 
+                          onClick={() => handleDeleteItem(item._id)}
+                          sx={{ minWidth: '40px', width: '40px', height: '40px', borderRadius: '50%', bgcolor: 'rgba(211, 47, 47, 0.08)', '&:hover': { bgcolor: 'rgba(211, 47, 47, 0.15)' } }}
                         >
-                          Edit
+                          <DeleteIcon fontSize="small" />
                         </Button>
                       </Box>
                     </Box>
