@@ -5,9 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, Typography, Avatar } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FolderIcon from '@mui/icons-material/Folder';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 interface SidebarProps {
   mobileOpen: boolean;
@@ -26,7 +25,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const navLinks = [
     { href: '/admin/dashboard', icon: <DashboardIcon />, label: 'لوحة التحكم' },
     { href: '/admin/dashboard/categories', icon: <FolderIcon />, label: 'التصنيفات' },
-    { href: '/admin/dashboard/items', icon: <SportsEsportsIcon />, label: 'عناصر القائمة' },
+    { href: '/admin/dashboard/items', icon: <LocalCafeOutlinedIcon />, label: 'عناصر القائمة' },
   ];
 
   const drawerContent = (
