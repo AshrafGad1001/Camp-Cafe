@@ -85,24 +85,48 @@ export default async function MenuPage() {
               component="a" 
               href="https://www.facebook.com/share/1Ebbei8Ysr/?mibextid=wwXIfr" 
               target="_blank" 
-              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#1877F2', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+              sx={{ 
+                color: '#1877F2', 
+                bgcolor: '#fff',
+                '&:hover': { bgcolor: '#f0f2f5', transform: 'scale(1.1)' }, 
+                transition: 'all 0.2s',
+                width: 48,
+                height: 48,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              }}
             >
-              <FacebookIcon fontSize="large" />
+              <FacebookIcon fontSize="medium" />
             </IconButton>
             <IconButton 
               component="a" 
               href="https://www.instagram.com/camp11114?igsh=MTBmMWZpOG1oYWd2bA%3D%3D&utm_source=qr" 
               target="_blank" 
-              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#E4405F', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+              sx={{ 
+                color: '#E4405F', 
+                bgcolor: '#fff',
+                '&:hover': { bgcolor: '#fcf1f3', transform: 'scale(1.1)' }, 
+                transition: 'all 0.2s',
+                width: 48,
+                height: 48,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              }}
             >
-              <InstagramIcon fontSize="large" />
+              <InstagramIcon fontSize="medium" />
             </IconButton>
             <IconButton 
               component="a" 
               href="tel:01023321047" 
-              sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#25D366', transform: 'scale(1.1)' }, transition: 'all 0.2s' }}
+              sx={{ 
+                color: '#25D366', 
+                bgcolor: '#fff',
+                '&:hover': { bgcolor: '#f0fcf4', transform: 'scale(1.1)' }, 
+                transition: 'all 0.2s',
+                width: 48,
+                height: 48,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              }}
             >
-              <PhoneIcon fontSize="large" />
+              <PhoneIcon fontSize="medium" />
             </IconButton>
           </Box>
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
