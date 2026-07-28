@@ -6,7 +6,7 @@ import { Category, MenuItem } from '@/types';
 import QRCodeGenerator from '@/components/admin/QRCodeGenerator';
 import { Grid, Card, Typography, CircularProgress, Box, IconButton, Button } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FolderIcon from '@mui/icons-material/Folder';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -49,7 +49,7 @@ export default function DashboardPage() {
   }
 
   const statCards = [
-    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح', value: stats.available, icon: <CheckCircleOutlineIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
+    { label: 'عناصر متاحة', subtitle: 'إجمالي المتاح', value: stats.available, icon: <CheckCircleOutlinedIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
     { label: 'عناصر القائمة', subtitle: 'كل العناصر', value: stats.items, icon: <RestaurantIcon fontSize="large" />, color: 'primary.main', bg: '#D3D4C0' },
     { label: 'التصنيفات', subtitle: 'إجمالي الأقسام', value: stats.categories, icon: <FolderIcon fontSize="large" />, color: 'success.main', bg: '#D3D4C0' },
   ];
