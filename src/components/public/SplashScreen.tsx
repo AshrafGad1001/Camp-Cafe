@@ -8,18 +8,6 @@ export default function SplashScreen() {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Check if the splash screen has already been shown in this session
-    const hasSeenSplash = sessionStorage.getItem('campcafe_splash_seen');
-    
-    if (hasSeenSplash) {
-      setIsVisible(false);
-      setShouldRender(false);
-      return;
-    }
-
-    // Set a flag in session storage so it doesn't show again on reload
-    sessionStorage.setItem('campcafe_splash_seen', 'true');
-
     // Start fade out after 2 seconds
     const hideTimer = setTimeout(() => {
       setIsVisible(false);
