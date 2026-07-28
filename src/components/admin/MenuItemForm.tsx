@@ -148,9 +148,12 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
           id="price"
           label="Price"
           type="number"
-          slotProps={{ htmlInput: { step: "0.01" } }}
+          slotProps={{ htmlInput: { min: 0, step: "0.01" } }}
           value={price}
-          onChange={(e) => setPrice(parseFloat(e.target.value) || '')}
+          onChange={(e) => {
+            const val = parseFloat(e.target.value);
+            setPrice(isNaN(val) ? '' : Math.max(0, val));
+          }}
           required={!hasSizes}
         />
       ) : (
@@ -162,11 +165,12 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
                 key={size.name}
                 label={`Price (${size.name})`}
                 type="number"
-                slotProps={{ htmlInput: { step: "0.01" } }}
+                slotProps={{ htmlInput: { min: 0, step: "0.01" } }}
                 value={size.price}
                 onChange={(e) => {
                   const newSizes = [...sizes];
-                  newSizes[index].price = parseFloat(e.target.value) || '';
+                  const val = parseFloat(e.target.value);
+                  newSizes[index].price = isNaN(val) ? '' : Math.max(0, val);
                   setSizes(newSizes);
                 }}
               />
