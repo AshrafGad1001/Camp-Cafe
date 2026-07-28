@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { compressImage } from '@/lib/imageCompression';
 import { Category } from '@/types';
-import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Switch } from '@mui/material';
+import { TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Switch, Typography } from '@mui/material';
 
 interface MenuItemFormProps {
   categories: Category[];
@@ -13,6 +13,8 @@ interface MenuItemFormProps {
     price: number;
     category: string;
     isAvailable: boolean;
+    hasSizes?: boolean;
+    sizes?: { name: string; price: number }[];
     imageUrl?: string;
   };
   onSubmit: (formData: FormData) => Promise<void>;
@@ -25,6 +27,13 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
   const [price, setPrice] = useState<number | ''>('');
   const [categoryId, setCategoryId] = useState('');
   const [isAvailable, setIsAvailable] = useState(true);
+  const [hasSizes, setHasSizes] = useState(false);
+  const [sizes, setSizes] = useState<{name: string, price: number | ''}[]>([
+    { name: 'S', price: '' },
+    { name: 'M', price: '' },
+    { name: 'L', price: '' },
+    { name: 'XL', price: '' },
+  ]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
 
@@ -35,6 +44,24 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
       setPrice(initialData.price || '');
       setCategoryId(initialData.category || '');
       setIsAvailable(initialData.isAvailable ?? true);
+      setHasSizes(initialData.hasSizes ?? false);
+      if (initialData.sizes && initialData.sizes.length > 0) {
+        const baseSizes = [
+          { name: 'S', price: '' as number | '' },
+          { name: 'M', price: '' as number | '' },
+          { name: 'L', price: '' as number | '' },
+          { name: 'XL', price: '' as number | '' },
+        ];
+        initialData.sizes.forEach(s => {
+          const index = baseSizes.findIndex(b => b.name === s.name);
+          if (index !== -1) {
+            baseSizes[index].price = s.price;
+          } else {
+            baseSizes.push({ name: s.name, price: s.price });
+          }
+        });
+        setSizes(baseSizes);
+      }
       if (initialData.imageUrl) setPreviewUrl(initialData.imageUrl);
     }
   }, [initialData]);
@@ -57,7 +84,17 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('price', String(price));
+    
+    let validSizes: any[] = [];
+    if (hasSizes) {
+      validSizes = sizes.filter(s => s.name && s.price !== '' && Number(s.price) > 0);
+    } else {
+      formData.append('price', String(price));
+    }
+    
+    formData.append('hasSizes', String(hasSizes));
+    formData.append('sizes', JSON.stringify(validSizes));
+    
     formData.append('category', categoryId);
     formData.append('isAvailable', String(isAvailable));
     
@@ -92,17 +129,51 @@ export default function MenuItemForm({ categories, initialData, onSubmit, isLoad
         required
       />
 
-      <TextField
-        fullWidth
-        margin="normal"
-        id="price"
-        label="Price"
-        type="number"
-        slotProps={{ htmlInput: { step: "0.01" } }}
-        value={price}
-        onChange={(e) => setPrice(parseFloat(e.target.value) || '')}
-        required
-      />
+      <Box sx={{ mt: 2 }}>
+        <FormControlLabel 
+          control={
+            <Switch 
+              checked={hasSizes} 
+              onChange={(e) => setHasSizes(e.target.checked)} 
+            />
+          } 
+          label="Multiple Sizes (S, M, L, XL)" 
+        />
+      </Box>
+
+      {!hasSizes ? (
+        <TextField
+          fullWidth
+          margin="normal"
+          id="price"
+          label="Price"
+          type="number"
+          slotProps={{ htmlInput: { step: "0.01" } }}
+          value={price}
+          onChange={(e) => setPrice(parseFloat(e.target.value) || '')}
+          required={!hasSizes}
+        />
+      ) : (
+        <Box sx={{ mt: 1, mb: 2, p: 2, border: '1px solid rgba(0,0,0,0.12)', borderRadius: 1 }}>
+          <Typography variant="subtitle2" sx={{ mb: 2 }}>Enter prices for available sizes (leave empty if unavailable):</Typography>
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 2 }}>
+            {sizes.map((size, index) => (
+              <TextField
+                key={size.name}
+                label={`Price (${size.name})`}
+                type="number"
+                slotProps={{ htmlInput: { step: "0.01" } }}
+                value={size.price}
+                onChange={(e) => {
+                  const newSizes = [...sizes];
+                  newSizes[index].price = parseFloat(e.target.value) || '';
+                  setSizes(newSizes);
+                }}
+              />
+            ))}
+          </Box>
+        </Box>
+      )}
 
       <FormControl fullWidth margin="normal" required>
         <InputLabel id="category-label">Category</InputLabel>

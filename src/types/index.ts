@@ -16,7 +16,9 @@ export interface MenuItem {
   _id: string;
   name: string;
   description: string;
-  price: number;
+  price: number | null;
+  hasSizes?: boolean;
+  sizes?: { name: string; price: number }[];
   image: CategoryImage;
   category: string | Category;
   isAvailable: boolean;
