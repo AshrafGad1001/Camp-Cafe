@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import api from '@/lib/api';
 import { MenuItem } from '@/types';
-import { Box, Typography, Button, Snackbar, Alert, Grid, Card, CardMedia, CardContent, CardActions, Chip, CircularProgress } from '@mui/material';
+import { Box, Typography, Button, Snackbar, Alert, Grid, Card, CardMedia, CardContent, CardActions, Chip, CircularProgress, Paper } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -36,18 +36,12 @@ export default function BestSellersPage() {
 
   const handleRemoveBestSeller = async (itemId: string) => {
     try {
-      // Create a FormData just to update isBestSeller to false
-      const formData = new FormData();
-      formData.append('isBestSeller', 'false');
-      
-      await api.put(`/items/${itemId}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      await api.put(`/items/${itemId}`, { isBestSeller: false });
       
       showToast('تمت الإزالة بنجاح', 'success');
       fetchBestSellers();
     } catch (error: any) {
-      console.error('Failed to remove:', error);
+      // Suppress console.error to avoid Next.js overlay for expected 400 errors
       showToast(error.response?.data?.message || 'Failed to remove from Best Sellers', 'error');
     }
   };
@@ -85,51 +79,95 @@ export default function BestSellersPage() {
           <Typography variant="h6" color="text.secondary">لا توجد عناصر في قائمة الأكثر مبيعاً</Typography>
         </Box>
       ) : (
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {items.map((item) => (
-            <Grid xs={12} sm={6} md={4} key={item._id || item.id}>
-              <Card sx={{ 
-                borderRadius: 4, 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                border: '2px solid transparent',
+            <Paper
+              key={item._id || item.id}
+              elevation={0}
+              sx={{ 
+                p: { xs: 1.5, md: 2 }, 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: { xs: 1, md: 2 },
+                borderRadius: 3,
+                bgcolor: 'background.paper',
+                border: '1px solid',
+                borderColor: 'rgba(0,0,0,0.06)',
                 transition: 'all 0.2s',
                 '&:hover': {
                   borderColor: 'warning.main',
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 12px 24px rgba(0,0,0,0.1)'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
                 }
-              }}>
-                {item.image?.url && (
-                  <CardMedia
-                    component="img"
-                    height="160"
-                    image={item.image.url}
-                    alt={item.name}
-                  />
-                )}
-                <CardContent sx={{ pb: 1 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5 }}>{item.name}</Typography>
-                  <Typography variant="body2" color="text.secondary" noWrap>
-                    {typeof item.category === 'object' ? (item.category as any).name : 'Category'}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ px: 2, pb: 2, pt: 0 }}>
-                  <Button 
-                    size="small" 
-                    color="error" 
-                    variant="outlined" 
-                    fullWidth 
-                    startIcon={<DeleteIcon />}
-                    onClick={() => handleRemoveBestSeller(item._id || item.id as string)}
-                    sx={{ borderRadius: 2 }}
-                  >
-                    إزالة
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+              }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                {/* Top Section: Info & Price */}
+                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: { xs: 1.5, sm: 2 }, width: '100%', mb: { xs: 1.5, sm: 2 } }}>
+                  
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: { xs: '100%', sm: 'auto' }, flexGrow: 1 }}>
+                    {/* Image */}
+                    {item.image?.url ? (
+                      <Box component="img" src={item.image.url} alt={item.name} sx={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', border: '2px solid', borderColor: 'primary.light', flexShrink: 0 }} />
+                    ) : (
+                      <Box sx={{ width: 64, height: 64, borderRadius: '50%', bgcolor: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid', borderColor: 'divider', flexShrink: 0 }}>
+                        <StarIcon sx={{ color: 'text.secondary' }} />
+                      </Box>
+                    )}
+
+                    {/* Title & Category */}
+                    <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                      <Typography variant="h6" sx={{ fontSize: { xs: '1.1rem', md: '1.15rem' }, fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>{typeof item.category === 'object' ? (item.category as any).name : 'Category'}</Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Price / Sizes */}
+                  <Box sx={{ minWidth: { xs: '100%', sm: 'auto' }, textAlign: { xs: 'right', sm: 'left' }, display: 'flex', justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
+                    {item.hasSizes && item.sizes && item.sizes.length > 0 ? (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
+                        {item.sizes.map((s: any) => (
+                          <Chip key={s.name} label={`${s.name}: ${s.price}`} size="small" sx={{ fontWeight: 700, fontSize: '0.75rem', bgcolor: 'rgba(10, 41, 71, 0.05)', color: '#0A2947' }} />
+                        ))}
+                      </Box>
+                    ) : (
+                      <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main', px: 1.5, py: 0.5, bgcolor: 'rgba(10, 41, 71, 0.05)', borderRadius: 2, display: 'inline-block' }}>
+                        {item.price} ج.م
+                      </Typography>
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Divider */}
+                <Box sx={{ height: '1px', bgcolor: 'rgba(0,0,0,0.06)', width: '100%', mb: { xs: 1.5, sm: 2 } }} />
+
+                {/* Bottom Section: Actions */}
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
+                  
+                  {/* Availability Display */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: item.isAvailable ? 'rgba(46, 125, 50, 0.08)' : 'rgba(0, 0, 0, 0.04)', px: 1.5, py: 0.5, borderRadius: 10 }}>
+                    <Typography sx={{ fontWeight: 700, fontSize: '0.85rem', color: item.isAvailable ? 'success.main' : 'text.secondary' }}>
+                      {item.isAvailable ? 'متاح' : 'غير متاح'}
+                    </Typography>
+                  </Box>
+
+                  {/* Action Buttons */}
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Button 
+                      size="small" 
+                      color="error" 
+                      variant="outlined" 
+                      startIcon={<DeleteIcon />}
+                      onClick={() => handleRemoveBestSeller(item._id || item.id as string)}
+                      sx={{ borderRadius: 2, fontWeight: 700 }}
+                    >
+                      إزالة من الأكثر مبيعاً
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            </Paper>
           ))}
-        </Grid>
+        </Box>
       )}
 
       <Snackbar
