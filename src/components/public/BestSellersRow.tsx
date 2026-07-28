@@ -120,12 +120,10 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
             <Box
               sx={{
                 width: '100%',
-                height: 200,
+                height: 220,
+                position: 'relative',
                 bgcolor: '#F8FAFC',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                p: 2,
+                overflow: 'hidden',
               }}
             >
               {item.image?.url ? (
@@ -134,16 +132,17 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
                   image={item.image.url}
                   alt={item.name}
                   sx={{ 
-                    maxHeight: '100%', 
-                    width: 'auto', 
-                    objectFit: 'contain',
-                    transition: 'transform 0.3s', 
-                    '&:hover': { transform: 'scale(1.05)' },
-                    filter: 'drop-shadow(0px 8px 16px rgba(0,0,0,0.1))'
+                    height: '100%', 
+                    width: '100%', 
+                    objectFit: 'cover',
+                    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)', 
+                    '&:hover': { transform: 'scale(1.08)' },
                   }}
                 />
               ) : (
-                <StarIcon sx={{ fontSize: 40, color: 'rgba(0,0,0,0.1)' }} />
+                <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <StarIcon sx={{ fontSize: 40, color: 'rgba(0,0,0,0.1)' }} />
+                </Box>
               )}
             </Box>
 
