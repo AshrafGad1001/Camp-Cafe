@@ -46,33 +46,28 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
           scrollbarWidth: 'none',
         }}
       >
-        <Stack direction="row" spacing={2} sx={{ minWidth: 'max-content', px: 1 }}>
+        <Stack direction="row" spacing={1.5} sx={{ minWidth: 'max-content', px: 1 }}>
           <Box
             onClick={() => setActiveCategory('all')}
             sx={{
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               gap: 1,
               cursor: 'pointer',
-              opacity: activeCategory === 'all' ? 1 : 0.6,
-              transition: 'all 0.3s ease',
-              transform: activeCategory === 'all' ? 'scale(1.05)' : 'scale(1)'
+              py: 1,
+              px: 2.5,
+              borderRadius: '24px',
+              bgcolor: activeCategory === 'all' ? 'primary.main' : 'transparent',
+              color: activeCategory === 'all' ? '#fff' : 'text.primary',
+              border: '1px solid',
+              borderColor: activeCategory === 'all' ? 'primary.main' : 'rgba(0,0,0,0.1)',
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                bgcolor: activeCategory === 'all' ? 'primary.main' : 'rgba(0,0,0,0.04)'
+              }
             }}
           >
-            <Avatar 
-              sx={{ 
-                width: 64, 
-                height: 64, 
-                bgcolor: activeCategory === 'all' ? 'primary.main' : 'grey.300',
-                border: activeCategory === 'all' ? '3px solid' : 'none',
-                borderColor: 'primary.main',
-                boxShadow: activeCategory === 'all' ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
-              }}
-            >
-              الكل
-            </Avatar>
-            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 800 : 600 }}>
+            <Typography variant="body2" sx={{ fontWeight: activeCategory === 'all' ? 700 : 600, fontSize: '0.95rem' }}>
               All
             </Typography>
           </Box>
@@ -83,26 +78,32 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
               onClick={() => setActiveCategory(category._id)}
               sx={{
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
                 gap: 1,
                 cursor: 'pointer',
-                opacity: activeCategory === category._id ? 1 : 0.6,
-                transition: 'all 0.3s ease',
-                transform: activeCategory === category._id ? 'scale(1.05)' : 'scale(1)'
+                py: 1,
+                px: 2.5,
+                borderRadius: '24px',
+                bgcolor: activeCategory === category._id ? 'primary.main' : 'transparent',
+                color: activeCategory === category._id ? '#fff' : 'text.primary',
+                border: '1px solid',
+                borderColor: activeCategory === category._id ? 'primary.main' : 'rgba(0,0,0,0.1)',
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                  bgcolor: activeCategory === category._id ? 'primary.main' : 'rgba(0,0,0,0.04)'
+                }
               }}
             >
-              <Avatar 
-                src={category.image?.url}
-                sx={{ 
-                  width: 64, 
-                  height: 64,
-                  border: activeCategory === category._id ? '3px solid' : 'none',
-                  borderColor: 'primary.main',
-                  boxShadow: activeCategory === category._id ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
-                }}
-              />
-              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 800 : 600 }}>
+              {category.image?.url && (
+                <Avatar 
+                  src={category.image.url}
+                  sx={{ 
+                    width: 24, 
+                    height: 24,
+                  }}
+                />
+              )}
+              <Typography variant="body2" sx={{ fontWeight: activeCategory === category._id ? 700 : 600, fontSize: '0.95rem' }}>
                 {category.name}
               </Typography>
             </Box>
