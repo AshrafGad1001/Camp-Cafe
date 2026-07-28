@@ -21,7 +21,7 @@ export default function MenuItemCard({ name, description, price, image }: MenuIt
       height: '100%',
       gap: 2
     }}>
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', textAlign: 'right', height: '100%' }}>
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '100%' }}>
         <Typography variant="h6" component="h3" sx={{ fontWeight: 800, color: '#1E3A5F', mb: 0.5, fontSize: '1.05rem', lineHeight: 1.3 }}>
           {name}
         </Typography>
