@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import ThemeRegistry from '@/theme/ThemeRegistry';
+import { Cairo } from 'next/font/google';
+
+const cairo = Cairo({ subsets: ['latin', 'arabic'] });
 
 export const metadata: Metadata = {
   title: "Camp Cafe | Restaurant Menu",
@@ -14,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning style={{ margin: 0, padding: 0 }}>
+      <body suppressHydrationWarning className={cairo.className} style={{ margin: 0, padding: 0 }}>
         <AppRouterCacheProvider options={{ key: 'mui' }}>
           <ThemeRegistry>
             {children}
