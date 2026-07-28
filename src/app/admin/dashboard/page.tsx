@@ -115,11 +115,11 @@ export default function DashboardPage() {
 
       {/* Bottom Section */}
       <Grid container spacing={4}>
-        <Grid size={{ xs: 12, md: 5 }}>
+        <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: 2, md: 1 } }}>
           <QRCodeGenerator />
         </Grid>
         
-        <Grid size={{ xs: 12, md: 7 }}>
+        <Grid size={{ xs: 12, md: 7 }} sx={{ order: { xs: 1, md: 2 } }}>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: 800, color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
               روابط سريعة ⚡
