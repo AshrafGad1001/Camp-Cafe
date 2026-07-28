@@ -7,10 +7,11 @@ import theme from './theme';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import rtlPlugin from 'stylis-plugin-rtl';
+import { prefixer } from 'stylis';
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
   return (
-    <AppRouterCacheProvider options={{ key: 'muirtl', stylisPlugins: [rtlPlugin] }}>
+    <AppRouterCacheProvider options={{ key: 'muirtl', stylisPlugins: [prefixer, rtlPlugin] }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
