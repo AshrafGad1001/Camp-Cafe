@@ -52,9 +52,9 @@ export default function AdminLayout({
       <Box 
         component="header" 
         sx={{ 
-          display: { xs: 'flex', md: 'none' }, 
+          display: { xs: 'grid', md: 'none' }, 
+          gridTemplateColumns: '1fr auto 1fr',
           alignItems: 'center',
-          justifyContent: 'space-between',
           px: 2,
           py: 1.5,
           bgcolor: '#fff',
@@ -65,18 +65,20 @@ export default function AdminLayout({
           zIndex: 1100
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 1, color: 'text.primary' }}
+            sx={{ color: 'text.primary' }}
           >
             <MenuIcon />
           </IconButton>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <img src="/logo.png" alt="Logo" style={{ maxHeight: '36px' }} />
         </Box>
+        <Box />
       </Box>
 
       <Box sx={{ display: 'flex', flexGrow: 1 }}>

@@ -70,7 +70,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
                     <Typography 
                       sx={{ 
                         fontWeight: active ? 700 : 600,
-                        fontSize: '1rem',
+                        fontSize: { xs: '0.85rem', md: '0.95rem' },
                         letterSpacing: '0.2px'
                       }}
                     >
