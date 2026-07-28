@@ -31,17 +31,17 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const drawerContent = (
     <>
       <Box sx={{ p: { xs: 2, md: 4 }, display: 'flex', justifyContent: 'center', mb: 1 }}>
-        <Box 
-          component="img" 
-          src="/logo.png" 
-          alt="Camp Cafe Logo" 
+        <Typography 
+          variant="h5" 
           sx={{ 
-            maxWidth: '100%', 
-            height: 'auto', 
-            maxHeight: { xs: '35px', md: '50px' }, 
-            filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))' 
-          }} 
-        />
+            fontWeight: 900, 
+            color: 'primary.main', 
+            letterSpacing: 1,
+            textAlign: 'center'
+          }}
+        >
+          Admin Dashboard
+        </Typography>
       </Box>
 
       <List sx={{ px: 3 }}>
