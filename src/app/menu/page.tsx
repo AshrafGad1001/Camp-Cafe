@@ -3,6 +3,8 @@ import { Box, Container, Typography, AppBar, Toolbar, IconButton } from '@mui/ma
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import LanguageIcon from '@mui/icons-material/Language';
+import EmailIcon from '@mui/icons-material/Email';
 import MenuStickyTabs from '@/components/public/MenuStickyTabs';
 import CategorySection from '@/components/public/CategorySection';
 import BestSellersRow from '@/components/public/BestSellersRow';
@@ -157,6 +159,71 @@ export default async function MenuPage() {
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
             © 2026 Camp Cafe. All rights reserved.
           </Typography>
+
+          {/* Developer Section */}
+          <Box sx={{ 
+            mt: 2, 
+            p: 1.5, 
+            px: 3,
+            bgcolor: 'rgba(255,255,255,0.95)', 
+            borderRadius: '16px', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: 1.5,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}>
+            <Typography variant="caption" sx={{ color: '#0A2947', fontWeight: 800, fontSize: '0.8rem', letterSpacing: 0.5 }}>
+              Developed By AshrafGad
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 1.5 }}>
+              <IconButton 
+                component="a" 
+                href="https://my-portfolio-frontend-pied-six.vercel.app/" 
+                target="_blank" 
+                sx={{ 
+                  color: '#4285F4', 
+                  bgcolor: '#e8f0fe',
+                  '&:hover': { transform: 'scale(1.1)', bgcolor: '#d2e3fc' }, 
+                  transition: 'all 0.2s',
+                  width: 32,
+                  height: 32,
+                }}
+              >
+                <LanguageIcon sx={{ fontSize: 18 }} />
+              </IconButton>
+              <IconButton 
+                component="a" 
+                href="https://wa.me/+201553585239" 
+                target="_blank" 
+                sx={{ 
+                  color: '#25D366', 
+                  bgcolor: '#e6f4ea',
+                  '&:hover': { transform: 'scale(1.1)', bgcolor: '#ceead6' }, 
+                  transition: 'all 0.2s',
+                  width: 32,
+                  height: 32,
+                }}
+              >
+                <WhatsAppIcon sx={{ fontSize: 18 }} />
+              </IconButton>
+              <IconButton 
+                component="a" 
+                href="mailto:ashrafmohamedgad214@gmail.com" 
+                target="_blank" 
+                sx={{ 
+                  color: '#EA4335', 
+                  bgcolor: '#fce8e6',
+                  '&:hover': { transform: 'scale(1.1)', bgcolor: '#fad2cf' }, 
+                  transition: 'all 0.2s',
+                  width: 32,
+                  height: 32,
+                }}
+              >
+                <EmailIcon sx={{ fontSize: 18 }} />
+              </IconButton>
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>
