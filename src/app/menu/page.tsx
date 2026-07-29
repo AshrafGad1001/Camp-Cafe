@@ -3,7 +3,9 @@ import { Box, Container, Typography, AppBar, Toolbar, IconButton } from '@mui/ma
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import MenuClient from '@/components/public/MenuClient';
+import MenuStickyTabs from '@/components/public/MenuStickyTabs';
+import CategorySection from '@/components/public/CategorySection';
+import BestSellersRow from '@/components/public/BestSellersRow';
 
 interface MenuCategory {
   _id: string;
@@ -14,7 +16,10 @@ interface MenuCategory {
     _id: string;
     name: string;
     description: string;
-    price: number;
+    price: number | null;
+    hasSizes?: boolean;
+    isBestSeller?: boolean;
+    sizes?: { name: string; price: number }[];
     image: { url: string; publicId: string };
   }>;
 }
@@ -36,6 +41,7 @@ async function getMenu(): Promise<MenuCategory[]> {
 
 export default async function MenuPage() {
   const menu = await getMenu();
+  const bestSellers = menu.flatMap(cat => cat.items.filter(item => item.isBestSeller));
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', display: 'flex', flexDirection: 'column' }}>
@@ -59,7 +65,25 @@ export default async function MenuPage() {
       </Box>
 
       <Container maxWidth="lg" sx={{ pt: 1, pb: 2, px: { xs: 1, sm: 2, md: 2 }, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-        <MenuClient menu={menu} />
+        <MenuStickyTabs menu={menu} />
+        
+        {bestSellers.length > 0 && (
+          <Box id="best-sellers-section" className="scrollspy-section" sx={{ pt: 2 }}>
+            <BestSellersRow items={bestSellers} />
+          </Box>
+        )}
+
+        <Box component="main">
+          {menu.map(category => (
+            <CategorySection
+              key={category._id}
+              id={`category-${category._id}`}
+              name={category.name}
+              image={category.image}
+              items={category.items}
+            />
+          ))}
+        </Box>
 
         <Box 
           component="footer" 
