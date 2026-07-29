@@ -57,9 +57,11 @@ export default function AdminLayout({
           alignItems: 'center',
           px: 2,
           py: 1.5,
-          bgcolor: '#fff',
-          borderBottom: '1px solid rgba(0,0,0,0.05)',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          bgcolor: 'rgba(10, 41, 71, 0.95)', 
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 8px 32px rgba(10, 41, 71, 0.25)', 
           position: 'sticky',
           top: 0,
           zIndex: 1100
@@ -70,13 +72,13 @@ export default function AdminLayout({
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerToggle}
-            sx={{ color: 'text.primary' }}
+            sx={{ color: '#fff' }}
           >
             <MenuIcon />
           </IconButton>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <img src="/logo.png" alt="Logo" style={{ maxHeight: '26px' }} />
+          <img src="/logo.png" alt="Logo" style={{ maxHeight: '26px', filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.3))' }} />
         </Box>
         <Box />
       </Box>
