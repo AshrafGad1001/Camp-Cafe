@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Card, CardContent, CardMedia, Chip } from '@mui/material';
+import { Box, Typography, Card, CardContent, Chip } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
+import Image from 'next/image';
 
 interface BestSellerItem {
   _id: string;
@@ -116,7 +117,6 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
               الأكثر مبيعاً <StarIcon sx={{ fontSize: 16, mb: '2px' }} />
             </Box>
 
-            {/* Image Area */}
             <Box
               sx={{
                 width: '100%',
@@ -124,20 +124,21 @@ export default function BestSellersRow({ items }: BestSellersRowProps) {
                 position: 'relative',
                 bgcolor: '#F8FAFC',
                 overflow: 'hidden',
+                '& img': {
+                  transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                },
+                '&:hover img': {
+                  transform: 'scale(1.08)'
+                }
               }}
             >
               {item.image?.url ? (
-                <CardMedia
-                  component="img"
-                  image={item.image.url}
+                <Image
+                  src={item.image.url}
                   alt={item.name}
-                  sx={{ 
-                    height: '100%', 
-                    width: '100%', 
-                    objectFit: 'cover',
-                    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)', 
-                    '&:hover': { transform: 'scale(1.08)' },
-                  }}
+                  fill
+                  sizes="(max-width: 600px) 280px, 280px"
+                  style={{ objectFit: 'cover' }}
                 />
               ) : (
                 <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

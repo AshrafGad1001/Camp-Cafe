@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, CardContent, Typography, Box, ButtonBase } from '@mui/material';
+import { Card, CardContent, Typography, Box, ButtonBase } from '@mui/material';
+import Image from 'next/image';
 
 interface MenuItemCardProps {
   name: string;
@@ -128,21 +129,20 @@ export default function MenuItemCard({ name, description, price, hasSizes, sizes
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          '& img': {
+            transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          },
+          '&:hover img': {
+            transform: 'scale(1.08)'
+          }
         }}>
-          <CardMedia 
-            component="img" 
-            image={image.url} 
+          <Image 
+            src={image.url} 
             alt={name} 
-            sx={{ 
-              width: '100%', 
-              height: '100%', 
-              objectFit: 'cover',
-              transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-              '&:hover': {
-                transform: 'scale(1.08)'
-              }
-            }}
+            fill
+            sizes="(max-width: 600px) 35vw, 33vw"
+            style={{ objectFit: 'cover' }}
           />
         </Box>
       )}
