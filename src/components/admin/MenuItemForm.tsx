@@ -10,7 +10,7 @@ interface MenuItemFormProps {
   initialData?: {
     name: string;
     description: string;
-    price: number;
+    price: number | null;
     category: string;
     isAvailable: boolean;
     isBestSeller?: boolean;

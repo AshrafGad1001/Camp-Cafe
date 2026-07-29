@@ -82,7 +82,7 @@ export default function BestSellersPage() {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {items.map((item) => (
             <Paper
-              key={item._id || item.id}
+              key={item._id}
               elevation={0}
               sx={{ 
                 p: { xs: 1.5, md: 2 }, 
@@ -157,7 +157,7 @@ export default function BestSellersPage() {
                       color="error" 
                       variant="outlined" 
                       startIcon={<DeleteIcon />}
-                      onClick={() => handleRemoveBestSeller(item._id || item.id as string)}
+                      onClick={() => handleRemoveBestSeller(item._id)}
                       sx={{ borderRadius: 2, fontWeight: 700 }}
                     >
                       إزالة من الأكثر مبيعاً
