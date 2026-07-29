@@ -26,6 +26,34 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [stickyTop, setStickyTop] = useState(76);
   const isScrollingRef = useRef(false);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-center the active tab in the horizontal scroll container
+  useEffect(() => {
+    if (!tabsContainerRef.current) return;
+    const container = tabsContainerRef.current;
+    
+    const activeTab = document.getElementById(`tab-${activeCategory}`);
+    if (activeTab) {
+      const containerRect = container.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      
+      // Calculate centers
+      const containerCenter = containerRect.left + containerRect.width / 2;
+      const tabCenter = tabRect.left + tabRect.width / 2;
+      
+      // Delta to scroll by
+      const scrollOffset = tabCenter - containerCenter;
+
+      // Only scroll if it's off-center by a noticeable amount
+      if (Math.abs(scrollOffset) > 5) {
+        container.scrollBy({
+          left: scrollOffset,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [activeCategory]);
 
   useEffect(() => {
     const header = document.querySelector('header');
@@ -96,6 +124,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
   return (
     <Box sx={{ mb: 4 }}>
       <Box 
+        ref={tabsContainerRef}
         sx={{ 
           display: 'flex',
           overflowX: 'auto',
@@ -117,6 +146,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
         }}
       >
           <Box
+            id="tab-all"
             onClick={() => handleCategoryClick('all')}
             sx={{
               display: 'inline-flex',
@@ -147,6 +177,7 @@ export default function MenuClient({ menu }: { menu: MenuCategory[] }) {
 
           {menu.map(category => (
             <Box
+              id={`tab-${category._id}`}
               key={category._id}
               onClick={() => handleCategoryClick(category._id)}
               sx={{
