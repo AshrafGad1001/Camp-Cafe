@@ -21,7 +21,7 @@ import { Category, MenuItem } from '@/types';
 import Modal from '@/components/ui/Modal';
 import MenuItemForm from '@/components/admin/MenuItemForm';
 import SortableItem from '@/components/admin/SortableItem';
-import { Box, Typography, Button, Snackbar, Alert, IconButton, Stack, Chip, Switch, CircularProgress } from '@mui/material';
+import { Box, Typography, Button, Snackbar, Alert, IconButton, Stack, Chip, Switch, CircularProgress, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -38,6 +38,7 @@ export default function MenuItemsPage() {
   const [isSorting, setIsSorting] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [filterCategory, setFilterCategory] = useState('');
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -129,14 +130,20 @@ export default function MenuItemsPage() {
     }
   };
 
-  const handleDeleteItem = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this item?')) return;
+  const handleDeleteItem = (id: string) => {
+    setItemToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
     try {
-      await api.delete(`/items/${id}`);
+      await api.delete(`/items/${itemToDelete}`);
       showToast('Item deleted', 'success');
       fetchData();
     } catch {
       showToast('Failed to delete item', 'error');
+    } finally {
+      setItemToDelete(null);
     }
   };
 
@@ -158,7 +165,8 @@ export default function MenuItemsPage() {
       setEditingItem(null);
       fetchData();
     } catch (error: any) {
-      showToast(error.response?.data?.message || 'Failed to save item', 'error');
+      const errorMessage = error.response?.data?.errors?.[0]?.msg || error.response?.data?.message || 'Failed to save item';
+      showToast(errorMessage, 'error');
       throw error; // Re-throw to let form handle UI reverts
     } finally {
       setIsSubmitting(false);
@@ -344,6 +352,38 @@ export default function MenuItemsPage() {
           isLoading={isSubmitting}
         />
       </Modal>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={!!itemToDelete}
+        onClose={() => setItemToDelete(null)}
+        sx={{ '& .MuiDialog-paper': { borderRadius: 4, p: 1, minWidth: { xs: 300, sm: 400 } } }}
+      >
+        <DialogTitle sx={{ fontWeight: 800, color: 'text.primary', textAlign: 'center' }}>
+          تأكيد الحذف
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ textAlign: 'center', fontWeight: 600, color: 'text.secondary', mt: 1 }}>
+            هل أنت متأكد أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center', gap: 2, pb: 2 }}>
+          <Button 
+            onClick={() => setItemToDelete(null)} 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, color: 'text.secondary' }}
+          >
+            إلغاء
+          </Button>
+          <Button 
+            onClick={confirmDelete} 
+            variant="contained" 
+            color="error" 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, boxShadow: '0 4px 12px rgba(211, 47, 47, 0.2)' }}
+          >
+            حذف
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

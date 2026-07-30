@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body suppressHydrationWarning className={cairo.className} style={{ margin: 0, padding: 0 }}>
         <ThemeRegistry>
           <SplashScreen />

@@ -21,7 +21,7 @@ import { Category } from '@/types';
 import Modal from '@/components/ui/Modal';
 import CategoryForm from '@/components/admin/CategoryForm';
 import SortableItem from '@/components/admin/SortableItem';
-import { Box, Typography, Button, Snackbar, Alert, IconButton, CircularProgress } from '@mui/material';
+import { Box, Typography, Button, Snackbar, Alert, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -35,6 +35,7 @@ export default function CategoriesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSorting, setIsSorting] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -104,22 +105,28 @@ export default function CategoriesPage() {
       setShowModal(false);
       setEditingCategory(null);
       fetchCategories();
-    } catch {
-      showToast('Failed to save category', 'error');
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.errors?.[0]?.msg || error.response?.data?.message || 'Failed to save category';
+      showToast(errorMessage, 'error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleDeleteClick = async (id: string) => {
-    if (window.confirm('Are you sure? This will also delete all items in this category.')) {
-      try {
-        await api.delete(`/categories/${id}`);
-        showToast('Category deleted', 'success');
-        fetchCategories();
-      } catch {
-        showToast('Failed to delete category', 'error');
-      }
+  const handleDeleteClick = (id: string) => {
+    setCategoryToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!categoryToDelete) return;
+    try {
+      await api.delete(`/categories/${categoryToDelete}`);
+      showToast('Category deleted', 'success');
+      fetchCategories();
+    } catch {
+      showToast('Failed to delete category', 'error');
+    } finally {
+      setCategoryToDelete(null);
     }
   };
 
@@ -229,6 +236,42 @@ export default function CategoriesPage() {
           isLoading={isSubmitting}
         />
       </Modal>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={!!categoryToDelete}
+        onClose={() => setCategoryToDelete(null)}
+        sx={{ '& .MuiDialog-paper': { borderRadius: 4, p: 1, minWidth: { xs: 300, sm: 400 } } }}
+      >
+        <DialogTitle sx={{ fontWeight: 800, color: 'text.primary', textAlign: 'center' }}>
+          تأكيد الحذف
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ textAlign: 'center', fontWeight: 600, color: 'text.secondary', mt: 1 }}>
+            هل أنت متأكد أنك تريد حذف هذا التصنيف؟ 
+            <br />
+            <Typography component="span" sx={{ color: 'error.main', fontWeight: 700, fontSize: '0.85rem' }}>
+              سيتم حذف جميع العناصر الموجودة بداخل هذا التصنيف أيضاً.
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center', gap: 2, pb: 2 }}>
+          <Button 
+            onClick={() => setCategoryToDelete(null)} 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, color: 'text.secondary' }}
+          >
+            إلغاء
+          </Button>
+          <Button 
+            onClick={confirmDelete} 
+            variant="contained" 
+            color="error" 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, boxShadow: '0 4px 12px rgba(211, 47, 47, 0.2)' }}
+          >
+            حذف
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

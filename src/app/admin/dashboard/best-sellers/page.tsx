@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import api from '@/lib/api';
 import { MenuItem } from '@/types';
-import { Box, Typography, Button, Snackbar, Alert, Grid, Card, CardMedia, CardContent, CardActions, Chip, CircularProgress, Paper } from '@mui/material';
+import { Box, Typography, Button, Snackbar, Alert, Grid, Card, CardMedia, CardContent, CardActions, Chip, CircularProgress, Paper, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -11,6 +11,7 @@ export default function BestSellersPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [itemToRemove, setItemToRemove] = useState<string | null>(null);
 
   const fetchBestSellers = useCallback(async () => {
     try {
@@ -34,15 +35,20 @@ export default function BestSellersPage() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const handleRemoveBestSeller = async (itemId: string) => {
+  const handleRemoveClick = (itemId: string) => {
+    setItemToRemove(itemId);
+  };
+
+  const confirmRemove = async () => {
+    if (!itemToRemove) return;
     try {
-      await api.put(`/items/${itemId}`, { isBestSeller: false });
-      
+      await api.put(`/items/${itemToRemove}`, { isBestSeller: false });
       showToast('تمت الإزالة بنجاح', 'success');
       fetchBestSellers();
     } catch (error: any) {
-      // Suppress console.error to avoid Next.js overlay for expected 400 errors
       showToast(error.response?.data?.message || 'Failed to remove from Best Sellers', 'error');
+    } finally {
+      setItemToRemove(null);
     }
   };
 
@@ -157,7 +163,7 @@ export default function BestSellersPage() {
                       color="error" 
                       variant="outlined" 
                       startIcon={<DeleteIcon />}
-                      onClick={() => handleRemoveBestSeller(item._id)}
+                      onClick={() => handleRemoveClick(item._id)}
                       sx={{ borderRadius: 2, fontWeight: 700 }}
                     >
                       إزالة من الأكثر مبيعاً
@@ -180,6 +186,38 @@ export default function BestSellersPage() {
           {toast?.message}
         </Alert>
       </Snackbar>
+
+      {/* Confirmation Dialog */}
+      <Dialog
+        open={!!itemToRemove}
+        onClose={() => setItemToRemove(null)}
+        sx={{ '& .MuiDialog-paper': { borderRadius: 4, p: 1, minWidth: { xs: 300, sm: 400 } } }}
+      >
+        <DialogTitle sx={{ fontWeight: 800, color: 'text.primary', textAlign: 'center' }}>
+          تأكيد الإزالة
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ textAlign: 'center', fontWeight: 600, color: 'text.secondary', mt: 1 }}>
+            هل أنت متأكد أنك تريد إزالة هذا العنصر من قائمة الأكثر مبيعاً؟
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center', gap: 2, pb: 2 }}>
+          <Button 
+            onClick={() => setItemToRemove(null)} 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, color: 'text.secondary' }}
+          >
+            إلغاء
+          </Button>
+          <Button 
+            onClick={confirmRemove} 
+            variant="contained" 
+            color="error" 
+            sx={{ fontWeight: 700, borderRadius: 2, px: 3, boxShadow: '0 4px 12px rgba(211, 47, 47, 0.2)' }}
+          >
+            إزالة
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

@@ -13,7 +13,6 @@ interface MenuStickyTabsProps {
 
 export default function MenuStickyTabs({ menu }: MenuStickyTabsProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [stickyTop, setStickyTop] = useState(76);
   const isScrollingRef = useRef(false);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
@@ -42,12 +41,6 @@ export default function MenuStickyTabs({ menu }: MenuStickyTabsProps) {
   }, [activeCategory]);
 
   useEffect(() => {
-    const header = document.querySelector('header');
-    if (header) {
-      const rect = header.getBoundingClientRect();
-      setStickyTop(rect.bottom + 8);
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (isScrollingRef.current) return;
@@ -88,7 +81,7 @@ export default function MenuStickyTabs({ menu }: MenuStickyTabsProps) {
 
     const section = document.getElementById(`category-${categoryId}`);
     if (section) {
-      const yOffset = -(stickyTop + 60); 
+      const yOffset = -140; 
       const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
       
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -109,10 +102,7 @@ export default function MenuStickyTabs({ menu }: MenuStickyTabsProps) {
         pt: 1.5,
         pb: 1.5,
         px: { xs: 2, md: 3 },
-        position: 'sticky',
-        top: stickyTop,
-        zIndex: 1000,
-        bgcolor: 'rgba(248, 250, 252, 0.85)',
+        bgcolor: 'transparent',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(0,0,0,0.05)',
